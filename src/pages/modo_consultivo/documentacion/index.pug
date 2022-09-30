@@ -1,0 +1,715 @@
+extends ../../../layout/main
+include ../../../components/external-link.pug
+
+
+block variables
+  - var scripts = ["https://unpkg.com/swiper/swiper-bundle.min.js", "../../../assets/js/pages/modo_consultivo_documentacion.js"]
+  - var HIDE_SIDEPANEL = true
+  - var breadcrumbsItems = [['Dashboard'], ['Filtro de servicios'], ['1103265-2021/1']]
+  - var title = 'Peritos Hogar'
+  -
+    const DIRECT_ACCESS = [
+      {
+        name: "Tower",
+        description: "Esto es una breve descripción del acceso directo",
+        href: "../wip/wip.html",
+        src: "tower_logo.png"
+      },
+      {
+        name: "Salesforce",
+        description: "Esto es una breve descripción del acceso directo",
+        href: "../wip/wip.html",
+        src: "salesforce_logo.svg"
+      },
+      {
+        name: "SAR",
+        description: "Esto es una breve descripción del acceso directo",
+        href: "../wip/wip.html",
+        src: "sar_logo.svg"
+      },
+      {
+        name: "SRV",
+        description: "Accede de una forma rápida al Sistema de Retribución Variable",
+        href: "../wip/wip.html",
+        src: "srv_logo.svg"
+      },
+      {
+        name: "Allfunds",
+        description: "Esto es una breve descripción del acceso directo",
+        href: "../wip/wip.html",
+        src: "allfunds_logo.svg"
+      }
+    ]
+
+    var comboBoxOptions = [
+      {
+        col: 0,
+        label:'Tipo de servicio',
+        filter: 'operation',
+        options: [
+          {name:'Comismar'}
+        ]
+      },
+      {
+        col: 1,
+        label :'Nº de siniestro',
+        filter: 'nro_siniestro',
+        text: true
+      },
+      {
+        col: 2,
+        label :'Año del siniestro',
+        filter: 'date_siniestro',
+        date: true
+      },
+      {
+        col: 3,
+        label :'Nº de póliza',
+        placeholder :'Escribir nº de póliza',
+        filter: 'nro_poliza',
+        text: true
+      },
+      {
+        col: 4,
+        label :'Ref. Externa',
+        placeholder :'Escribir referencia externa',
+        filter: 'nro_externa',
+        text: true
+      },
+      {
+        col: 5,
+        label:'Situación',
+        filter: 'situacion',
+        options: [
+          {name:'En curso'}
+        ]
+      },
+    ]
+
+    const THEADER_ROW_AJUSTES_DAÑOS = [
+      'tipo',
+      'Garantía',
+      'Gremio',
+      'Partida',
+      'precio',
+      'DIR.',
+      'EST',
+      {name: 'V.NUEVO:', status: "none"},
+      {name: 'DEPREC:', status: "none"},
+      {name: 'V.REAL:', status: "none"},
+      {name: 'PROPUESTA:', status: "none"}
+    ]
+
+    const TBODY_ROWS_AJUSTES_DAÑOS = [
+      [
+        'Reparación',
+        'Vivienda',
+        'Fontanero',
+        'Localización sin cala',
+        '25,62€',
+        '1,00',
+        '0,00',
+        '25,62€',
+        '25,62€',
+        '25,62€',
+        '25,62€'
+      ],
+      [
+        'Reparación',
+        'Vivienda',
+        'Fontanero',
+        'Localización sin cala',
+        '25,62€',
+        '1,00',
+        '0,00',
+        '25,62€',
+        '25,62€',
+        '25,62€',
+        '25,62€'
+      ],
+      [
+        'Reparación',
+        'Vivienda',
+        'Fontanero',
+        'Localización sin cala',
+        '25,62€',
+        '1,00',
+        '0,00',
+        '25,62€',
+        '25,62€',
+        '25,62€',
+        '25,62€'
+      ],
+      [
+        'Reparación',
+        'Vivienda',
+        'Fontanero',
+        'Localización sin cala',
+        '25,62€',
+        '1,00',
+        '0,00',
+        '25,62€',
+        '25,62€',
+        '25,62€',
+        '25,62€'
+      ],
+      [
+        'Reparación',
+        'Vivienda',
+        'Fontanero',
+        'Localización sin cala',
+        '25,62€',
+        '1,00',
+        '0,00',
+        '25,62€',
+        '25,62€',
+        '25,62€',
+        '25,62€'
+      ]
+    ]
+
+    const THEADER_ROW_CONCURRENCIA = [
+      'Compañia',
+      'Capital',
+      'Coef. participación',
+      'Capital Participación',
+      'PORCENTAJE',
+      'RESULTADOS.'
+    ]
+
+    const TBODY_ROWS_CONCURRENCIA = [
+      [
+        'Demo Madrileña',
+        '150.000,00€',
+        '100%',
+        '150.000,00€',
+        '62,50%',
+        '825,56€'
+      ],
+      [
+        'Demo Madrileña',
+        '150.000,00€',
+        '100%',
+        '150.000,00€',
+        '62,50%',
+        '825,56€'
+      ]
+    ]
+
+block content
+  #content-page-sidebar.display-f.flex--column.flex--row-lg
+    #content-page.w100.pos-relative
+      .content-icon-expanded
+        i.btn-expanded(href='#' onclick='expandPage(event)')
+          img(src='../../../assets/img/icon_expand.svg' alt='layout-nav-logo' width='15' height='10')
+        mm-tooltip.mm-tooltip-expanded.dark.w-fitContent(position="left") 
+          span.expanded Cerrar
+          span.not-expanded Abrir
+          |  columna de resumen
+      .row
+        .col-12
+          main.pl-m.pr-m.display-f.flex--column
+            .row.py-xs
+              .col-12
+                .display-f.flex--justify-between
+                  .display-f.flex--align-center
+                    h1.mb-n.mr-xs COMISMAR 1103265 - 2021/1
+                    mm-indicator.mr-xs Finalizado
+            .row.mb-m
+              .col-12 
+                mm-progress-indicator(current-step='5')
+                  .mmpi-content DESCRIPCIÓN RIESGO
+                  a.mmpi-icon(href='descripcion_riesgos.html' slot='step-1' title='Seccion')
+                    i.fas.fa-home(style='font-size: 30px;')
+                  .mmpi-content CAUSAS Y ATRIBUTOS
+                  a.mmpi-icon(href='causas_atributos.html' slot='step-2' title='Seccion')
+                    i.fas.fa-file-alt(style='font-size: 30px;')
+                  .mmpi-content TERCEROS IMPLICADOS
+                  a.mmpi-icon(href='terceros_implicados.html' slot='step-3' title='Seccion')
+                    i.fas.fa-users(style='font-size: 30px;')
+                  .mmpi-content TASACIÓN Y AJUSTE DE DAÑOS
+                  a.mmpi-icon(href='tasacion_ajustes.html' slot='step-4' title='Seccion')
+                    i.fas.fa-file-invoice-dollar(style='font-size: 30px;')
+                  .mmpi-content DOCUMENTACIÓN
+                  a.mmpi-icon(href='documentacion.html' slot='step-5' title='Seccion')
+                    i.fas.fa-folder-open(style='font-size: 30px;')    
+            .row.mb-m 
+              .col-12
+                .subheading--modo-consultivo
+                  i.fas.fa-folder-open 
+                  h3 Documentación
+                .b-block
+                  .row 
+                    .col-12.display-f.flex--justify-end.button-action-gallery
+                      mm-buttons-selector
+                        button.grouping-button-item.mr-xxs(type='button' name='botones' value='1' onclick='handleActionGallery(event)')
+                          i.fa.fa-th-large(aria-hidden='true')
+                        button.grouping-button-item(type='button' name='botones' value='0' onclick='handleActionGallery(event)') 
+                          i.fa.fa-th-list(aria-hidden='true')
+                  .row.row-galery.mb-m 
+                    .col-12 
+                      .heading-documents.display-f.flex--align-center.mb-xxs
+                        p.mb-n
+                          strong.uppercase.mr-xxs documentos servicio actual
+                          | (1103265 - 2021/3)
+                      .row
+                        .content-galery.content-galery--grid.content-galery--old.content-galery--not-select 
+                            .col-item-documents 
+                              .item-documents--image
+                                a.pos-relative(href="#" onclick=`openLightbox(event, 'gallery1Lightbox', 0)`)
+                                  .video-shadow 
+                                    i.fas.fa-play-circle
+                                  img(src='../../../assets/img/img_galeria.jpg')
+                                a.delete-img(href="#")
+                                  i.fas.fa-trash 
+                              .item-documents--detail
+                                .icon-type 
+                                  i.fas.fa-file-video
+                                .actions 
+                                  a.delete.mr-xs(href="#")
+                                    i.fas.fa-trash
+                                  a.edit(href="#")
+                                    i.fas.fa-edit
+                                .detail
+                                  p.title
+                                    a(href="#" onclick=`openLightbox(event, 'gallery1Lightbox', 0)`)  1. Título del video
+                                  .descripcion
+                                    p.mr-xs Video - terceros
+                                    p.mb-n 05/01/2022, 09:35 
+                            .col-item-documents 
+                              .item-documents--image 
+                                img(src='../../../assets/img/img_galeria.jpg')
+                                a.delete-img(href="#")
+                                  i.fas.fa-trash
+                              .item-documents--detail
+                                .icon-type 
+                                  i.fas.fa-file-image
+                                .actions 
+                                  a.delete.mr-xs(href="#")
+                                    i.fas.fa-trash
+                                  a.edit(href="#")
+                                    i.fas.fa-edit
+                                .detail
+                                  .select 
+                                    mm-checkbox
+                                      input(type='checkbox' value='1' name='check1')
+                                      label
+                                  p.title 
+                                    a(href="#" onclick=`openLightbox(event, 'gallery1Lightbox', 1)`) 2. Título de la imagen
+                                  .descripcion  
+                                    p.mr-xs Imagen - terceros
+                                    p.mb-n 05/01/2022, 09:35                             
+                            .col-item-documents 
+                              .item-documents--image 
+                                i.fas.fa-file-pdf
+                                a.delete-img(href="#")
+                                  i.fas.fa-trash 
+                              .item-documents--detail
+                                .icon-type 
+                                  i.fas.fa-file-pdf
+                                .actions 
+                                  a.delete.mr-xs(href="#")
+                                    i.fas.fa-trash
+                                  a.edit(href="#")
+                                    i.fas.fa-edit
+                                .detail
+                                  p.title 
+                                    a(href="#" onclick=`openLightbox(event, 'gallery1Lightbox', 2)`)  3. Título del pdf
+                                  .descripcion
+                                    p.mr-xs Pdf - terceros
+                                    p.mb-n 05/01/2022, 09:35
+                        mm-lightbox.sizeS.gallery(label=`` id-lightbox=`gallery1Lightbox`)
+                          section(slot='lightbox-content')
+                            .w-100.px-s
+                              .row
+                                .col-12
+                                  .swiper.swiper-container.slider-swiper
+                                    .swiper-wrapper
+                                      .swiper-slide 
+                                        .row.mb-xs
+                                          .col-12.display-f.flex--justify-between
+                                            .header-slider 
+                                              h2 1- Título del Video
+                                              p Imagen VVAA. Perjudicada 05/01/2022, 13:35
+                                            .actions.display-f.flex--justify-end.flex--align-end
+                                              mm-button(type="support" onclick=`rotateImage("#gallery1LightboxObject1")`)
+                                                i.fa.fa-sync-alt(aria-hidden='true')
+                                                span.ml-xs Rotar 
+                                        .row
+                                          .col-12
+                                            .body-slider.object
+                                              #gallery1LightboxObject1.north
+                                                iframe(width='560' height='315' src='https://www.youtube.com/embed/cgmrjKTdhG0' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen='')
+                                      .swiper-slide
+                                        .row.mb-xs
+                                          .col-12.display-f.flex--justify-between
+                                            .header-slider 
+                                              h2 2- Título de la imagen
+                                              p Imagen VVAA. Perjudicada 05/01/2022, 13:35
+                                            .actions.display-f.flex--justify-end.flex--align-end
+                                              mm-button(type="support" onclick=`rotateImage("#gallery1LightboxObject2")`)
+                                                i.fa.fa-sync-alt(aria-hidden='true')
+                                                span.ml-xs Rotar
+                                        .row
+                                          .col-12
+                                            .body-slider
+                                              img#gallery1LightboxObject2.north(src="../../../assets/img/img_slider.png")
+                                      .swiper-slide 
+                                        .row.mb-xs
+                                          .col-12
+                                            .header-slider 
+                                              h2 3- Título del PDF
+                                              p Imagen VVAA. Perjudicada 05/01/2022, 13:35
+                                        .row.mb-xs
+                                          .col-12
+                                            .actions
+                                        .row
+                                          .col-12
+                                            .body-slider.pdf
+                                              mm-file-preview(url='https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf')
+
+                                    // Add Pagination
+                                    .swiper-pagination
+                                    // Add Navigation
+                                    .swiper-button-prev
+                                      i.fas.fa-angle-left
+                                    .swiper-button-next 
+                                      i.fas.fa-angle-right
+                              .row
+                                .col-12
+                                  section.display-f.flex--justify-end.mt-m(slot='lightbox-content-button')
+                                    mm-button.btn-save.display-n.mr-s(label='guardar cambios' type='support' )
+                                    mm-button.btn-close(label='Cerrar')
+                  .row.row-galery 
+                    .col-12 
+                      .heading-documents.display-f.flex--align-center.mb-xxs
+                        p.mb-n
+                          strong.uppercase.mr-xxs documentos servicios anteriores
+                          span 
+                            i.fa.fa-info-circle
+                            mm-tooltip.dark lorem ipsum
+                      .row
+                        .content-galery.content-galery--grid.content-galery--old.content-galery--not-select 
+                          .col-item-documents 
+                            .item-documents--image 
+                              img(src='../../../assets/img/img_galeria.jpg')
+                              a.delete-img(href="#")
+                                i.fas.fa-trash
+                            
+                            .item-documents--detail
+                              .icon-type 
+                                i.fas.fa-file-image
+                              .detail 
+                                p.title 
+                                  a(href="#" onclick=`openLightbox(event, 'gallery2Lightbox', 0)`) 1. Título de la imagen
+                                .descripcion  
+                                  p.mr-xs Imagen - terceros
+                                  p.mb-n 05/01/2022, 09:35
+
+                          .col-item-documents 
+                            .item-documents--image
+                              a.pos-relative(href="#" onclick=`openLightbox(event, 'gallery2Lightbox', 1)`)
+                                .video-shadow 
+                                  i.fas.fa-play-circle
+                                img(src='../../../assets/img/img_galeria.jpg')
+                              a.delete-img(href="#")
+                                i.fas.fa-trash
+                            .item-documents--detail
+                              .icon-type 
+                                i.fas.fa-file-image
+                              .actions 
+                                a.edit(href="#")
+                                  i.fas.fa-edit
+                                a.delete.ml-xs(href="#")
+                                  i.fas.fa-trash
+
+                              .detail  
+                                .select 
+                                  mm-checkbox
+                                    input(type='checkbox' value='1' name='check1')
+                                    label
+                                p.title
+                                  a(href="#" onclick=`openLightbox(event, 'gallery2Lightbox', 1)`) 2. Título de la imagen
+                                .descripcion
+                                  p Imagen - terceros
+                                  p.mb-n 05/01/2022, 09:35                             
+                          .col-item-documents 
+                              .item-documents--image 
+                                img(src='../../../assets/img/img_galeria_2.jpg')
+                                a.delete-img(href="#")
+                                  i.fas.fa-trash 
+                              .item-documents--detail 
+                                .icon-type 
+                                  i.fas.fa-file-pdf
+                                .detail
+                                  p.title 
+                                    a(href="#" onclick=`openLightbox(event, 'gallery2Lightbox', 2)`) 3. Título de la imagen
+                                  .descripcion  
+                                    p.mr-xs Imagen - terceros
+                                    p.mb-n 05/01/2022, 09:35
+                        mm-lightbox.sizeS.gallery(label=`` id-lightbox=`gallery2Lightbox`)
+                          section(slot='lightbox-content')
+                            .w-100.px-s
+                              .row
+                                .col-12
+                                  .swiper.swiper-container.slider-swiper
+                                    .swiper-wrapper
+                                      .swiper-slide 
+                                        .row.mb-xs
+                                          .col-12.display-f.flex--justify-between
+                                            .header-slider 
+                                              h2 1- Título de la imagen
+                                              p Imagen VVAA. Perjudicada 05/01/2022, 13:35
+                                            .actions.display-f.flex--justify-end.flex--align-end
+                                              mm-button(type="support" onclick=`rotateImage("#gallery2LightboxObject0")`)
+                                                i.fa.fa-sync-alt(aria-hidden='true')
+                                                span.ml-xs Rotar 
+                                        .row
+                                          .col-12
+                                            .body-slider
+                                              img#gallery2LightboxObject2.north(src="../../../assets/img/img_slider.png")
+                                      .swiper-slide
+                                        .row.mb-xs
+                                          .col-12.display-f.flex--justify-between
+                                            .header-slider 
+                                              h2 2- Título del Video
+                                              p Imagen VVAA. Perjudicada 05/01/2022, 13:35
+                                            .actions.display-f.flex--justify-end.flex--align-end
+                                              mm-button(type="support" onclick=`rotateImage("#galler2LightboxObject1")`)
+                                                i.fa.fa-sync-alt(aria-hidden='true')
+                                                span.ml-xs Rotar
+                                        .row
+                                          .col-12
+                                            .body-slider.object
+                                              #gallery1LightboxObject1.north
+                                                iframe(width='560' height='315' src='https://www.youtube.com/embed/cgmrjKTdhG0' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen='')
+                                        
+                                      .swiper-slide 
+                                        .row.mb-xs
+                                          .col-12.display-f.flex--justify-between
+                                            .header-slider 
+                                              h2 3- Título de la imagen
+                                              p Imagen VVAA. Perjudicada 05/01/2022, 13:35
+                                            .actions.display-f.flex--justify-end.flex--align-end
+                                              mm-button(type="support" onclick=`rotateImage("#galler2LightboxObject2")`)
+                                                i.fa.fa-sync-alt(aria-hidden='true')
+                                                span.ml-xs Rotar
+                                        .row.mb-xs
+                                          .col-12
+                                            .actions
+                                        .row
+                                          .col-12
+                                            .body-slider
+                                              img#gallery2LightboxObject3.north(src="../../../assets/img/img_slider.png")
+
+                                    // Add Pagination
+                                    .swiper-pagination
+                                    // Add Navigation
+                                    .swiper-button-prev
+                                      i.fas.fa-angle-left
+                                    .swiper-button-next 
+                                      i.fas.fa-angle-right
+                              .row
+                                .col-12
+                                  section.display-f.flex--justify-end.mt-m(slot='lightbox-content-button')
+                                    mm-button.btn-save.display-n.mr-s(label='guardar cambios' type='support' )
+                                    mm-button.btn-close(label='Cerrar')
+
+            .button-action-sticky.row.display-f.flex--justify-between.mt-m 
+              .action-1
+                mm-button.mr-xs( label="Cancelar" type="support")
+              .action-2.display-f
+                a#buttonModoConsultivoPrev(href="tasacion_ajustes.html")
+                  mm-button.mr-xs( label="anterior" type="secondary")
+                mm-button.mr-xs( label="Descargar informe PDF" type="secondary")
+                mm-button( label="Cerrar" type="primary")
+    mm-responsive-layout-lateral-menu.grey.modo-consultivo
+      i.fas.fa-times.close-icon(onclick='expandPage(event)')
+      .b-block
+        h4.blue.no-line Detalle del siniestro
+        .row 
+          .col-6 
+            small Número del siniestro
+            p 1103265 - 2021/1
+        
+          .col-6 
+            small Número del siniestro
+            p 1103265 - 2021/1
+        .row 
+          .col-6 
+            small Dirección riesgo
+            p Juan de la Cierva, 1, 7º-13
+        
+          .col-6 
+            small Fecha/hora Efecto
+            p 20/05/2018 - 09:40h
+        .row 
+          .col-6 
+            small Estado
+            mm-indicator.mr-xs Finalizado
+        
+          .col-6 
+            small Fecha/hora Ocurrencia
+            p 20/05/2018 - 09:40h
+        .row 
+          .col-6 
+            small Proveedor
+            a(id="proveedorLightbox")
+              i.fas.fa-user-tie.mr-xxs
+              | IPAS
+        
+          .col-6 
+            small Fecha/hora Declaración
+            p 20/05/2018 - 09:40h
+        .row 
+          .col-6 
+            small Tipo 
+            p Indemnizable
+        
+          .col-6 
+            small Fecha/hora Vencimiento
+            p 20/05/2018 - 09:40h
+      .b-block
+        .sidebar-subheading--modo-consultivo
+          i.fas.fa-file-alt 
+          h3 Resumen
+        .row 
+          .col-12 
+            mm-accordion.sidebar--modo-consultivo(header='datos generales' reduced='')
+              .row.mb-xs 
+                .col-6 
+                  small Producto 
+                  p 
+                    a(href="#") A todo riesgo PLUS
+              
+                .col-6 
+                  small Tipo de siniestro
+                  p 1103265 - 2021/1
+              .row.mb-xs 
+                .col-6 
+                  small Superficie construída
+                  p 112 m2
+              
+                .col-6 
+                  small Nº Trasteros/Garajes
+                  p 3
+              .row.mb-xs 
+                .col-6 
+                  small Tipo/Subtipo vivienda
+                  p Piso
+              
+                .col-6 
+                  small Superficie terraza
+                  p 100 m2
+              .row.mb-xs 
+                .col-6 
+                  small Año construcción
+                  p 2004
+              
+                .col-6 
+                  small Año última reforma
+                  p 2004
+              .row.mb-xs 
+                .col-6 
+                  small Superficie parcela s/c
+                  p 0
+              
+                .col-6 
+                  small Habitantes
+                  p 4
+              .row.mb-xs 
+                .col-12 
+                  small Protecciones
+                  p Protección 1, Protección 2, Protección 3,...
+              .row.mb-xs 
+                .col-12  
+                  small Atributos
+                  p VTS, Corrosión, Infraseguro, Judicial
+            mm-accordion.sidebar--modo-consultivo(header='descripción del riesgo' reduced='')
+              .row.mb-xs 
+                .col-12 
+                  small Capital continente adecudo a preexistencias
+                  p Sí, (Existencias verificadas)
+              .row.mb-xs 
+                .col-12 
+                  small Capital contenido adecudo a preexistencias
+                  p No, (Razón Cdo)
+              .row.mb-xs 
+                .col-12 
+                  small Estado de conservación
+                  p Requiere mantenimiento
+              .row.mb-xs 
+                .col-12 
+                  small Infraseguro
+                  p No
+              .row.mb-xs
+                .col-6 
+                  small Tasación vivienda
+                  p Tasación vivienda
+                .col-6 
+                  small.number Valor asegur. VVAA
+                  p.number 155.756,36€
+              .row.mb-xs 
+                .col-6 
+                  small Tasación mobiliario
+                  p Tasación mobiliario
+                .col-6 
+                  small.number Valor asegur. Mobiliario
+                  p.number 47.568,13€
+            mm-accordion.sidebar--modo-consultivo(header='Causas y atributos' reduced='')
+              .row.mb-xs 
+                .col-12 
+                  small Asegurado conforme
+                  p Sí
+              .row.mb-xs 
+                .col-6 
+                  small Tiene cobertura
+                  p Sí
+                .col-6 
+                  small Es recobrable
+                  p No
+              .row.mb-xs 
+                .col-6 
+                  small daños consorciables
+                  p No
+                .col-6 
+                  small Datos consorciables
+                  p Parcial
+              .row.mb-xs 
+                .col-12 
+                  small Estimación daños consorciables
+                  p Estimación daños
+              .row.mb-xs 
+                .col-6 
+                  small Posible fraude
+                  p No
+                .col-6 
+                  small Corrosión
+                  p No
+              .row.mb-xs 
+                .col-12 
+                  small Concurrencia
+                  p No
+              .row.mb-xs 
+                .col-12 
+                  small Visualizar informe reparador
+                  p No
+            mm-accordion.sidebar--modo-consultivo(header='terceros implicados' reduced='' )
+              .row.mb-xs 
+                .col-12 
+                  small Últimos terceros implicados añadidos
+                  p.my-xxs Perjudicado - Mari Camen Martínez
+                  p.my-xxs Afectado - Ana Noemí Fernández Martínez
+                  p.my-xxs Causante - Jose María Fernández Iglesias
+            mm-accordion.sidebar--modo-consultivo(header='Tasación y ajustes de daño' reduced='' active)
+              .row.mb-xs 
+                .col-6 
+                  small.number Valor total nuevo
+                  p.number 102,48€
+                .col-6 
+                  small.number Valor total real
+                  p.number 102,48€
+              .row.mb-xs 
+                .col-6 
+                  small.number Propuesta total
+                  p.number 102,48€

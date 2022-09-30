@@ -1,0 +1,824 @@
+extends ../../../layout/main
+include ../../../components/external-link.pug
+
+block variables
+  - var scripts = ["../../../assets/js/pages/home.js"]
+  - var HIDE_SIDEPANEL = true
+  - var breadcrumbsItems = [['Dashboard'], ['Filtro de servicios'], ['1103265-2021/1']]
+  - var title = 'Peritos Hogar'
+  -
+    const DIRECT_ACCESS = [
+      {
+        name: "Tower",
+        description: "Esto es una breve descripción del acceso directo",
+        href: "../wip/wip.html",
+        src: "tower_logo.png"
+      },
+      {
+        name: "Salesforce",
+        description: "Esto es una breve descripción del acceso directo",
+        href: "../wip/wip.html",
+        src: "salesforce_logo.svg"
+      },
+      {
+        name: "SAR",
+        description: "Esto es una breve descripción del acceso directo",
+        href: "../wip/wip.html",
+        src: "sar_logo.svg"
+      },
+      {
+        name: "SRV",
+        description: "Accede de una forma rápida al Sistema de Retribución Variable",
+        href: "../wip/wip.html",
+        src: "srv_logo.svg"
+      },
+      {
+        name: "Allfunds",
+        description: "Esto es una breve descripción del acceso directo",
+        href: "../wip/wip.html",
+        src: "allfunds_logo.svg"
+      }
+    ]
+
+    var comboBoxOptions = [
+      {
+        col: 0,
+        label:'Tipo de servicio',
+        filter: 'operation',
+        options: [
+          {name:'Comismar'}
+        ]
+      },
+      {
+        col: 1,
+        label :'Nº de siniestro',
+        filter: 'nro_siniestro',
+        text: true
+      },
+      {
+        col: 2,
+        label :'Año del siniestro',
+        filter: 'date_siniestro',
+        date: true
+      },
+      {
+        col: 3,
+        label :'Nº de póliza',
+        placeholder :'Escribir nº de póliza',
+        filter: 'nro_poliza',
+        text: true
+      },
+      {
+        col: 4,
+        label :'Ref. Externa',
+        placeholder :'Escribir referencia externa',
+        filter: 'nro_externa',
+        text: true
+      },
+      {
+        col: 5,
+        label:'Situación',
+        filter: 'situacion',
+        options: [
+          {name:'En curso'}
+        ]
+      },
+    ]
+
+    const THEADER_ROW_GARANTIA = [
+      'Garantias',
+      'Capitales',
+      'RP'
+    ] 
+
+    const TBODY_ROWS_GARANTIA = [
+      [
+        'Vivienda',
+        {name: '155.756,36 €', icon: 'clip', link: '', textlink:'Ver detalle'},
+        'No'
+      ],
+      [
+        'Vivienda',
+        {name: '155.756,36 €', icon: 'clip', link: '', textlink:'Ver detalle'},
+        'No'
+      ],
+      [
+        'Mobiliario',
+        {name: '47.568,13 €', icon: 'clip', link: '', textlink:'Ver detalle'},
+        'No'
+      ],
+      [
+        'RC Conjunta',
+        {name: '300.000,00 €', icon: 'clip', link: '#', textlink:'Ver detalle'},
+        '-'
+      ],
+      [
+        'RC Conjunta',
+        {name: '300.000,00 €', icon: 'clip', link: '#', textlink:'Ver detalle'},
+        '-'
+      ],
+      [
+        'RC Conjunta',
+        {name: '300.000,00 €', icon: 'clip', link: '#', textlink:'Ver detalle'},
+        '-'
+      ],
+      [
+        'Vivienda',
+        {name: '155.756,36 €', icon: 'clip', link: '', textlink:'Ver detalle'},
+        'No'
+      ],
+      [
+        'Vivienda',
+        {name: '155.756,36 €', icon: 'clip', link: '', textlink:'Ver detalle'},
+        'No'
+      ]
+    ]
+
+    const THEADER_ROW_SINIESTROS = [
+      'Siniestro',
+      'tipo',
+      'causa',
+      'ocurrencia',
+      'Declaración',
+      'terminación',
+      'Descripción del siniestro',
+      'coberturas'
+    ] 
+
+    const TBODY_ROWS_SINIESTROS = [
+      [
+        '1254808 / 2021',
+        'IN',
+        'Daños eléctricos por sobretensión',
+        '25/03/2021',
+        '26/03/2021',
+        '15/03/2021',
+        {name: 'Descripción del siniestro...',text:'Descripción del siniestro...'},
+        {name: 'CRISTALERO - CONFIRMA ',text:'CRISTALERO - CONFIRMA SINIESTRO - MEDIDO UNA LUNA DE 10 MM DE 160 X 90 CM CON CANTOS PULIDOS Y ESQUINAS REDONDAS, PERO EL CLIENTE EXIGE TAMBIEN LA SUSTITUCION DE LAS VENTOSAS DE SUJECION DEL CRISTAL, AUNQUE LAS MISMAS ESTAN EN ESTADO ACEPTABLE DE REUTILIZACION.'}
+      ],
+      [
+        '1254808 / 2021',
+        'IN',
+        'Daños eléctricos por sobretensión',
+        '25/03/2021',
+        '26/03/2021',
+        '15/03/2021',
+        {name: 'Descripción del siniestro...',text:'Descripción del siniestro...'},
+        {name: 'CRISTALERO - CONFIRMA ',text:'CRISTALERO - CONFIRMA SINIESTRO - MEDIDO UNA LUNA DE 10 MM DE 160 X 90 CM CON CANTOS PULIDOS Y ESQUINAS REDONDAS, PERO EL CLIENTE EXIGE TAMBIEN LA SUSTITUCION DE LAS VENTOSAS DE SUJECION DEL CRISTAL, AUNQUE LAS MISMAS ESTAN EN ESTADO ACEPTABLE DE REUTILIZACION.'}
+      ],
+      [
+        '1254808 / 2021',
+        'IN',
+        'Daños eléctricos por sobretensión',
+        '25/03/2021',
+        '26/03/2021',
+        '15/03/2021',
+        {name: 'Descripción del siniestro...',text:'Descripción del siniestro...'},
+        {name: 'CRISTALERO - CONFIRMA ',text:'CRISTALERO - CONFIRMA SINIESTRO - MEDIDO UNA LUNA DE 10 MM DE 160 X 90 CM CON CANTOS PULIDOS Y ESQUINAS REDONDAS, PERO EL CLIENTE EXIGE TAMBIEN LA SUSTITUCION DE LAS VENTOSAS DE SUJECION DEL CRISTAL, AUNQUE LAS MISMAS ESTAN EN ESTADO ACEPTABLE DE REUTILIZACION.'}
+      ],
+      [
+        '1254808 / 2021',
+        'IN',
+        'Daños eléctricos por sobretensión',
+        '25/03/2021',
+        '26/03/2021',
+        '15/03/2021',
+        {name: 'Descripción del siniestro...',text:'Descripción del siniestro...'},
+        {name: 'CRISTALERO - CONFIRMA ',text:'CRISTALERO - CONFIRMA SINIESTRO - MEDIDO UNA LUNA DE 10 MM DE 160 X 90 CM CON CANTOS PULIDOS Y ESQUINAS REDONDAS, PERO EL CLIENTE EXIGE TAMBIEN LA SUSTITUCION DE LAS VENTOSAS DE SUJECION DEL CRISTAL, AUNQUE LAS MISMAS ESTAN EN ESTADO ACEPTABLE DE REUTILIZACION.'}
+      ],
+      [
+        '1254808 / 2021',
+        'IN',
+        'Daños eléctricos por sobretensión',
+        '25/03/2021',
+        '26/03/2021',
+        '15/03/2021',
+        {name: 'Descripción del siniestro...',text:'Descripción del siniestro...'},
+        {name: 'CRISTALERO - CONFIRMA ',text:'CRISTALERO - CONFIRMA SINIESTRO - MEDIDO UNA LUNA DE 10 MM DE 160 X 90 CM CON CANTOS PULIDOS Y ESQUINAS REDONDAS, PERO EL CLIENTE EXIGE TAMBIEN LA SUSTITUCION DE LAS VENTOSAS DE SUJECION DEL CRISTAL, AUNQUE LAS MISMAS ESTAN EN ESTADO ACEPTABLE DE REUTILIZACION.'}
+      ],
+      [
+        '1254808 / 2021',
+        'IN',
+        'Daños eléctricos por sobretensión',
+        '25/03/2021',
+        '26/03/2021',
+        '15/03/2021',
+        {name: 'Descripción del siniestro...',text:'Descripción del siniestro...'},
+        {name: 'CRISTALERO - CONFIRMA ',text:'CRISTALERO - CONFIRMA SINIESTRO - MEDIDO UNA LUNA DE 10 MM DE 160 X 90 CM CON CANTOS PULIDOS Y ESQUINAS REDONDAS, PERO EL CLIENTE EXIGE TAMBIEN LA SUSTITUCION DE LAS VENTOSAS DE SUJECION DEL CRISTAL, AUNQUE LAS MISMAS ESTAN EN ESTADO ACEPTABLE DE REUTILIZACION.'}
+      ],
+      
+    ]
+
+    const THEADER_ROW_CONTACTO_MODAL = [
+      'nombre y apellidos',
+      'teléfono',
+      'horario contacto'
+    ]
+
+    const TBODY_ROWS_CONTACTO_MODAL = [
+      [
+        'Juan Pablo Labaña',
+        '634123456',
+        '10:00 - 20:00h'
+      ],
+      [
+        'Juan Pablo Labaña',
+        '634123456',
+        '10:00 - 20:00h'
+      ],
+      [
+        'Noemí Fernández',
+        '634123456',
+        '10:00 - 20:00h'
+      ],
+      [
+        'Jose María Iglesias',
+        '634123456',
+        '10:00 - 20:00h'
+      ]
+    ]
+
+    const THEADER_ROW_PERJUDICADOS_MODAL = [
+      'nombre y apellidos',
+      'domicilio',
+    ]
+
+    const TBODY_ROWS_PERJUDICADOS_MODAL = [
+      [
+        'Juan Pablo Labaña',
+        'Castillo de arévalo 11 28232 Las Rozas de Madrid'
+      ],
+      [
+        'Juan Pablo Labaña',
+        'José Noriega 15, 1 1 28017 Madrid',
+      ],
+      [
+        'Noemí Fernández',
+        'Castillo de arévalo 11 28232 Las Rozas de Madrid',
+      ],
+      [
+        'Jose María Iglesias',
+        'José Noriega 15, 1 1 28017 Madrid',
+      ]
+    ]
+
+block content
+  .row.py-xs.pos-sticky-heading  
+    .col-12
+      .display-f.flex--justify-between
+        .display-f.flex--align-center
+          h1.mb-n.mr-xs COMISMAR 1103265 - 2021/1
+          mm-indicator.mr-xs pte avance
+          mm-indicator.status_info_secondary tipo siniestro
+        .display-f.flex--align-center
+          .bg--full_white.display-f.flex--justify-end.flex--align-center
+            mm-button.mr-xs( label="GESTIONAR NOTAS" type="secondary")
+            mm-button.mr-xs( label="GESTIONAR TAREAS" type="secondary")
+            mm-button( label="GESTIONAR CITA" type="primary")
+  main.row
+    .col-12               
+      .container-flex.main.bg-white.border-radius-2
+        .row
+          section.col-12
+            .row.mb-m.mt-m  
+              .col-6
+                .card.px-xs.py-xs.mb-s 
+                  .card-header.display-f.flex--justify-between.flex--align-center 
+                    h3 Descripción del siniestro
+                    a.underline(id="siniestroLightbox") Ver datos del siniestro
+                  .card-body 
+                    .row
+                      .col-6.display-flex
+                        .item
+                          h5 Póliza
+                          p 1.170.277
+                        .item
+                          h5 DNI
+                          p 12345678V
+                      .col-6.display-flex
+                        .item
+                          h5 Asegurado
+                          p Paco López Martínez
+                    .row
+                      .col-6.display-flex
+                        .item
+                          h5 Domicilio asegurado
+                          p Calle Rafael Bergamin 5 B:K P:3 28043 Madrid
+                      .col-6.display-flex
+                        .item
+                          h5 Referencia catastral
+                          p 
+                            a(href="#") 0899382658794650
+                    .row
+                      .col-12.display-flex
+                        .item
+                          h5 Descripción del siniestro
+                          p Causa humedades al piso inferior en el baño
+                    .row
+                      .col-6.display-flex
+                        .item
+                          h5 Perito alta servicio
+                          p Motivo: No está claro origen/dificultad ténica 
+                      .col-6.display-flex
+                        .item
+                          h5 Causa
+                          p Causa humedades al piso inferior en el baño 
+
+                .card.px-xs.py-xs.mb-s 
+                  .card-header.display-f.flex--justify-between.flex--align-center 
+                    h3 Datos del contacto
+                    a.underline(id="contactoLightbox") Ver más contactos
+                  .card-body
+                    .row
+                      .col-6.display-flex
+                        .item
+                          h5 Declarante
+                          p Asegurado
+                        .item
+                          h5 Nombre y apellidos
+                          p Paco López Martínez
+                      .col-6.display-flex
+                        .item
+                          h5 Teléfono
+                          p 634123456
+                        .item
+                          h5 Horario de contacto
+                          p 10:00 - 20:00h
+
+                .card.px-xs.py-xs.mb-s 
+                  .card-header.display-f.flex--justify-between.flex--align-center 
+                    h3 Perjudicados
+                    a.underline(id="perjudicadosLightbox") Ver más perjudicados
+                  .card-body
+                    .row
+                      .col-6.display-flex
+                        .item
+                          h5 Nombre y apellidos
+                          p Elena López Fernández
+                        
+                      .col-6.display-flex
+                        .item
+                          h5 Domicilio
+                          p Castillo de arévalo 11 28232 Las Rozas de Madrid
+                    .row
+                      .col-6.display-flex
+                        .item
+                          h5 Nombre y apellidos
+                          p Elena López Fernández
+                        
+                      .col-6.display-flex
+                        .item
+                          h5 Domicilio
+                          p Castillo de arévalo 11 28232 Las Rozas de Madrid
+                    .row
+                      .col-6.display-flex
+                        .item
+                          h5 Nombre y apellidos
+                          p Elena López Fernández
+                        
+                      .col-6.display-flex
+                        .item
+                          h5 Domicilio
+                          p Castillo de arévalo 11 28232 Las Rozas de Madrid
+              
+              .col-6
+                .card.px-xs.py-xs.mb-s 
+                  .card-header.display-f.flex--justify-between.flex--align-center 
+                    h3 Detalle de la póliza
+                    .actions 
+                      a.underline.mr-m(id="riesgoLightbox") Ver información riesgo
+                      a.underline( id="polizaLightbox") Ver detalles de la póliza
+                  .card-body 
+                    .row
+                      .col-6.display-flex
+                        .item
+                          h5 Producto
+                          p 
+                            a(href="#") A todo riesgo PLUS
+                        .item
+                          h5 Nº Condicionado
+                          p HG2001
+                      .col-6.display-flex
+                        .item
+                          h5 VIP
+                          p No
+                        .item
+                          h5 CAV
+                          p Sí
+                    .row
+                      .col-6.display-flex
+                        .item
+                          h5 Fecha contratación
+                          p 12/05/2020 - 13:30h
+                        .item
+                          h5 Fecha efecto
+                          p 12/06/2020 - 13:30h
+                      .col-6.display-flex
+                        .item
+                          h5 Fecha ocurrencia
+                          p 12/05/2020 - 13:30h
+                        .item
+                          h5 Fecha declaración
+                          p 12/06/2020 - 13:30h
+                    .row
+                      .col-6.display-flex
+                        .item
+                          h5 Fecha vencimiento
+                          p 12/05/2020 - 13:30h
+                        .item
+                          h5 Proveedor
+                          p 
+                            a(id="proveedorLightbox")
+                              i.fas.fa-user-tie.mr-xxs
+                              | IPAS
+                      .col-6.display-flex
+                        .item
+                          h5 Estado de la póliza
+                          mm-indicator.status_success En vigor
+                    .row 
+                      .col-12 
+                        mm-listing.filter-table-header()
+                          header(slot='header-title').w100.display-f.flex--align-end
+                            h5.fs-normal.display-ib.mm-bold.uppercase.mb-s Garantías y capitales asegurados
+                                
+                          table#garantiaTable(slot='table')
+                            thead
+                              tr
+                                each th, index in THEADER_ROW_GARANTIA
+                                  - var type = index === 5 ? "date": ''
+                                  th(type=type)
+                                    | #{th}      
+                            tbody
+                              each rows, indexRow in TBODY_ROWS_GARANTIA
+                                tr(id=`garntiaRow_${indexRow}` class=`${rows[0].status}`)
+                                  each item, index in rows
+                                    if item.textlink
+                                      td.text-nowrap
+                                        span #{item.name}
+                                        if item.link
+                                          a.ml-xs(href="#") 
+                                            i.fas.fa-paperclip.mr-xxs
+                                            | #{item.textlink}
+                                    else
+                                      td #{item}
+
+            .row 
+              .col-12
+                .card.px-xs.py-xs.mb-s 
+                  .card-header.display-f.flex--justify-between.flex--align-center 
+                    h3 Siniestros previos
+                  .card-body 
+                    .row 
+                      .col-12 
+                        mm-listing.filter-table-header(compact)
+                          table#siniestroTable(slot='table')
+                            thead
+                              tr
+                                each th, index in THEADER_ROW_SINIESTROS
+                                  - var type = index === 5 ? "date": ''
+                                  th(type=type)
+                                    | #{th}      
+                            tbody
+                              each rows, indexRow in TBODY_ROWS_SINIESTROS
+                                tr(id=`garntiaRow_${indexRow}` class=`${rows[0].status}`)
+                                  each item, index in rows
+                                    if item.text
+                                      td
+                                        span #{item.name}
+                                        mm-tooltip #{item.text}
+                                    else
+                                      td #{item}
+
+
+  mm-lightbox.sizeS(label=`Más detalles de la póliza` id-lightbox=`polizaLightbox`)
+    section(slot='lightbox-content')
+      .box-section
+        .box-section-header
+          h4 Perfil del cliente
+        .box-section-body
+          .row.mx-n
+            .col-3
+              .item 
+                h5 Perfil
+                mm-indicator.client_gold.mb-s Gold
+            .col-3
+              .item 
+                h5 Empleado
+                p No
+            .col-3
+              .item 
+                h5 Hipoteca
+                p Si
+      .box-section
+        .box-section-header
+          h4 Firmas de la póliza
+        .box-section-body
+          .row.mx-n
+            .col-3 
+              .item 
+                h5 Alta CP
+                p No Aplica
+            .col-3 
+              .item 
+                h5 Alta PA
+                p No Aplica
+            .col-3 
+              .item 
+                h5 Supl CP
+                p Firmada
+            .col-3 
+              .item 
+                h5 Supl PA
+                p No Aplica
+      .box-section
+        .box-section-header
+          h4 h4 Datos del tomador
+        .box-section-body
+          .row.mx-n.mb-m 
+            .col-4
+              .item 
+                h5 Nombre y apellidos
+                p Francisco Martínez Prieto
+            .col-3   
+              .item 
+                h5 NIF
+                p 12345678X
+            .col-5
+              .item 
+                h5 Domiclio
+                p Calle Castillo de arévalo 11
+          .row.mx-n  
+            .col-4
+              .item 
+                h5 Fecha de nacimiento
+                p 06/03/1966
+            .col-3
+              .item 
+                h5 Teléfono
+                p 634123456
+            .col-5
+              .item 
+                h5 Email
+                p franmarpi@gmail.com
+
+    section.display-f.flex--justify-between.mt-m(slot='lightbox-content-button')
+      button.mm-button.basic.support.button-close.mr-m(type='button') Cancelar
+
+  mm-lightbox.sizeS(label=`Más datos del siniestro` id-lightbox=`siniestroLightbox`)
+    section(slot='lightbox-content')
+      .box-section
+        .box-section-header
+          h4 Detalle del siniestro
+        .box-section-body
+          .row.mx-n.mb-xs
+            .col-3
+              .item 
+                h5 Estado
+                mm-indicator en curso
+            .col-3
+              .item 
+                h5 Situación
+                mm-indicator.status_info_secondary PTE avance
+            .col-3
+              .item 
+                h5 Causa
+                p Rotura de tubería empotrada
+          .row.mx-n
+            .col-3
+              .item 
+                h5 Ubicación daño
+                p trasteros
+            .col-3
+              .item 
+                h5 Bienes dañados
+                p Paramento
+            .col-3
+              .item 
+                h5 Causante
+                p Asegurado
+
+      .box-section
+        .box-section-header
+          h4 Atributos
+        .box-section-body
+          .row.mx-n.mb-xs
+            .col-3 
+              .item 
+                p VTS
+            .col-3 
+              .item 
+                h5 Corrosión
+            .col-3 
+              .item 
+                h5 Infraseguro
+            .col-3 
+              .item 
+                h5 Causante no repara
+          .row.mx-n
+            .col-3 
+              .item 
+                p Judicial
+            .col-3 
+              .item 
+                h5 Consorciable
+            .col-3 
+              .item 
+                h5 Seguimiento especial
+   
+    section.display-f.flex--justify-between.mt-m(slot='lightbox-content-button')
+      button.mm-button.basic.support.button-close.mr-m(type='button') Cancelar
+  
+  mm-lightbox.sizeS(label=`Mas contactos` id-lightbox=`contactoLightbox`)
+    section(slot='lightbox-content')
+      .row.mx-n
+        .col-12
+          mm-listing.filter-table-header(search compact)
+            header(slot='header-title').w100.display-f.flex--align-end
+              h5.fs-normal.display-ib.mm-bold.uppercase.mb-s Listado de contactos
+            table#contactoModalTable(slot='table')
+              thead
+                tr
+                  each th, index in THEADER_ROW_CONTACTO_MODAL
+                    - var type = index === 5 ? "date": ''
+                    th(sortable searchable type=type)
+                      | #{th}      
+              tbody
+                each rows, indexRow in TBODY_ROWS_CONTACTO_MODAL
+                  tr(id=`contactoModalRow_${indexRow}` class=`${rows[0].status}`)
+                    each item, index in rows
+                      td #{item}
+
+        section.display-f.flex--justify-between.mt-m(slot='lightbox-content-button')
+          button.mm-button.basic.support.button-close.mr-m(type='button') Cancelar
+  
+  mm-lightbox.sizeS(label=`Más perjudicados` id-lightbox=`perjudicadosLightbox`)
+    section(slot='lightbox-content')
+      .row.mx-n
+        .col-12
+          mm-listing.filter-table-header(search compact)
+            header(slot='header-title').w100.display-f.flex--align-end
+              h5.fs-normal.display-ib.mm-bold.uppercase.mb-s Listado de perjudicados
+            table#perjudicadosModalTable(slot='table')
+              thead
+                tr
+                  each th, index in THEADER_ROW_PERJUDICADOS_MODAL
+                    - var type = index === 5 ? "date": ''
+                    th(sortable searchable type=type)
+                      | #{th}      
+              tbody
+                each rows, indexRow in TBODY_ROWS_PERJUDICADOS_MODAL
+                  tr(id=`perjudicadosModalRow_${indexRow}` class=`${rows[0].status}`)
+                    each item, index in rows
+                      td #{item}
+
+        section.display-f.flex--justify-between.mt-m(slot='lightbox-content-button')
+          button.mm-button.basic.support.button-close.mr-m(type='button') Cancelar
+  
+  mm-lightbox.sizeM(label=`Información del riesgo` id-lightbox=`riesgoLightbox`)
+    section(slot='lightbox-content')
+      .box-section
+        .box-section-header
+          h4 Información del riesgo
+        .box-section-body
+          .row.mx-n.mb-s
+            .col-3
+              .item 
+                h5 Tipo
+                p Piso
+            .col-3
+              .item 
+                h5 Planta
+                p Planta baja
+            .col-3
+              .item 
+                h5 Régimen
+                p Propiedad (Ocupante)
+            .col-3
+              .item 
+                h5 Uso
+                p Vivienda habitual
+          .row.mx-n.mb-s
+            .col-3
+              .item 
+                h5 Ubicación
+                p Núcleo urbano
+            .col-3
+              .item 
+                h5 Año construcción
+                p 2004
+            .col-3
+              .item 
+                h5 Año última reforma
+                p 2004
+            .col-3
+              .item 
+                h5 Tipo de construcción
+                p Estándar
+          .row.mx-n.mb-s
+            .col-3
+              .item 
+                h5 Actividad profesional
+                p No
+            .col-3
+              .item 
+                h5 Porcentaje uso
+                p 0.00%
+            .col-3
+              .item 
+                h5 Superficie construida
+                p 112 m2
+            .col-3
+              .item 
+                h5 Superficie terraza
+                p 100 m2
+          .row.mx-n
+            .col-3
+              .item 
+                h5 Parcela si construir
+                p 0 m2
+            .col-3
+              .item 
+                h5 Nº trasteros y garajes
+                p 1
+            .col-3
+              .item 
+                h5 Nº habitantes
+                p 2
+            .col-3
+              .item 
+                h5 Nº puertas acceso
+                p 3
+
+
+      .box-section
+        .box-section-header
+          h4 medidas de robo
+        .box-section-body
+          .row.mx-n.mb-s
+            .col-3 
+              .item 
+                h5 Puertas blindadas
+                p Sí
+            .col-3 
+              .item 
+                h5 Rejas fijas en ventana
+                p Sí
+            .col-3 
+              .item 
+                h5 Caja fuerte
+                p Sí
+            .col-3 
+              .item 
+                h5 Vivienda conectada a alarma
+                p Sí
+          .row.mx-n
+            .col-3 
+              .item 
+                h5 Sistema vigilancia 24 horas
+                p No
+            .col-3 
+              .item 
+                h5 Sistema electrónico de seguridad
+                p Sí
+      .box-section
+        .box-section-header
+          h4 observaciones
+        .box-section-body
+          .row.mx-n
+            .col-12
+              .item 
+                p Nunc mollis feugiat pulvinar. Nunc sit amet laoreet justo. Morbi sem erat, interdum quis lectus a, tincidunt bibendum urna. Vestibulum purus elit, sagittis vel tortor ut.
+   
+    section.display-f.flex--justify-between.mt-m(slot='lightbox-content-button')
+      button.mm-button.basic.support.button-close.mr-m(type='button') Cancelar
+  
+  mm-lightbox.sizeS(label=`Datos del proveedor` id-lightbox=`proveedorLightbox`)
+    section(slot='lightbox-content')
+      .box-section.no-border
+        .box-section-body
+          .row.mx-n.mb-xs
+            .col-12
+              .item 
+                h5 Nombre
+                p IPAS
+          .row.mx-n.mb-xs
+            .col-4
+              .item 
+                h5 Teléfono 1
+                p 665788900
+            .col-4
+              .item 
+                h5 Email 1
+                p nombre@mail.com
+          .row.mx-n
+            .col-4
+              .item 
+                h5 Teléfono 2
+                p 665788900
+            .col-4
+              .item 
+                h5 Email 2
+                p nombre_dos@mail.com
+
+    section.display-f.flex--justify-between.mt-m(slot='lightbox-content-button')
+      button.mm-button.basic.support.button-close.mr-m(type='button') Cancelar

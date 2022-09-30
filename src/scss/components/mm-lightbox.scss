@@ -1,0 +1,41 @@
+mm-lightbox.no-overflow {
+  .lightbox-container [slot="lightbox-content"] {
+    overflow: inherit;
+  }
+
+  mm-combobox label {
+    white-space: nowrap;
+  }
+}
+
+mm-lightbox.sizeM {
+  .lightbox-container {
+    max-width: 1020px;
+    width: 80%;
+
+    [slot="lightbox-content"] {
+      overflow-y: visible;
+      @media only screen and (max-width: 1020px), screen and (max-height: 896px) {
+        overflow-y: auto;
+      }
+    }
+  }
+}
+
+mm-lightbox.sizeS {
+  .lightbox-container {
+    max-width: 800px;
+    width: 50%;
+
+    [slot="lightbox-content"] {
+      overflow-y: visible;
+      @media only screen and (max-width: 1020px), screen and (max-height: 896px) {
+        overflow-y: auto;
+
+        .posStatic .options.show {
+          position: static;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,45 @@
+mm-corner-sheet {
+  & ~ mm-main-container {
+    padding-bottom: 60px;
+
+    mm-info-container {
+      border-right: unset;
+    }
+  }
+
+  & ~ mm-warning.corner-sheet-warning .warning-container {
+    bottom: 70px;
+  }
+
+  &.open ~ mm-warning.corner-sheet-warning .warning-container {
+    bottom: 350px;
+  }
+
+  .corner-sheet-card-element {
+    background-color: #fff;
+    border-left: 4px solid transparent;
+    padding: 5px 10px;
+    transition: all 200ms ease-in-out;
+
+    &.newElement {
+      border-left-color: #c9337d;
+      background: #e9ecf0;
+      margin-bottom: 20px;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: show 600ms ease-in forwards;
+
+      @keyframes show {
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    }
+
+    & .fa-times:hover {
+      color: #55494c;
+      cursor: pointer;
+    }
+  }
+}

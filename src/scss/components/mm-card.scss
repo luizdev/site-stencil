@@ -1,0 +1,179 @@
+mm-card {
+  &.access-home {
+    .mm-card__logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100px;
+
+      &.tower_logo img {
+        height: 100%;
+        width: 85%;
+      }
+
+      &.allfunds_logo img {
+        min-width: 120px;
+      }
+    }
+  }
+
+  &.mm-card--data-day,
+  &.mm-card--data-info {
+    .card-container {
+      min-height: unset;
+      border-radius: 0;
+    }
+  }
+
+  &.mm-card--data-info .card-container {
+    background-color: #3269b3;
+    color: white;
+    width: 200px;
+    padding: 14px 10px;
+    margin: 0;
+    box-sizing: border-box;
+
+    i {
+      color: white;
+    }
+
+    .text-container {
+      width: 100%;
+
+      .principal {
+        color: white;
+        font-size: 28px;
+
+        p {
+          display: flex;
+          align-items: center;
+          padding-top: 3px;
+          margin-bottom: 5px;
+
+          i {
+            margin-left: 5px;
+            font-size: 19px;
+          }
+        }
+      }
+
+      .secondary p {
+        color: white;
+        font-size: 14px !important;
+        font-family: "OpenSans";
+        font-weight: normal;
+      }
+    }
+  }
+
+  &.mm-card--data-info {
+    &.white {
+      .card-container {
+        background-color: #ffffff;
+
+        h2 p,
+        .secondary p {
+          color: #61616a;
+        }
+
+        i {
+          color: #00a4e3;
+        }
+      }
+    }
+
+    &.small-grey {
+      @extend .mm-card--data-info;
+
+      .card-container {
+        width: 150px;
+        height: 80px;
+        background-color: #f9f9f9;
+
+        .text-container .principal {
+          color: #61616a;
+          font-size: 20px;
+
+          p {
+            justify-content: center;
+          }
+        }
+      }
+    }
+  }
+
+  &.mm-card--data-day .card-container {
+    width: 68px;
+    margin-right: 8px;
+    box-sizing: border-box;
+  }
+
+  &.no-shadow .card-container {
+    box-shadow: none;
+  }
+
+  &.mm-card--document {
+    position: relative;
+    .card-container {
+      min-height: 116px;
+      width: 175px;
+      height: 100%;
+      box-sizing: border-box;
+      padding: 10px 5px;
+    }
+
+    &:nth-child(8n) {
+      margin-right: 0;
+    }
+
+    .mm-card--document-indicator {
+      position: absolute;
+      right: 0;
+      top: 10px;
+      height: 25px;
+      text-align: center;
+
+      small {
+        color: #a0aab5;
+        font-family: "OpenSans-Semibold";
+        font-size: 10px;
+      }
+    }
+
+    i {
+      font-size: 20px;
+    }
+
+    .icon {
+      margin: 0;
+    }
+
+    mm-checkbox {
+      position: relative;
+      label {
+        padding-top: 0;
+        min-height: 25px;
+        &:before {
+          top: -4px;
+        }
+      }
+    }
+  }
+
+  &.normal-hover {
+    cursor: pointer;
+
+    &:hover {
+      .card-container {
+        border-color: #dfe1e2;
+        background-color: #f2f2f2;
+      }
+    }
+  }
+}
+
+.custom-card {
+  padding: 14px 10px;
+  background: #fff;
+  box-shadow: 0 1px 5px 0 #dfe1e2;
+}

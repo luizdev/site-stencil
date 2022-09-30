@@ -1,0 +1,164 @@
+$gutter-migration: 0.9375rem;
+
+/****************/
+/* Layoout */
+/***************/
+.row {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+@for $i from 1 through 12 {
+  .col#{$i} {
+    flex: 0 0 auto;
+    padding: 0 0.9375rem;
+    flex-grow: 1;
+    flex-basis: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+
+    & > .row {
+      margin-left: -$gutter-migration;
+      margin-right: -$gutter-migration;
+    }
+  }
+
+  .col#{$i} {
+    flex-basis: (100 / 12) * ($i + 0%);
+    max-width: (100 / 12) * ($i + 0%);
+  }
+}
+
+.container,
+.container-flex {
+  padding-right: $gutter-migration;
+  padding-left: $gutter-migration;
+}
+
+/****************/
+/* Clases */
+/***************/
+.text--status_success_600 {
+  color: #42804a;
+}
+
+.text--status_critical_600 {
+  color: #d62c42;
+}
+
+.text--status_info_600 {
+  color: #7cc3f4;
+}
+
+.text--status_warning_600 {
+  color: #ffae33;
+}
+
+.bg--status_success_600 {
+  background: #42804a;
+}
+
+.bg--status_critical_600 {
+  background: #d62c42;
+}
+
+.bg--status_info_600 {
+  background: #7cc3f4;
+}
+
+.bg--status_warning_600 {
+  background: #ffae33;
+}
+
+.float-r {
+  margin-left: auto;
+}
+
+.flex--justify-center {
+  text-align: initial !important;
+}
+
+.container-flex {
+  max-width: none;
+}
+
+.mm-semibold {
+  font-family: "OpenSans-SemiBold";
+}
+
+i.fas,
+i.far {
+  text-align: center;
+}
+
+p {
+  margin: 0 0 8px;
+}
+
+/****************/
+/* Componentes */
+/***************/
+mm-tooltip {
+  white-space: initial;
+  text-transform: initial;
+  width: 100%;
+}
+
+mm-listing table {
+  table-layout: auto;
+}
+
+mm-button-dropdown .dropdown-item {
+  padding: 0 !important;
+
+  a {
+    padding: 10px;
+  }
+}
+
+mm-main-container mm-sidebar[collapsable-side="right"] {
+  order: 2;
+}
+
+mm-sidebar.collapsable {
+  z-index: 100;
+}
+
+mm-indicator[class*="status_"].secondary .indicator {
+  border: 1px solid;
+}
+
+mm-tab .tab-header {
+  overflow: initial;
+}
+
+mm-filter-search {
+  min-width: 710px;
+}
+
+mm-breadcrumb {
+  padding-left: 10px;
+}
+
+.mm-table.reduced tr {
+  border-bottom: none !important;
+
+  th {
+    padding: 6px 10px !important;
+    display: table-cell;
+  }
+
+  td {
+    padding: 2px 10px !important;
+    border-bottom: none !important;
+  }
+}
+
+mm-textfield label span {
+  white-space: initial;
+}
+
+//FIXME: QUITAR porque hay que solucionarlo en 3.1
+mm-breadcrumb .indicator {
+  margin-right: 10px !important;
+}

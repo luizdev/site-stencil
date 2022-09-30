@@ -1,0 +1,99 @@
+mm-button {
+  &.btn-pink {
+    * {
+      color: #c9337d;
+    }
+  }
+
+  &.btn-pink,
+  &.btn-grey {
+    span {
+      text-decoration: underline;
+    }
+  }
+}
+
+.note {
+  &.is-open {
+    .note__body {
+      display: block;
+    }
+  }
+
+  &__header {
+    border-bottom: 1px solid #55494c;
+    position: relative;
+    padding-left: 27px;
+
+    mm-radiobutton input[type="radio"] + label:before {
+      top: -4px;
+    }
+
+    p {
+      font-size: 12px;
+      line-height: 18px;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    &--left {
+      max-width: 603px;
+      overflow: hidden;
+    }
+
+    &--text,
+    &--date {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    &--text {
+      max-width: 350px;
+    }
+    &--date {
+      max-width: 114px;
+    }
+
+    &--radio {
+      position: absolute;
+      left: 0;
+      top: 3px;
+    }
+  }
+
+  &__body {
+    display: none;
+
+    p {
+      margin-top: 0;
+      margin-bottom: 5px;
+    }
+
+    &--title {
+      font-size: 12px;
+      font-weight: 600;
+    }
+  }
+}
+
+.col-12.mod-note {
+  .mod-time {
+    margin-left: 24px;
+  }
+}
+
+.col-12.create-note {
+  .mod-time {
+    margin-left: 24px;
+  }
+}
+
+.note__header.exclamation-red {
+  border-bottom: 1px solid #d62c42;
+  i.note__header--open-icon {
+    color: #d62c42;
+  }
+}

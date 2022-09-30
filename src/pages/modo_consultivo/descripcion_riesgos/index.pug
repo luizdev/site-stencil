@@ -1,0 +1,292 @@
+extends ../../../layout/main
+include ../../../components/external-link.pug
+
+
+block variables
+  - var scripts = ["../../../assets/js/pages/modo_consultivo_descripcion_riesgos.js"]
+  - var HIDE_SIDEPANEL = true
+  - var breadcrumbsItems = [['Dashboard'], ['Filtro de servicios'], ['1103265-2021/1']]
+  - var title = 'Peritos Hogar'
+  -
+    const DIRECT_ACCESS = [
+      {
+        name: "Tower",
+        description: "Esto es una breve descripción del acceso directo",
+        href: "../wip/wip.html",
+        src: "tower_logo.png"
+      },
+      {
+        name: "Salesforce",
+        description: "Esto es una breve descripción del acceso directo",
+        href: "../wip/wip.html",
+        src: "salesforce_logo.svg"
+      },
+      {
+        name: "SAR",
+        description: "Esto es una breve descripción del acceso directo",
+        href: "../wip/wip.html",
+        src: "sar_logo.svg"
+      },
+      {
+        name: "SRV",
+        description: "Accede de una forma rápida al Sistema de Retribución Variable",
+        href: "../wip/wip.html",
+        src: "srv_logo.svg"
+      },
+      {
+        name: "Allfunds",
+        description: "Esto es una breve descripción del acceso directo",
+        href: "../wip/wip.html",
+        src: "allfunds_logo.svg"
+      }
+    ]
+
+    var comboBoxOptions = [
+      {
+        col: 0,
+        label:'Tipo de servicio',
+        filter: 'operation',
+        options: [
+          {name:'Comismar'}
+        ]
+      },
+      {
+        col: 1,
+        label :'Nº de siniestro',
+        filter: 'nro_siniestro',
+        text: true
+      },
+      {
+        col: 2,
+        label :'Año del siniestro',
+        filter: 'date_siniestro',
+        date: true
+      },
+      {
+        col: 3,
+        label :'Nº de póliza',
+        placeholder :'Escribir nº de póliza',
+        filter: 'nro_poliza',
+        text: true
+      },
+      {
+        col: 4,
+        label :'Ref. Externa',
+        placeholder :'Escribir referencia externa',
+        filter: 'nro_externa',
+        text: true
+      },
+      {
+        col: 5,
+        label:'Situación',
+        filter: 'situacion',
+        options: [
+          {name:'En curso'}
+        ]
+      },
+    ]
+
+
+block content
+  #content-page-sidebar.display-f.flex--column.flex--row-lg
+    #content-page.w100.pos-relative
+      .content-icon-expanded
+        i.btn-expanded(href='#' onclick='expandPage(event)')
+          img(src='../../../assets/img/icon_expand.svg' alt='layout-nav-logo' width='15' height='10')
+        mm-tooltip.mm-tooltip-expanded.dark.w-fitContent(position="left") 
+          span.expanded Cerrar
+          span.not-expanded Abrir
+          |  columna de resumen
+      .row
+        .col-12
+          main.pl-m.pr-m.display-f.flex--column
+            .row.py-xs
+              .col-12
+                .display-f.flex--justify-between
+                  .display-f.flex--align-center
+                    h1.mb-n.mr-xs COMISMAR 1103265 - 2021/1
+                    mm-indicator.mr-xs Finalizado
+            .row.mb-m 
+              .col-12 
+                mm-progress-indicator(current-step='1')
+                  .mmpi-content DESCRIPCIÓN RIESGO
+                  a.mmpi-icon(href='descripcion_riesgos.html' slot='step-1' title='Seccion')
+                    i.fas.fa-home(style='font-size: 30px;')
+                  .mmpi-content CAUSAS Y ATRIBUTOS
+                  a.mmpi-icon(href='causas_atributos.html' slot='step-2' title='Seccion')
+                    i.fas.fa-file-alt(style='font-size: 30px;')
+                  .mmpi-content TERCEROS IMPLICADOS
+                  a.mmpi-icon(href='terceros_implicados.html' slot='step-3' title='Seccion')
+                    i.fas.fa-users(style='font-size: 30px;')
+                  .mmpi-content TASACIÓN Y AJUSTE DE DAÑOS
+                  a.mmpi-icon(href='tasacion_ajustes.html' slot='step-4' title='Seccion')
+                    i.fas.fa-file-invoice-dollar(style='font-size: 30px;')
+                  .mmpi-content DOCUMENTACIÓN
+                  a.mmpi-icon(href='documentacion.html' slot='step-5' title='Seccion')
+                    i.fas.fa-folder-open(style='font-size: 30px;')
+            .row.mb-xs  
+              .col-12
+                .subheading--modo-consultivo 
+                  i.fas.fa-file-alt 
+                  h3 Descripción del riesgo
+                .b-block 
+                  .row 
+                    .col-4
+                      mm-textfield(label='Estado de conservación')
+                        p.text--grey_800.pt-xs Adecuado
+                    .col-4
+                      mm-textfield(label='¿Recomendar continuidad?')
+                        p.text--grey_800.pt-xs No
+                    .col-4
+                      mm-textfield(label='Motivo de NO continuidad')
+                        p.text--grey_800.pt-xs Motivos de no continuidad
+            .row.mb-xs  
+              .col-12 
+                h4.ml-n Vivienda
+                .b-block 
+                  .row 
+                    .col-12
+                      mm-textfield(label='¿Capital continente adecuado a preexistencias?')
+                        p.text--grey_800.pt-xs Sí
+                  .row 
+                    .col-4
+                      mm-textfield(label='Capital asegurado vivienda')
+                        p.text--grey_800.pt-xs 155.756,36€
+                    .col-4
+                      mm-textfield(label='Tasación vivienda')
+                        p.text--grey_800.pt-xs 155.756,36€
+                    .col-4
+                      mm-textfield(label='Infraseguro')
+                        p.text--grey_800.pt-xs No
+            .row.mb-xs  
+              .col-12 
+                h4.ml-n mobiliario
+                .b-block 
+                  .row
+                    .col-4
+                      mm-textfield(label='¿Capital contenido adecuado a preexistencias?')
+                        p.text--grey_800.pt-xs No
+                    .col-4
+                      mm-textfield(label='Razón contenido no adecuado')
+                        p.text--grey_800.pt-xs Motivo de razón de contenido no adecuado
+                  .row
+                    .col-4
+                      mm-textfield(label='Capital asegurado mobiliario')
+                        p.text--grey_800.pt-xs 47.568,13€
+                    .col-4
+                      mm-textfield(label='Tasación mobiliario')
+                        p.text--grey_800.pt-xs 40.000,00€
+                    .col-2
+                      mm-textfield(label='% Infraseguro')
+                        p.text--grey_800.pt-xs 8%
+                    .col-2
+                      mm-textfield(label='Infraseguro')
+                        p.text--grey_800.pt-xs Sí
+            .button-action-sticky.row.display-f.flex--justify-between.mt-m 
+              .action-1
+                mm-button.mr-xs( label="Cancelar" type="support")
+              .action-2.display-f
+                a#buttonModoConsultivoNext(href="causas_atributos.html")
+                  mm-button.mr-xs( label="Siguiente" type="primary")
+    mm-responsive-layout-lateral-menu.grey.modo-consultivo
+      i.fas.fa-times.close-icon(onclick='expandPage(event)')
+      .b-block
+        h4.blue.no-line Detalle del siniestro
+        .row 
+          .col-6 
+            small Número del siniestro
+            p 1103265 - 2021/1
+        
+          .col-6 
+            small Número del siniestro
+            p 1103265 - 2021/1
+        .row 
+          .col-6 
+            small Dirección riesgo
+            p Juan de la Cierva, 1, 7º-13
+        
+          .col-6 
+            small Fecha/hora Efecto
+            p 20/05/2018 - 09:40h
+        .row 
+          .col-6 
+            small Estado
+            mm-indicator.mr-xs Finalizado
+        
+          .col-6 
+            small Fecha/hora Ocurrencia
+            p 20/05/2018 - 09:40h
+        .row 
+          .col-6 
+            small Proveedor
+            a(id="proveedorLightbox")
+              i.fas.fa-user-tie.mr-xxs
+              | IPAS
+        
+          .col-6 
+            small Fecha/hora Declaración
+            p 20/05/2018 - 09:40h
+        .row 
+          .col-6 
+            small Tipo 
+            p Indemnizable
+        
+          .col-6 
+            small Fecha/hora Vencimiento
+            p 20/05/2018 - 09:40h
+      .b-block
+        .sidebar-subheading--modo-consultivo
+          i.fas.fa-file-alt 
+          h3 Resumen
+        .row 
+          .col-12 
+            mm-accordion.sidebar--modo-consultivo(header='datos generales' reduced='' active)
+              .row.mb-xs 
+                .col-6 
+                  small Producto 
+                  p 
+                    a(href="#") A todo riesgo PLUS
+              
+                .col-6 
+                  small Tipo de siniestro
+                  p 1103265 - 2021/1
+              .row.mb-xs 
+                .col-6 
+                  small Superficie construída
+                  p 112 m2
+              
+                .col-6 
+                  small Nº Trasteros/Garajes
+                  p 3
+              .row.mb-xs 
+                .col-6 
+                  small Tipo/Subtipo vivienda
+                  p Piso
+              
+                .col-6 
+                  small Superficie terraza
+                  p 100 m2
+              .row.mb-xs 
+                .col-6 
+                  small Año construcción
+                  p 2004
+              
+                .col-6 
+                  small Año última reforma
+                  p 2004
+              .row.mb-xs 
+                .col-6 
+                  small Superficie parcela s/c
+                  p 0
+              
+                .col-6 
+                  small Habitantes
+                  p 4
+              .row.mb-xs 
+                .col-12 
+                  small Protecciones
+                  p Protección 1, Protección 2, Protección 3,...
+              .row.mb-xs 
+                .col-12  
+                  small Atributos
+                  p VTS, Corrosión, Infraseguro, Judicial

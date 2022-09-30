@@ -1,0 +1,72 @@
+.card {
+  background: #f9f9f9;
+  border-radius: 2px;
+  box-shadow: none;
+  .card-body {
+    .item {
+      margin-right: 1em;
+      flex: 1 1 0px;
+      h5 {
+        margin-bottom: 4px;
+      }
+      h5 + p {
+        margin-top: 5px;
+      }
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+mm-listing {
+  .dataTables_wrapper {
+    border-bottom: none;
+  }
+  table {
+    tbody {
+      tr {
+        &.info {
+          background: #fff !important;
+          td {
+            border-bottom: 1px solid #3269b3;
+            &:first-child {
+              border-left: 8px solid #3269b3;
+            }
+            i {
+              color: #3269b3;
+            }
+          }
+        }
+        &.clock {
+          background: #fff !important;
+          td {
+            border-bottom: 1px solid #ffae33;
+            &:first-child {
+              border-left: 8px solid #ffae33;
+            }
+            i {
+              color: #ffae33;
+            }
+          }
+        }
+        &.exclamation {
+          background: #fff !important;
+          td {
+            border-bottom: 1px solid #d62c42;
+            &:first-child {
+              border-left: 8px solid #d62c42;
+            }
+            i {
+              color: #d62c42;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+#siniestroTable {
+  background: #fff;
+}

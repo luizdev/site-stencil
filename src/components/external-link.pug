@@ -1,0 +1,8 @@
+mixin external-link(id, table)
+  - var text = "Se abrirá en una nueva pestaña"
+  if table
+    i.fas.fa-external-link-alt.text--grey_700.ml-xxs.pos-relative(id=id onmouseover="setTableTooltip(event)" onmouseleave="removeTableTooltip(event)")
+    mm-tooltip.w-fitContent.text-initial(id=`tooltip_${id}`) #{text}
+  else
+    i.fas.fa-external-link-alt.text--brand_accent_500.ml-xxs.pos-relative
+    mm-tooltip.w-fitContent #{text}

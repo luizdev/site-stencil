@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head><base href="./">
+    <meta charset="utf-8">
+    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="Aplicación demo 1.5">
+    <meta name="theme-color" content="#16161d">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="x-ua-compatible" content="IE=Edge">
+    <link rel="apple-touch-icon" href="../../../assets/icon/icon.png">
+    <!-- Libreria JS y estilos Guia MM-->
+    <link rel="icon" type="image/png" href="../../../assets/favicons/favicon.svg">
+    <link rel="preload stylesheet" as="style" href="../../../assets/build/demo-components-guide.css">
+    <link rel="preload stylesheet" as="style" href="../../../assets/fontawesome/fontawesome-all.css">
+    <link rel="preload stylesheet" as="style" href="../../../assets/css/main.css">
+    <link rel="preload stylesheet" as="style" href="https://unpkg.com/swiper/swiper.min.css">
+    <!--Guia-->
+    <script type="module" src="../../../assets/build/demo-components-guide.esm.js"></script>
+    <script nomodule src="../../../assets/build/demo-components-guide.js"></script>
+    <script src="../../../assets/plugins/jquery-3.6.0.min.js" async></script>
+    <script src="../../../assets/plugins/datatables/datatables.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../../../assets/js/pages/index.js" async></script>
+    <script src="../../../assets/js/pages/busqueda_busqueda.js" async></script>
+  </head>
+  <body>
+    <mm-responsive-layout><a href="../home/home.html" title="ejemplo" slot="header-logo"><img class="logo" src="logo.svg" alt="layout-logo" width="" height=""></a><a href="../home/home.html" title="ejemplo" slot="nav-logo"><img class="logo" src="logo.svg" alt="layout-nav-logo" width="" height=""></a>
+      <nav slot="nav">
+        <mm-responsive-layout-item type="dropdown">
+          <div>Dashboard</div>
+        </mm-responsive-layout-item>
+        <mm-responsive-layout-item type="dropdown">
+          <div>búsqueda manual</div>
+        </mm-responsive-layout-item>
+        <mm-responsive-layout-item type="dropdown">
+          <div>repositorio</div>
+        </mm-responsive-layout-item>
+        <mm-responsive-layout-item type="dropdown">
+          <div>Meteosim</div>
+        </mm-responsive-layout-item>
+      </nav>
+      <div slot="header-actions">
+        <mm-dark-mode class="display-n display-f-lg"></mm-dark-mode>
+        <mm-responsive-layout-user-nav slot="profile">
+          <div slot="sidenav">
+            <mm-responsive-layout-user-item icon="fas fa-bell" label="Notificaciones" bubble-counter="3">
+              <div>
+                <h4 class="m-n">3 alertas nuevas</h4>
+                <div class="mt-xs"><small class="mm-semibold">Nombre de la alerta</small><small class="mm-regular">Informaci&oacute;n adicional de la alerta. Texto adicional de la alerta.</small></div>
+                <div class="mt-s"><small class="mm-semibold">Nombre de la alerta</small><small class="mm-regular">Informaci&oacute;n adicional de la alerta. Texto adicional de la alerta.</small></div>
+                <div class="mt-s"><small class="mm-semibold">Nombre de la alerta</small><small class="mm-regular">Informaci&oacute;n adicional de la alerta. Texto adicional de la alerta.</small></div>
+              </div>
+            </mm-responsive-layout-user-item>
+            <mm-responsive-layout-user-item label="Área personal" box-style="false">
+              <section class="display-f flex--align-center" slot="custom-item-header"><i class="fas fa-user mr-n mr-s-lg"></i>
+                <div class="display-b-lg display-n">
+                  <h6 class="m-n p-n text--full_white">Francisco De la Torre</h6><small class="text--full_white">fdelatorre@demo.es</small>
+                </div>
+              </section>
+              <mm-user-profile id="userExample">
+                <mm-button class="adapt" label="Simular usuario" type="ghost" slot="mm-user-profile-simulation"></mm-button>
+                <mm-button class="adapt" label="Cambiar contraseña" type="ghost" slot="mm-user-profile-password"></mm-button>
+                <mm-button label="Cerrar sesión" type="secondary" slot="mm-user-profile-close"></mm-button>
+              </mm-user-profile>
+            </mm-responsive-layout-user-item>
+          </div>
+        </mm-responsive-layout-user-nav>
+      </div>
+      <div id="main" slot="content">
+        <mm-breadcrumb>
+          <ul>
+            <li><span>Dashboard</span>
+            </li>
+          </ul>
+        </mm-breadcrumb>
+        <main class="bg-blue dashboard">            
+          <div class="container-flex mt-m">
+            <div class="main">
+              <div class="content-aside-left-1">
+                <div class="card card-shadow px-s py-s mb-s">
+                  <div class="card-header"> 
+                    <h1>Hola Francisco</h1>
+                    <p class="content-label mb-m">Esto es lo que necesitas saber para hoy</p>
+                  </div>
+                  <div class="card-content">
+                    <div class="display-f"> 
+                      <div class="w50"> 
+                        <div class="display-f">
+                          <div class="w50 general-card">
+                            <h5>PRIMEROS SERVICIOS </h5>
+                            <h2>10.145</h2>
+                            <div class="display-f positive flex--align-center"><i class="fa fa-long-arrow-alt-up general-card__icon"></i>
+                              <label class="general-card__percentage">+2%</label>
+                              <p class="m-n p-n general-card__content">Videoperitaciones</p>
+                            </div>
+                          </div>
+                          <div class="w50 first-graph">
+                            <mm-graph id="firts-bar-graph" type="bar" tooltip-money-format="false" show-axes="false" show-grid="false" show-grid-y="false">       </mm-graph>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="w50"> 
+                        <div class="display-f">
+                          <div class="w50 general-card">
+                            <h5>CLONES</h5>
+                            <h2>12.145</h2>
+                            <div class="display-f negative flex--align-center"><i class="fa fa-long-arrow-alt-down general-card__icon"></i>
+                              <label class="general-card__percentage">-2%</label>
+                              <p class="m-n p-n general-card__content">Videoperitaciones</p>
+                            </div>
+                          </div>
+                          <div class="w50">
+                            <canvas id="grafico"></canvas>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row info-cards"> 
+                  <div class="col-3"> 
+                    <div class="card info-card card-shadow">
+                      <div class="card-content p-xs">
+                        <div class="display-f flex--align-center"> <i class="fa fa-phone-alt info-card__icon mr-xs"></i>
+                          <h5 class="m-n info-card__title grey">TIEMPO MEDIO CONTACTO</h5>
+                        </div>
+                        <h2 class="mb-0 info-card__number grey">23,4</h2><small class="info-card__description grey">% Peritaciones / Año en curso</small>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-3"> 
+                    <div class="card info-card card-shadow">
+                      <div class="card-content p-xs">
+                        <div class="display-f flex--align-center"> <i class="fa fa-home info-card__icon mr-xs"></i>
+                          <h5 class="m-n info-card__title grey">TIEMPO MEDIO VISITA</h5>
+                        </div>
+                        <h2 class="mb-0 info-card__number grey">23,4</h2><small class="info-card__description grey">% Peritaciones / Año en curso</small>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-3"> 
+                    <div class="card info-card card-shadow">
+                      <div class="card-content p-xs">
+                        <div class="display-f flex--align-center"> <i class="fa fa-arrows-alt-h info-card__icon mr-xs"></i>
+                          <h5 class="m-n info-card__title grey">TIEMPO MEDIO AVANCE</h5>
+                        </div>
+                        <h2 class="mb-0 info-card__number grey">23,4</h2><small class="info-card__description grey">% Peritaciones / Año en curso</small>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-3"> 
+                    <div class="card info-card card-shadow">
+                      <div class="card-content p-xs">
+                        <div class="display-f flex--align-center"> <i class="fa fa-file-alt info-card__icon mr-xs"></i>
+                          <h5 class="m-n info-card__title grey">TIEMPO MEDIO CIERRE</h5>
+                        </div>
+                        <h2 class="mb-0 info-card__number grey">23,4</h2><small class="info-card__description grey">% Peritaciones / Año en curso</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="content-aside-left-2">
+                <div class="display-f dashboard-image">
+                  <div class="display-f flex--column flex--justify-around left-column">                 
+                    <div class="card info-card card-shadow mb-l py-xs">
+                      <div class="card-content">
+                        <div class="display-f flex--align-center">
+                          <h2 class="px-xs info-card__title grey">36</h2><a class="special-link" href="#">Primeros servicios</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="display-f flex--column">
+                    <div class="card info-card card-shadow mt-s py-15 px-xs critical-border">
+                      <div class="card-content">                                 
+                        <div class="display-f flex--justify-between highlighted">
+                          <div>
+                            <H2TEXT>12</H2TEXT><a class="px-xs" href="#">Fuera de plazo</a>
+                          </div>
+                          <div> </div><i class="fas fa-exclamation-triangle text--status_critical_500"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card info-card card-shadow my-s py-15 px-xs warning-border">
+                      <div class="card-content"> 
+                        <div class="display-f flex--justify-between highlighted">
+                          <div>
+                            <H2TEXT>12</H2TEXT><a class="px-xs" href="#">Acciones hoy</a>
+                          </div>
+                          <div></div><i class="fas fa-clock text--status_warning_500"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card info-card card-shadow mb-s py-15 px-xs services-border">
+                      <div class="card-content"> 
+                        <div class="display-f highlighted">
+                          <H2TEXT class="grey">12</H2TEXT><a class="px-xs" href="#">Servicios</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="display-f flex--column right-column">
+                    <div class="card info-card card-shadow regular-border mt-s">
+                      <div class="card-content">
+                        <div class="display-f flex--justify-between">
+                          <div class="display-f flex--align-center fill">
+                            <H3TEXT>1</H3TEXT><small class="grey pl-xs">Pte contacto</small>
+                          </div>
+                          <div class="display-f flex--align-center fill">
+                            <H3TEXT>2</H3TEXT><small class="grey pl-xs">Pte visita</small>
+                          </div>
+                          <div class="display-f flex--align-center fill"> 
+                            <H3TEXT>7</H3TEXT><small class="grey pl-xs">Pte avance</small>
+                          </div>
+                          <div class="display-f flex--align-center fill"> 
+                            <H3TEXT>2</H3TEXT><small class="grey pl-xs">Pte informe </small>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card info-card card-shadow regular-border my-s">
+                      <div class="card-content">
+                        <div class="display-f flex--justify-between">
+                          <div class="display-f flex--align-center fill">
+                            <H3TEXT>1</H3TEXT><small class="pl-xs">Pte contacto</small>
+                          </div>
+                          <div class="display-f flex--align-center fill">
+                            <H3TEXT>2</H3TEXT><small class="grey pl-xs">Pte visita</small>
+                          </div>
+                          <div class="display-f flex--align-center fill-color">
+                            <H3TEXT>7</H3TEXT><small class="grey pl-xs">Pte avance</small>
+                          </div>
+                          <div class="display-f flex--align-center fill">
+                            <H3TEXT>2</H3TEXT><small class="grey pl-xs">Pte informe</small>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card info-card card-shadow regular-border mb-s">
+                      <div class="card-content">
+                        <div class="display-f flex--justify-between">
+                          <div class="display-f flex--align-center fill">
+                            <H3TEXT>1</H3TEXT><small class="pl-xs">Pte contacto</small>
+                          </div>
+                          <div class="display-f flex--align-center fill">
+                            <H3TEXT>2</H3TEXT><small class="grey pl-xs">Pte visita</small>
+                          </div>
+                          <div class="display-f flex--align-center fill">
+                            <H3TEXT>7</H3TEXT><small class="grey pl-xs">Pte avance</small>
+                          </div>
+                          <div class="display-f flex--align-center fill">
+                            <H3TEXT>2</H3TEXT><small class="grey pl-xs">Pte informe                        </small>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="display-f dashboard-image">
+                  <div class="display-f flex--column flex--justify-around left-column">                 
+                    <div class="card info-card card-shadow mb-l py-xs">
+                      <div class="card-content">
+                        <div class="display-f flex--align-center">
+                          <h2 class="px-xs info-card__title grey">96</h2><a class="special-link" href="#">Clones</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="display-f flex--column">
+                    <div class="card info-card card-shadow mt-s py-15 px-xs critical-border">
+                      <div class="card-content">                                 
+                        <div class="display-f flex--justify-between highlighted">
+                          <div>
+                            <H2TEXT>32</H2TEXT><a class="px-xs" href="#">Fuera de plazo</a>
+                          </div>
+                          <div> </div><i class="fas fa-exclamation-triangle text--status_critical_500"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card info-card card-shadow my-s py-15 px-xs warning-border">
+                      <div class="card-content"> 
+                        <div class="display-f flex--justify-between highlighted">
+                          <div>
+                            <H2TEXT>32</H2TEXT><a class="px-xs" href="#">Acciones hoy</a>
+                          </div>
+                          <div></div><i class="fas fa-clock text--status_warning_500"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card info-card card-shadow mb-s py-15 px-xs services-border">
+                      <div class="card-content"> 
+                        <div class="display-f highlighted">
+                          <H2TEXT class="grey">32</H2TEXT><a class="px-xs" href="#">Servicios</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="display-f flex--column right-column">
+                    <div class="card info-card card-shadow regular-border mt-s">
+                      <div class="card-content">
+                        <div class="display-f flex--justify-between">
+                          <div class="display-f flex--align-center fill">
+                            <H3TEXT>6</H3TEXT><small class="grey pl-xs">Pte contacto</small>
+                          </div>
+                          <div class="display-f flex--align-center fill">
+                            <H3TEXT>12</H3TEXT><small class="grey pl-xs">Pte visita</small>
+                          </div>
+                          <div class="display-f flex--align-center fill"> 
+                            <H3TEXT>7</H3TEXT><small class="grey pl-xs">Pte avance</small>
+                          </div>
+                          <div class="display-f flex--align-center fill"> 
+                            <H3TEXT>7</H3TEXT><small class="grey pl-xs">Pte informe </small>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card info-card card-shadow regular-border my-s">
+                      <div class="card-content">
+                        <div class="display-f flex--justify-between">
+                          <div class="display-f flex--align-center fill">
+                            <H3TEXT>6</H3TEXT><small class="pl-xs">Pte contacto</small>
+                          </div>
+                          <div class="display-f flex--align-center fill">
+                            <H3TEXT>12</H3TEXT><small class="grey pl-xs">Pte visita</small>
+                          </div>
+                          <div class="display-f flex--align-center fill-color">
+                            <H3TEXT>7</H3TEXT><small class="grey pl-xs">Pte avance</small>
+                          </div>
+                          <div class="display-f flex--align-center fill">
+                            <H3TEXT>7</H3TEXT><small class="grey pl-xs">Pte informe</small>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card info-card card-shadow regular-border mb-s">
+                      <div class="card-content">
+                        <div class="display-f flex--justify-between">
+                          <div class="display-f flex--align-center fill">
+                            <H3TEXT>6</H3TEXT><small class="pl-xs">Pte contacto</small>
+                          </div>
+                          <div class="display-f flex--align-center fill">
+                            <H3TEXT>12</H3TEXT><small class="grey pl-xs">Pte visita</small>
+                          </div>
+                          <div class="display-f flex--align-center fill">
+                            <H3TEXT>7</H3TEXT><small class="grey pl-xs">Pte avance</small>
+                          </div>
+                          <div class="display-f flex--align-center fill">
+                            <H3TEXT>7</H3TEXT><small class="grey pl-xs">Pte informe                        </small>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row"> 
+                  <div class="col-6">
+                    <div class="card bottom-info-card card-shadow pb-xs mt-s">
+                      <div class="display-f flex--align-center">
+                        <h2 class="pl-xs">96</h2><a class="px-xs special-link" href="#">Tareas  </a>
+                      </div>
+                      <div class="card-content">
+                        <div class="display-f flex--align-center flex--justify-around flex--wrap">
+                          <div class="px-xs py-xs critical-border">                           
+                            <H2TEXT class="mb-0 info-card__number grey_900">32</H2TEXT><a class="px-xs" href="#">Fuera de plazo</a><i class="fas fa-exclamation-triangle text--status_critical_500"></i>
+                          </div>
+                          <div class="px-xs py-xs warning-border">  
+                            <H2TEXT class="mb-0 info-card__number grey_900">32</H2TEXT><a class="px-xs" href="#">Acciones hoy</a><i class="fas fa-clock text--status_warning_500"></i>
+                          </div>
+                          <div class="px-xs py-xs services-border">        
+                            <H2TEXT class="mb-0 info-card__number grey_900">32</H2TEXT><a class="px-xs" href="#">Servicios</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="card bottom-info-card card-shadow pb-xs mt-s">
+                      <div class="display-f flex--align-center">
+                        <h2 class="pl-xs">36</h2><a class="px-xs special-link" href="#">Notas  </a>
+                      </div>
+                      <div class="card-content">
+                        <div class="display-f flex--align-center flex--justify-around flex--wrap">
+                          <div class="px-xs py-xs critical-border">                           
+                            <H2TEXT class="mb-0 info-card__number grey_900">32</H2TEXT><a class="px-xs" href="#">Fuera de plazo</a><i class="fas fa-exclamation-triangle text--status_critical_500"></i>
+                          </div>
+                          <div class="px-xs py-xs warning-border">  
+                            <H2TEXT class="mb-0 info-card__number grey_900">32</H2TEXT><a class="px-xs" href="#">Acciones hoy</a><i class="fas fa-clock text--status_warning_500"></i>
+                          </div>
+                          <div class="px-xs py-xs services-border">        
+                            <H2TEXT class="mb-0 info-card__number grey_900">32</H2TEXT><a class="px-xs" href="#">Servicios</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="content-aside-right-1">
+                <mm-textfield label="Selecciona rango de fecha" helper-icon="Texto de ayuda"></mm-textfield>
+                <div class="card p-n dashboard-date-picker">
+                  <mm-textfield>
+                    <mm-datepicker id="agenda" placeholder="dd/mm/aaaa-dd/mm/aaaa" date-range="true"></mm-datepicker>
+                  </mm-textfield>
+                </div>
+              </div>
+              <div class="content-aside-right-2 mt-s" id="appointment">
+                <div class="card agenda-contacts">
+                  <div> 
+                    <div class="headline-agenda">Tus citas</div>
+                  </div>
+                  <div id="agenda"> </div>
+                  <div id="global">
+                    <div class="items-citas">
+                      <div class="item-cita">
+                        <div class="item-cita-heading display-f flex--justify-between flex--align-center mb-xxs">
+                          <mm-indicator>02/05/2022 09:00 - 11:00</mm-indicator><span class="date display-f">1010859-2022/1</span><i class="fa fa-home"></i>
+                        </div>
+                        <p>Rafael Bergamin 5 B:K|P:3|C Madrid, 28043</p>
+                      </div>
+                      <div class="item-cita"> 
+                        <div class="item-cita-heading display-f flex--justify-between flex--align-center mb-xxs">
+                          <mm-indicator>02/05/2022 09:00 - 11:00</mm-indicator><span class="date display-f">1010859-2022/1</span><i class="fa fa-home"></i>
+                        </div>
+                        <p>Rafael Bergamin 5 B:K|P:3|C Madrid, 28043</p>
+                      </div>
+                      <div class="item-cita"> 
+                        <div class="item-cita-heading display-f flex--justify-between flex--align-center mb-xxs"> 
+                          <mm-indicator>02/05/2022 09:00 - 11:00</mm-indicator><span class="date display-f">1010859-2022/1</span><i class="fas fa-video text--brand_accent_500"></i>
+                        </div>
+                        <p>Rafael Bergamin 5 B:K|P:3|C Madrid, 28043</p>
+                      </div>
+                      <div class="item-cita"> 
+                        <div class="item-cita-heading display-f flex--justify-between flex--align-center mb-xxs"> 
+                          <mm-indicator>02/05/2022 09:00 - 11:00</mm-indicator><span class="date display-f">1010859-2022/1</span><i class="fas fa-video text--brand_accent_500"> </i>
+                        </div>
+                        <p>Rafael Bergamin 5 B:K|P:3|C Madrid, 28043  </p>
+                      </div>
+                      <div class="item-cita"> 
+                        <div class="item-cita-heading display-f flex--justify-between flex--align-center mb-xxs">
+                          <mm-indicator>02/05/2022 09:00 - 11:00</mm-indicator><span class="date display-f">1010859-2022/1</span><i class="fa fa-home"></i>
+                        </div>
+                        <p>Rafael Bergamin 5 B:K|P:3|C Madrid, 28043</p>
+                      </div>
+                      <div class="item-cita"> 
+                        <div class="item-cita-heading display-f flex--justify-between flex--align-center mb-xxs"> 
+                          <mm-indicator>02/05/2022 09:00 - 11:00</mm-indicator><span class="date display-f">1010859-2022/1</span><i class="fa fa-home"></i>
+                        </div>
+                        <p>Rafael Bergamin 5 B:K|P:3|C Madrid, 2804</p>
+                      </div>
+                      <div class="item-cita"> 
+                        <div class="item-cita-heading display-f flex--justify-between flex--align-center mb-xxs">
+                          <mm-indicator>02/05/2022 09:00 - 11:00</mm-indicator><span class="date display-f">1010859-2022/1</span><i class="fa fa-home"></i>
+                        </div>
+                        <p>Rafael Bergamin 5 B:K|P:3|C Madrid, 28043</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+        <script type="text/javascript">
+          function updateDatepicker() {
+            const tabletSize = 1415;
+            var rangeDatepicker = document.querySelector('#agenda');
+            var containerAppointment = document.querySelector('#global');
+            var btnAppointment = document.querySelector('#appointment');
+            if (window.innerWidth < tabletSize) {
+              rangeDatepicker.options = { inline: false,};
+              if (containerAppointment) {
+                containerAppointment.style.display='none';
+                btnAppointment.addEventListener('click', appointmentList);
+                var btnClick = 0;
+                function appointmentList () {
+                  if (btnClick == 0) {
+                    containerAppointment.style.display='block';
+                    btnClick = 1;
+                  }else if (btnClick == 1) {          
+                    containerAppointment.style.display='none';
+                    btnClick = 0;
+                  }
+                }
+              }
+            } else {
+              rangeDatepicker.options = { inline: true, };
+              containerAppointment.style.display='flex';
+            }      
+          }
+          updateDatepicker();
+          window.addEventListener('resize', updateDatepicker);
+          
+          var graph = document.querySelector("mm-graph#firts-bar-graph");
+          var labelArrays = ["", "", "", "", "", "", "", "", ""];
+          const barLabel = "";
+          const barColor = 'rgba(0, 74, 147, 1)';
+          const lineColor = 'rgba(38, 195, 255, 1)';
+          
+          var barValues = [5, 20, 5, 3, 3, 8, 15, 20, 3];
+          
+          var data = {
+            data: {
+              labels:labelArrays,
+              legends: labelArrays,
+              datasets: [
+                {
+                  label: barLabel,
+                  data: barValues,
+                  backgroundColor: barColor,
+                },
+                
+              ],
+            },
+            options: {
+              plugins: {
+                legend: {
+                    display: false
+                }
+              },
+              scales: {
+                y: {
+                  display: false
+                },
+                x: {
+                  display: false
+                }
+              }
+            }
+          };
+          graph.data = data;
+          
+          const data2 = {
+            datasets: [{
+                  label: 'Bar Dataset',
+                  data: barValues,
+                  backgroundColor: barColor,
+                  // this dataset is drawn below
+                  order: 2
+             }, {
+                 label: 'Line Dataset',
+                 data: barValues,
+                 type: 'line',
+                 backgroundColor: lineColor,
+                 borderColor: lineColor,
+                 // this dataset is drawn on top
+                 order: 1
+             }],
+             labels: labelArrays
+          };
+          
+          const config = {
+            type: 'bar',
+            data: data2,
+            options: {
+              plugins: {
+                legend: {
+                    display: false
+                },
+              },
+              scales: {
+                y: {
+                  display: false
+                },
+                x: {
+                  display: false
+                }
+              }
+            }
+          };
+          
+          const myChart = new Chart(
+            document.querySelector('#grafico'),
+            config
+          );
+        </script>
+      </div>
+    </mm-responsive-layout>
+  </body>
+</html>

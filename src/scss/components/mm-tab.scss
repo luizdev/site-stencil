@@ -1,0 +1,61 @@
+$mm-tab-content-padding: 15px 20px;
+$home-search-combobox-width: 256px;
+
+mm-tab {
+  &.savings-file .tab-content {
+    max-width: 100vw;
+  }
+
+  mm-tab-header {
+    .fa-info-circle {
+      font-size: 1rem;
+    }
+  }
+
+  mm-tab-content {
+    padding: $mm-tab-content-padding;
+
+    &.home-contract-search {
+      position: relative;
+
+      .pb-n {
+        padding-bottom: 0 !important;
+      }
+
+      .pt-s {
+        padding-top: 20px !important;
+      }
+
+      mm-combobox {
+        position: absolute;
+        top: -18px;
+        right: 0;
+        width: $home-search-combobox-width;
+
+        &:not(.is-selected) + mm-filter-search {
+          cursor: not-allowed;
+
+          input {
+            &::placeholder {
+              color: #cccccc;
+              opacity: 1;
+            }
+
+            background-color: #f9f9f9;
+            pointer-events: none;
+          }
+        }
+      }
+    }
+  }
+
+  &.type-button {
+    width: 100%;
+  }
+}
+
+mm-tab[] {
+  .tab-header-item:last-of-type {
+    border: 1px solid #ccc;
+  }
+}

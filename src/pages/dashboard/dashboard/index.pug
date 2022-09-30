@@ -1,0 +1,569 @@
+extends ../../../layout/main
+include ../../../components/external-link.pug
+
+block variables
+  - var scripts = ["../../../assets/js/pages/busqueda_busqueda.js"]
+  - var HIDE_SIDEPANEL = true
+  - var breadcrumbsItems = [['Dashboard']]
+  - var title = 'Dashboard'
+  -
+    const topCards = [
+      {
+        icon: 'fa-phone-alt',
+        title: 'TIEMPO MEDIO CONTACTO',
+        number: '23,4',
+        description: '% Peritaciones / Año en curso'
+      },
+      {
+        icon: 'fa-home',
+        title: 'TIEMPO MEDIO VISITA',
+        number: '23,4',
+        description: '% Peritaciones / Año en curso'
+      },
+      {
+        icon: 'fa-arrows-alt-h',
+        title: 'TIEMPO MEDIO AVANCE',
+        number: '23,4',
+        description: '% Peritaciones / Año en curso'
+      },
+       {
+        icon: 'fa-file-alt',
+        title: 'TIEMPO MEDIO CIERRE',
+        number: '23,4',
+        description: '% Peritaciones / Año en curso'
+      }
+    ]
+ 
+    const middleCards = [
+      {
+        tasks: 36,
+        text: "Primeros servicios",
+        link: "",
+        outOfTime: {
+          number: 12,
+          link: '',
+          text: 'Fuera de plazo',
+          pendContact: {
+          number: 1,
+          link: '',
+          text: 'Pte contacto',
+        },
+          pendVisita: {
+          number: 2,
+          link: '',
+          text: 'Pte visita',
+        },
+          pendAvance: {
+          number: 7,
+          link: '',
+          text: 'Pte avance',
+        },
+        pendInforme: {
+          number: 2,
+          link: '',
+          text: 'Pte informe',
+        }         
+        },
+        today: {
+          number: 12,
+          link: '',
+          text: 'Acciones hoy',
+          pendContact: {
+          number: 1,
+          link: '',
+          text: 'Pte contacto',
+        },
+          pendVisita: {
+          number: 2,
+          link: '',
+          text: 'Pte visita',
+        },
+          pendAvance: {
+          number: 7,
+          link: '',
+          text: 'Pte avance',
+        },
+        pendInforme: {
+          number: 2,
+          link: '',
+          text: 'Pte informe',
+        }         
+        },
+        services: {
+          number: 12,
+          link: '',
+          text: 'Servicios',
+          pendContact: {
+          number: 1,
+          link: '',
+          text: 'Pte contacto',
+        },
+          pendVisita: {
+          number: 2,
+          link: '',
+          text: 'Pte visita',
+        },
+          pendAvance: {
+          number: 7,
+          link: '',
+          text: 'Pte avance',
+        },
+        pendInforme: {
+          number: 2,
+          link: '',
+          text: 'Pte informe',
+        }         
+        }
+        },
+              {
+        tasks: 96,
+        text: "Clones",
+        link: "",
+        outOfTime: {
+          number: 32,
+          link: '',
+          text: 'Fuera de plazo',
+          pendContact: {
+          number: 6,
+          link: '',
+          text: 'Pte contacto',
+        },
+          pendVisita: {
+          number: 12,
+          link: '',
+          text: 'Pte visita',
+        },
+          pendAvance: {
+          number: 7,
+          link: '',
+          text: 'Pte avance',
+        },
+        pendInforme: {
+          number: 7,
+          link: '',
+          text: 'Pte informe',
+        }         
+        },
+        today: {
+          number: 32,
+          link: '',
+          text: 'Acciones hoy',
+          pendContact: {
+          number: 6,
+          link: '',
+          text: 'Pte contacto',
+        },
+          pendVisita: {
+          number: 12,
+          link: '',
+          text: 'Pte visita',
+        },
+          pendAvance: {
+          number: 7,
+          link: '',
+          text: 'Pte avance',
+        },
+        pendInforme: {
+          number: 7,
+          link: '',
+          text: 'Pte informe',
+        }         
+        },
+        services: {
+          number: 32,
+          link: '',
+          text: 'Servicios',
+          pendContact: {
+          number: 6,
+          link: '',
+          text: 'Pte contacto',
+        },
+          pendVisita: {
+          number: 12,
+          link: '',
+          text: 'Pte visita',
+        },
+          pendAvance: {
+          number: 7,
+          link: '',
+          text: 'Pte avance',
+        },
+        pendInforme: {
+          number: 7,
+          link: '',
+          text: 'Pte informe',
+        }         
+        }
+        }
+    ]
+ 
+    const bottomCards = [
+      {
+        tasks: 96,
+        text: "Tareas",
+        link: "",
+        outOfTime: {
+          number: 32,
+          link: '',
+          text: 'Fuera de plazo',
+        },
+        today: {
+          number: 32,
+          link: '',
+          text: 'Acciones hoy',
+        },
+        services: {
+          number: 32,
+          link: '',
+          text: 'Servicios',
+        }
+      },
+       {
+        tasks: 36,
+        text: "Notas",
+        link: "",
+        outOfTime: {
+          number: 32,
+          link: '',
+          text: 'Fuera de plazo',
+        },
+        today: {
+          number: 32,
+          link: '',
+          text: 'Acciones hoy',
+        },
+        services: {
+          number: 32,
+          link: '',
+          text: 'Servicios',
+        },
+       }
+    ]
+
+block content
+  main.bg-blue.dashboard             
+      .container-flex.mt-m
+        .main
+          div.content-aside-left-1
+            //- Aquí va el contenido
+            //- Top card
+            .card.card-shadow.px-s.py-s.mb-s
+              .card-header 
+                h1 Hola Francisco
+                p.content-label.mb-m Esto es lo que necesitas saber para hoy
+              .card-content
+                div.display-f 
+                  div.w50 
+                    div.display-f
+                      div.w50.general-card
+                        h5 PRIMEROS SERVICIOS 
+                        h2 10.145
+                        .display-f.positive.flex--align-center
+                          i(class="fa fa-long-arrow-alt-up general-card__icon")
+                          label.general-card__percentage +2%
+                          p.m-n.p-n.general-card__content Videoperitaciones
+                      div.w50.first-graph
+                        mm-graph#firts-bar-graph(type="bar" tooltip-money-format="false" show-axes="false" show-grid="false" show-grid-y="false")        
+        
+                  div.w50 
+                    div.display-f
+                      div.w50.general-card
+                        h5 CLONES
+                        h2 12.145
+                        .display-f.negative.flex--align-center
+                          i(class="fa fa-long-arrow-alt-down general-card__icon")
+                          label.general-card__percentage -2%
+                          p.m-n.p-n.general-card__content Videoperitaciones
+                      div.w50
+                        canvas#grafico
+
+            //- Info cards
+            .row.info-cards 
+              each card in topCards
+                .col-3 
+                  .card.info-card.card-shadow
+                    .card-content.p-xs
+                      div.display-f.flex--align-center 
+                        i(class="fa "+card.icon+' info-card__icon mr-xs')
+                        h5.m-n.info-card__title.grey #{card.title}
+                      h2.mb-0.info-card__number.grey #{card.number}
+                      small.info-card__description.grey #{card.description}
+
+          //- middle & bottom cards
+          div.content-aside-left-2
+            each card in middleCards
+              div.display-f.dashboard-image
+
+                  //- Left column
+                  div.display-f.flex--column.flex--justify-around.left-column                  
+                      .card.info-card.card-shadow.mb-l.py-xs
+                        .card-content
+                          div.display-f.flex--align-center
+                            h2.px-xs.info-card__title.grey #{card.tasks}
+                            a(href="#").special-link #{card.text}
+
+                  //- Center Column
+                  div.display-f.flex--column
+                    .card.info-card.card-shadow.mt-s.py-15.px-xs.critical-border
+                      .card-content                                  
+                        div.display-f.flex--justify-between.highlighted
+                          div
+                            H2TEXT #{card.outOfTime.number}
+                            a(href="#").px-xs #{card.outOfTime.text}
+                          div  
+                          i.fas.fa-exclamation-triangle.text--status_critical_500
+                    .card.info-card.card-shadow.my-s.py-15.px-xs.warning-border
+                      .card-content  
+                        div.display-f.flex--justify-between.highlighted
+                          div
+                            H2TEXT #{card.today.number}
+                            a(href="#").px-xs #{card.today.text}
+                          div
+                          i.fas.fa-clock.text--status_warning_500
+                    .card.info-card.card-shadow.mb-s.py-15.px-xs.services-border
+                      .card-content  
+                        div.display-f.highlighted
+                          H2TEXT.grey #{card.services.number}
+                          a(href="#").px-xs #{card.services.text}
+
+                  //- Right Column
+                  div.display-f.flex--column.right-column
+                    .card.info-card.card-shadow.regular-border.mt-s
+                      .card-content
+                        div.display-f.flex--justify-between
+                          div.display-f.flex--align-center.fill
+                            H3TEXT #{card.outOfTime.pendContact.number}
+                            small.grey.pl-xs #{card.outOfTime.pendContact.text}
+                          div.display-f.flex--align-center.fill
+                            H3TEXT #{card.outOfTime.pendVisita.number}
+                            small.grey.pl-xs #{card.outOfTime.pendVisita.text}
+                          div.display-f.flex--align-center.fill  
+                            H3TEXT #{card.outOfTime.pendAvance.number}
+                            small.grey.pl-xs #{card.outOfTime.pendAvance.text}
+                          div.display-f.flex--align-center.fill 
+                            H3TEXT #{card.outOfTime.pendInforme.number}
+                            small.grey.pl-xs #{card.outOfTime.pendInforme.text} 
+                    .card.info-card.card-shadow.regular-border.my-s
+                      .card-content
+                        div.display-f.flex--justify-between
+                          div.display-f.flex--align-center.fill
+                            H3TEXT #{card.today.pendContact.number}
+                            small.pl-xs #{card.outOfTime.pendContact.text}
+                          div.display-f.flex--align-center.fill
+                            H3TEXT #{card.today.pendVisita.number}
+                            small.grey.pl-xs #{card.today.pendVisita.text}
+                          div.display-f.flex--align-center.fill-color
+                            H3TEXT #{card.today.pendAvance.number}
+                            small.grey.pl-xs #{card.today.pendAvance.text}
+                          div.display-f.flex--align-center.fill
+                            H3TEXT #{card.today.pendInforme.number}
+                            small.grey.pl-xs #{card.today.pendInforme.text}
+                    .card.info-card.card-shadow.regular-border.mb-s
+                      .card-content
+                        div.display-f.flex--justify-between
+                          div.display-f.flex--align-center.fill
+                            H3TEXT #{card.services.pendContact.number}
+                            small.pl-xs #{card.services.pendContact.text}
+                          div.display-f.flex--align-center.fill
+                            H3TEXT #{card.services.pendVisita.number}
+                            small.grey.pl-xs #{card.services.pendVisita.text}
+                          div.display-f.flex--align-center.fill
+                            H3TEXT #{card.services.pendAvance.number}
+                            small.grey.pl-xs #{card.services.pendAvance.text}
+                          div.display-f.flex--align-center.fill
+                            H3TEXT #{card.services.pendInforme.number}
+                            small.grey.pl-xs #{card.services.pendInforme.text}                        
+            
+            //- Bottom cards
+            .row  
+              each card in bottomCards
+                .col-6
+                  .card.bottom-info-card.card-shadow.pb-xs.mt-s
+                    div.display-f.flex--align-center
+                      h2.pl-xs #{card.tasks}
+                      a(href="#").px-xs.special-link #{card.text}  
+                    .card-content
+                        div.display-f.flex--align-center.flex--justify-around.flex--wrap
+                          div.px-xs.py-xs.critical-border                            
+                            H2TEXT.mb-0.info-card__number.grey_900 #{card.outOfTime.number}
+                            a(href="#").px-xs #{card.outOfTime.text}
+                            i.fas.fa-exclamation-triangle.text--status_critical_500
+                          div.px-xs.py-xs.warning-border   
+                            H2TEXT.mb-0.info-card__number.grey_900 #{card.today.number}
+                            a(href="#").px-xs #{card.today.text}
+                            i.fas.fa-clock.text--status_warning_500
+                          div.px-xs.py-xs.services-border         
+                            H2TEXT.mb-0.info-card__number.grey_900 #{card.services.number}
+                            a(href="#").px-xs #{card.services.text}
+
+          //- Calendar
+          div.content-aside-right-1
+            mm-textfield(label="Selecciona rango de fecha" helper-icon="Texto de ayuda")
+            .card.p-n.dashboard-date-picker
+              mm-textfield
+                mm-datepicker#agenda(placeholder="dd/mm/aaaa-dd/mm/aaaa" date-range="true")
+
+          //- Agenda              
+          div.content-aside-right-2.mt-s#appointment
+            .card.agenda-contacts
+              div  
+                .headline-agenda Tus citas
+              div#agenda  
+              div#global
+                .items-citas
+                  .item-cita
+                    .item-cita-heading.display-f.flex--justify-between.flex--align-center.mb-xxs
+                      mm-indicator 02/05/2022 09:00 - 11:00
+                      span.date.display-f 1010859-2022/1
+                      i.fa.fa-home
+                    p Rafael Bergamin 5 B:K|P:3|C Madrid, 28043
+                  .item-cita 
+                    .item-cita-heading.display-f.flex--justify-between.flex--align-center.mb-xxs
+                      mm-indicator 02/05/2022 09:00 - 11:00
+                      span.date.display-f 1010859-2022/1
+                      i.fa.fa-home
+                    p Rafael Bergamin 5 B:K|P:3|C Madrid, 28043
+                  .item-cita 
+                    .item-cita-heading.display-f.flex--justify-between.flex--align-center.mb-xxs 
+                      mm-indicator 02/05/2022 09:00 - 11:00
+                      span.date.display-f 1010859-2022/1
+                      i.fas.fa-video.text--brand_accent_500
+                    p Rafael Bergamin 5 B:K|P:3|C Madrid, 28043
+                  .item-cita 
+                    .item-cita-heading.display-f.flex--justify-between.flex--align-center.mb-xxs 
+                      mm-indicator 02/05/2022 09:00 - 11:00
+                      span.date.display-f 1010859-2022/1
+                      i.fas.fa-video.text--brand_accent_500 
+                    p Rafael Bergamin 5 B:K|P:3|C Madrid, 28043  
+                  .item-cita 
+                    .item-cita-heading.display-f.flex--justify-between.flex--align-center.mb-xxs
+                      mm-indicator 02/05/2022 09:00 - 11:00
+                      span.date.display-f 1010859-2022/1
+                      i.fa.fa-home
+                    p Rafael Bergamin 5 B:K|P:3|C Madrid, 28043
+                  .item-cita 
+                    .item-cita-heading.display-f.flex--justify-between.flex--align-center.mb-xxs 
+                      mm-indicator 02/05/2022 09:00 - 11:00
+                      span.date.display-f 1010859-2022/1
+                      i.fa.fa-home
+                    p Rafael Bergamin 5 B:K|P:3|C Madrid, 2804
+                  .item-cita 
+                    .item-cita-heading.display-f.flex--justify-between.flex--align-center.mb-xxs
+                      mm-indicator 02/05/2022 09:00 - 11:00
+                      span.date.display-f 1010859-2022/1
+                      i.fa.fa-home
+                    p Rafael Bergamin 5 B:K|P:3|C Madrid, 28043
+
+  script(type='text/javascript').
+    function updateDatepicker() {
+      const tabletSize = 1415;
+      var rangeDatepicker = document.querySelector('#agenda');
+      var containerAppointment = document.querySelector('#global');
+      var btnAppointment = document.querySelector('#appointment');
+      if (window.innerWidth < tabletSize) {
+        rangeDatepicker.options = { inline: false,};
+        if (containerAppointment) {
+          containerAppointment.style.display='none';
+          btnAppointment.addEventListener('click', appointmentList);
+          var btnClick = 0;
+          function appointmentList () {
+            if (btnClick == 0) {
+              containerAppointment.style.display='block';
+              btnClick = 1;
+            }else if (btnClick == 1) {          
+              containerAppointment.style.display='none';
+              btnClick = 0;
+            }
+          }
+        }
+      } else {
+        rangeDatepicker.options = { inline: true, };
+        containerAppointment.style.display='flex';
+      }      
+    }
+    updateDatepicker();
+    window.addEventListener('resize', updateDatepicker);
+
+    var graph = document.querySelector("mm-graph#firts-bar-graph");
+    var labelArrays = ["", "", "", "", "", "", "", "", ""];
+    const barLabel = "";
+    const barColor = 'rgba(0, 74, 147, 1)';
+    const lineColor = 'rgba(38, 195, 255, 1)';
+
+    var barValues = [5, 20, 5, 3, 3, 8, 15, 20, 3];
+
+    var data = {
+      data: {
+        labels:labelArrays,
+        legends: labelArrays,
+        datasets: [
+          {
+            label: barLabel,
+            data: barValues,
+            backgroundColor: barColor,
+          },
+          
+        ],
+      },
+      options: {
+        plugins: {
+          legend: {
+              display: false
+          }
+        },
+        scales: {
+          y: {
+            display: false
+          },
+          x: {
+            display: false
+          }
+        }
+      }
+    };
+    graph.data = data;
+
+    const data2 = {
+      datasets: [{
+            label: 'Bar Dataset',
+            data: barValues,
+            backgroundColor: barColor,
+            // this dataset is drawn below
+            order: 2
+       }, {
+           label: 'Line Dataset',
+           data: barValues,
+           type: 'line',
+           backgroundColor: lineColor,
+           borderColor: lineColor,
+           // this dataset is drawn on top
+           order: 1
+       }],
+       labels: labelArrays
+    };
+
+    const config = {
+      type: 'bar',
+      data: data2,
+      options: {
+        plugins: {
+          legend: {
+              display: false
+          },
+        },
+        scales: {
+          y: {
+            display: false
+          },
+          x: {
+            display: false
+          }
+        }
+      }
+    };
+
+    const myChart = new Chart(
+      document.querySelector('#grafico'),
+      config
+    );
+  

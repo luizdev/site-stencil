@@ -1,0 +1,256 @@
+.dashboard {
+  h2 {
+    font-family: "OpenSans";
+    font-style: normal;
+    font-weight: 300;
+    font-size: 30px;
+    line-height: 48px;
+    margin: 0;
+  }
+
+  .grey {
+    color: var(--grey_800, #61616a);
+  }
+
+  .info-card__icon {
+    color: var(--brand_accent_500, #00a4e3);
+  }
+
+  .general-card {
+    .general-card__percentage {
+      margin-right: 8px;
+      margin-left: 4px;
+    }
+
+    .positive {
+      .general-card__icon,
+      .general-card__percentage {
+        color: green;
+      }
+    }
+
+    .negative {
+      .general-card__icon,
+      .general-card__percentage {
+        color: red;
+      }
+    }
+  }
+
+  /* middle cards */
+  .left-column {
+    min-width: 208px;
+    margin-right: 80px;
+  }
+  .center-column {
+    min-width: 186px;
+  }
+
+  .right-column {
+    flex-grow: 1;
+    margin-left: 16px;
+  }
+
+  .dashboard-image {
+    background-image: url("../../../assets/img/dashboard_background.png");
+    background-repeat: no-repeat;
+  }
+
+  .critical-border {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #d62c42;
+    border-radius: 4px;
+  }
+  .warning-border {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #ffae33;
+    border-radius: 4px;
+  }
+  .services-border {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #3269b3;
+    border-radius: 4px;
+  }
+  .regular-border {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #ffffff;
+    border-radius: 4px;
+  }
+
+  .special-link {
+    font-family: "OpenSans";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .fill-color {
+    padding: 9px 20px;
+    background-color: #f2f2f2;
+  }
+  .fill {
+    padding: 9px 20px;
+  }
+  .card-shadow {
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    background-color: white;
+  }
+
+  /* Calendar */
+
+  .flatpickr-calendar.inline {
+    width: 330px;
+    height: 340px;
+    border-radius: 2px;
+    top: 1px;
+  }
+  .flatpickr-calendar {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+
+  mm-indicator .indicator {
+    font-size: 11px;
+  }
+
+  /* Agenda */
+
+  .agenda-contacts {
+    padding-left: 12px;
+    padding-right: 6px;
+    min-width: 310px;
+    background: #ffff;
+  }
+
+  .headline-agenda {
+    font-family: "OpenSans";
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--grey_800, #61616a);
+    text-align: left;
+    line-height: 1.5rem;
+    padding-top: 7px;
+    padding-bottom: 8px;
+  }
+  #global {
+    height: 495px;
+    width: 315px;
+    background: white;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    border-bottom: 6px solid white;
+    border-radius: 2px;
+  }
+  #agenda {
+    height: auto;
+    scrollbar-width: thin;
+  }
+
+  /* Responsive */
+
+  .main {
+    display: -webkit-flex; /* Safari */
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  /* Safari 6.1+ */
+  .content-aside-left-1 {
+    -webkit-order: 1;
+    flex-grow: 1;
+    min-width: 1018px;
+  }
+  .content-aside-left-2 {
+    -webkit-order: 3;
+    flex-grow: 1;
+    min-width: 1018px;
+  }
+  .content-aside-right-1 {
+    -webkit-order: 2;
+    margin-top: -20px;
+    margin-left: 20px;
+    width: 330px;
+  }
+  .content-aside-right-2 {
+    -webkit-order: 4;
+    width: 330px;
+    margin-left: 20px;
+  }
+
+  /* Standard syntax */
+  .content-aside-left-1 {
+    order: 1;
+    flex-grow: 1;
+    min-width: 1018px;
+  }
+  .content-aside-left-2 {
+    order: 3;
+    flex-grow: 1;
+    min-width: 1018px;
+  }
+  .content-aside-right-1 {
+    order: 2;
+    width: 330px;
+    margin-top: -20px;
+    margin-left: 20px;
+  }
+  .content-aside-right-2 {
+    order: 4;
+    width: 330px;
+    margin-left: 20px;
+  }
+
+  .w50.first-graph {
+    margin-right: 40px;
+  }
+
+  @media (max-width: 1415px) {
+    .content-aside-left-1 {
+      -webkit-order: 1;
+      width: 100%;
+    }
+    .content-aside-left-2 {
+      -webkit-order: 4;
+      width: 100%;
+    }
+    .content-aside-right-1 {
+      -webkit-order: 2;
+      width: 330px;
+      margin-top: 20px;
+      margin-left: 0px;
+    }
+    .content-aside-right-2 {
+      -webkit-order: 3;
+      width: 100%;
+      margin-left: 0px;
+    }
+
+    /* Standard syntax */
+    .content-aside-left-1 {
+      order: 1;
+      width: 100%;
+    }
+    .content-aside-left-2 {
+      order: 4;
+      width: 100%;
+    }
+    .content-aside-right-1 {
+      order: 2;
+      width: 330px;
+      margin-top: 20px;
+      margin-left: 0px;
+    }
+    .content-aside-right-2 {
+      order: 3;
+      width: 100%;
+      margin-left: 0px;
+    }
+    #global {
+      height: 292px;
+    }
+  }
+}

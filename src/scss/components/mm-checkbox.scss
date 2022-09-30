@@ -1,0 +1,20 @@
+mm-checkbox.readOnly {
+  label {
+    pointer-events: none;
+  }
+
+  input:checked {
+    + label::before {
+      content: "\f00c";
+      color: #42804a;
+    }
+  }
+
+  input {
+    + label::before {
+      content: "\f00d";
+      font-family: "fontawesome-solid";
+      color: #d62c42;
+    }
+  }
+}

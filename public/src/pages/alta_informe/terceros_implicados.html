@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head><base href="./">
+    <meta charset="utf-8">
+    <title>Peritos Hogar</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="Aplicación demo 1.5">
+    <meta name="theme-color" content="#16161d">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="x-ua-compatible" content="IE=Edge">
+    <link rel="apple-touch-icon" href="../../../assets/icon/icon.png">
+    <!-- Libreria JS y estilos Guia MM-->
+    <link rel="icon" type="image/png" href="../../../assets/favicons/favicon.svg">
+    <link rel="preload stylesheet" as="style" href="../../../assets/build/demo-components-guide.css">
+    <link rel="preload stylesheet" as="style" href="../../../assets/fontawesome/fontawesome-all.css">
+    <link rel="preload stylesheet" as="style" href="../../../assets/css/main.css">
+    <link rel="preload stylesheet" as="style" href="https://unpkg.com/swiper/swiper.min.css">
+    <!--Guia-->
+    <script type="module" src="../../../assets/build/demo-components-guide.esm.js"></script>
+    <script nomodule src="../../../assets/build/demo-components-guide.js"></script>
+    <script src="../../../assets/plugins/jquery-3.6.0.min.js" async></script>
+    <script src="../../../assets/plugins/datatables/datatables.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../../../assets/js/pages/index.js" async></script>
+    <script src="../../../assets/js/pages/alta_informe_terceros_implicados.js" async></script>
+  </head>
+  <body>
+    <mm-responsive-layout><a href="../home/home.html" title="ejemplo" slot="header-logo"><img class="logo" src="logo.svg" alt="layout-logo" width="" height=""></a><a href="../home/home.html" title="ejemplo" slot="nav-logo"><img class="logo" src="logo.svg" alt="layout-nav-logo" width="" height=""></a>
+      <nav slot="nav">
+        <mm-responsive-layout-item type="dropdown">
+          <div>Dashboard</div>
+        </mm-responsive-layout-item>
+        <mm-responsive-layout-item type="dropdown">
+          <div>búsqueda manual</div>
+        </mm-responsive-layout-item>
+        <mm-responsive-layout-item type="dropdown">
+          <div>repositorio</div>
+        </mm-responsive-layout-item>
+        <mm-responsive-layout-item type="dropdown">
+          <div>Meteosim</div>
+        </mm-responsive-layout-item>
+      </nav>
+      <div slot="header-actions">
+        <mm-dark-mode class="display-n display-f-lg"></mm-dark-mode>
+        <mm-responsive-layout-user-nav slot="profile">
+          <div slot="sidenav">
+            <mm-responsive-layout-user-item icon="fas fa-bell" label="Notificaciones" bubble-counter="3">
+              <div>
+                <h4 class="m-n">3 alertas nuevas</h4>
+                <div class="mt-xs"><small class="mm-semibold">Nombre de la alerta</small><small class="mm-regular">Informaci&oacute;n adicional de la alerta. Texto adicional de la alerta.</small></div>
+                <div class="mt-s"><small class="mm-semibold">Nombre de la alerta</small><small class="mm-regular">Informaci&oacute;n adicional de la alerta. Texto adicional de la alerta.</small></div>
+                <div class="mt-s"><small class="mm-semibold">Nombre de la alerta</small><small class="mm-regular">Informaci&oacute;n adicional de la alerta. Texto adicional de la alerta.</small></div>
+              </div>
+            </mm-responsive-layout-user-item>
+            <mm-responsive-layout-user-item label="Área personal" box-style="false">
+              <section class="display-f flex--align-center" slot="custom-item-header"><i class="fas fa-user mr-n mr-s-lg"></i>
+                <div class="display-b-lg display-n">
+                  <h6 class="m-n p-n text--full_white">Francisco De la Torre</h6><small class="text--full_white">fdelatorre@demo.es</small>
+                </div>
+              </section>
+              <mm-user-profile id="userExample">
+                <mm-button class="adapt" label="Simular usuario" type="ghost" slot="mm-user-profile-simulation"></mm-button>
+                <mm-button class="adapt" label="Cambiar contraseña" type="ghost" slot="mm-user-profile-password"></mm-button>
+                <mm-button label="Cerrar sesión" type="secondary" slot="mm-user-profile-close"></mm-button>
+              </mm-user-profile>
+            </mm-responsive-layout-user-item>
+          </div>
+        </mm-responsive-layout-user-nav>
+      </div>
+      <div id="main" slot="content">
+        <mm-breadcrumb>
+          <ul>
+            <li><a href="../wip/wip.html">Dashboard</a>
+            </li>
+            <li><a href="../wip/wip.html">Filtro de servicios</a>
+            </li>
+            <li><span>1103265-2021/1</span>
+            </li>
+          </ul>
+        </mm-breadcrumb>
+        <div class="display-f flex--column flex--row-lg" id="content-page-sidebar">
+          <div class="w100 pos-relative" id="content-page">
+            <div class="content-icon-expanded"><i class="btn-expanded" href="#" onclick="expandPage(event)"><img src="../../../assets/img/icon_expand.svg" alt="layout-nav-logo" width="15" height="10"></i>
+              <mm-tooltip class="mm-tooltip-expanded dark w-fitContent" position="left"> <span class="expanded">Cerrar</span><span class="not-expanded">Abrir</span> columna de resumen</mm-tooltip>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <main class="pl-m pr-m display-f flex--column">
+                  <div class="row py-xs">
+                    <div class="col-12">
+                      <div class="display-f flex--justify-between">
+                        <div class="display-f flex--align-center">
+                          <h1 class="mb-n mr-xs">Generar informe</h1>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-m">
+                    <div class="col-12"> 
+                      <mm-progress-indicator current-step="3">
+                        <div class="mmpi-content">DESCRIPCIÓN RIESGO</div><i class="fas fa-home mmpi-icon" slot="step-1" style="font-size: 30px;"></i>
+                        <div class="mmpi-content">CAUSAS Y ATRIBUTOS</div><i class="fas fa-file-alt mmpi-icon" slot="step-2" style="font-size: 30px;"></i>
+                        <div class="mmpi-content">TERCEROS IMPLICADOS</div><i class="fas fa-users mmpi-icon" slot="step-3" style="font-size: 30px;"></i>
+                        <div class="mmpi-content">TASACIÓN Y AJUSTE DE DAÑOS</div><i class="fas fa-file-invoice-dollar mmpi-icon" slot="step-4" style="font-size: 30px;"></i>
+                        <div class="mmpi-content">DOCUMENTACIÓN</div><i class="fas fa-folder-open mmpi-icon" slot="step-5" style="font-size: 30px;"></i>
+                      </mm-progress-indicator>
+                    </div>
+                  </div>
+                  <div class="row mb-m"> 
+                    <div class="col-12">
+                      <div class="subheading--modo-consultivo"><i class="fas fa-users"> </i>
+                        <h3>Terceros implicados</h3>
+                      </div>
+                      <div class="b-block"> 
+                        <div class="row"> 
+                          <div class="col-12"> 
+                            <mm-listing class="filter-table-header" id="tableTercerosImplicadosAltaInforme" search check-column show-table-actions actions-buttons>
+                              <table slot="table">
+                                <thead>
+                                  <tr>
+                                    <th>Calidad      </th>
+                                    <th>Nombre      </th>
+                                    <th class="none"> Dni: </th>
+                                    <th class="none"> Telefono: </th>
+                                    <th>Dirección      </th>
+                                    <th class="none"> Provincia: </th>
+                                    <th>póliza      </th>
+                                    <th>Nº Expediente      </th>
+                                    <th>compañía      </th>
+                                    <th class="none"> Daños: </th>
+                                    <th class="none"> Observaciones: </th>
+                                    <th></th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr class="undefined" id="row_tercerosImplicados0">
+                                    <td>Perjudicado</td>
+                                    <td>Mari Carmen Martínez</td>
+                                    <td>45444223</td>
+                                    <td>635783910 </td>
+                                    <td>Membezar 5, 1 Madrid</td>
+                                    <td>Madrid</td>
+                                    <td>1.260.285</td>
+                                    <td>Nº expediente</td>
+                                    <td>Demo Madrileña</td>
+                                    <td>Asume daños</td>
+                                    <td>Descripción observación</td>
+                                    <td>
+                                      <div class="display-f flex--justify-evenly actionsButtons text-align-r">
+                                        <div class="action-pos-relative"><i class="fas fa-edit text--brand_accent_500 pos-relative fs-16 pointer ml-s" onclick="editRow(event, 'mm-listing#tableTercerosImplicadosAltaInforme', 0)" id="editIcon_tercerosImplicados0"></i>
+                                          <mm-tooltip class="w-fitContent">Editar fila</mm-tooltip>
+                                        </div>
+                                        <div class="action-pos-relative"><i class="fas fa-trash-alt text--brand_accent_500 pos-relative fs-16 pointer ml-s" onclick="deleteRow(event, 'mm-listing#tableTercerosImplicadosAltaInforme')"></i>
+                                          <mm-tooltip class="w-fitContent">Eliminar fila</mm-tooltip>
+                                        </div>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                  <tr class="undefined" id="row_tercerosImplicados1">
+                                    <td>Perjudicado</td>
+                                    <td>Mari Carmen Martínez</td>
+                                    <td>45444223</td>
+                                    <td>635783910 </td>
+                                    <td>Membezar 5, 1 Madrid</td>
+                                    <td>Madrid</td>
+                                    <td>1.260.285</td>
+                                    <td>Nº expediente</td>
+                                    <td>Demo Madrileña</td>
+                                    <td>Asume daños</td>
+                                    <td>Descripción observación</td>
+                                    <td>
+                                      <div class="display-f flex--justify-evenly actionsButtons text-align-r">
+                                        <div class="action-pos-relative"><i class="fas fa-edit text--brand_accent_500 pos-relative fs-16 pointer ml-s" onclick="editRow(event, 'mm-listing#tableTercerosImplicadosAltaInforme', 1)" id="editIcon_tercerosImplicados1"></i>
+                                          <mm-tooltip class="w-fitContent">Editar fila</mm-tooltip>
+                                        </div>
+                                        <div class="action-pos-relative"><i class="fas fa-trash-alt text--brand_accent_500 pos-relative fs-16 pointer ml-s" onclick="deleteRow(event, 'mm-listing#tableTercerosImplicadosAltaInforme')"></i>
+                                          <mm-tooltip class="w-fitContent">Eliminar fila</mm-tooltip>
+                                        </div>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                  <tr class="undefined" id="row_tercerosImplicados2">
+                                    <td>Perjudicado</td>
+                                    <td>Mari Carmen Martínez</td>
+                                    <td>45444223</td>
+                                    <td>635783910 </td>
+                                    <td>Membezar 5, 1 Madrid</td>
+                                    <td>Madrid</td>
+                                    <td>1.260.285</td>
+                                    <td>Nº expediente</td>
+                                    <td>Demo Madrileña</td>
+                                    <td>Asume daños</td>
+                                    <td>Descripción observación</td>
+                                    <td>
+                                      <div class="display-f flex--justify-evenly actionsButtons text-align-r">
+                                        <div class="action-pos-relative"><i class="fas fa-edit text--brand_accent_500 pos-relative fs-16 pointer ml-s" onclick="editRow(event, 'mm-listing#tableTercerosImplicadosAltaInforme', 2)" id="editIcon_tercerosImplicados2"></i>
+                                          <mm-tooltip class="w-fitContent">Editar fila</mm-tooltip>
+                                        </div>
+                                        <div class="action-pos-relative"><i class="fas fa-trash-alt text--brand_accent_500 pos-relative fs-16 pointer ml-s" onclick="deleteRow(event, 'mm-listing#tableTercerosImplicadosAltaInforme')"></i>
+                                          <mm-tooltip class="w-fitContent">Eliminar fila</mm-tooltip>
+                                        </div>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                  <tr class="undefined" id="row_tercerosImplicados3">
+                                    <td>Perjudicado</td>
+                                    <td>Mari Carmen Martínez</td>
+                                    <td>45444223</td>
+                                    <td>635783910 </td>
+                                    <td>Membezar 5, 1 Madrid</td>
+                                    <td>Madrid</td>
+                                    <td>1.260.285</td>
+                                    <td>Nº expediente</td>
+                                    <td>Demo Madrileña</td>
+                                    <td>Asume daños</td>
+                                    <td>Descripción observación</td>
+                                    <td>
+                                      <div class="display-f flex--justify-evenly actionsButtons text-align-r">
+                                        <div class="action-pos-relative"><i class="fas fa-edit text--brand_accent_500 pos-relative fs-16 pointer ml-s" onclick="editRow(event, 'mm-listing#tableTercerosImplicadosAltaInforme', 3)" id="editIcon_tercerosImplicados3"></i>
+                                          <mm-tooltip class="w-fitContent">Editar fila</mm-tooltip>
+                                        </div>
+                                        <div class="action-pos-relative"><i class="fas fa-trash-alt text--brand_accent_500 pos-relative fs-16 pointer ml-s" onclick="deleteRow(event, 'mm-listing#tableTercerosImplicadosAltaInforme')"></i>
+                                          <mm-tooltip class="w-fitContent">Eliminar fila</mm-tooltip>
+                                        </div>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                  <tr class="undefined" id="row_tercerosImplicados4">
+                                    <td>Perjudicado</td>
+                                    <td>Mari Carmen Martínez</td>
+                                    <td>45444223</td>
+                                    <td>635783910 </td>
+                                    <td>Membezar 5, 1 Madrid</td>
+                                    <td>Madrid</td>
+                                    <td>1.260.285</td>
+                                    <td>Nº expediente</td>
+                                    <td>Demo Madrileña</td>
+                                    <td>Asume daños</td>
+                                    <td>Descripción observación</td>
+                                    <td>
+                                      <div class="display-f flex--justify-evenly actionsButtons text-align-r">
+                                        <div class="action-pos-relative"><i class="fas fa-edit text--brand_accent_500 pos-relative fs-16 pointer ml-s" onclick="editRow(event, 'mm-listing#tableTercerosImplicadosAltaInforme', 4)" id="editIcon_tercerosImplicados4"></i>
+                                          <mm-tooltip class="w-fitContent">Editar fila</mm-tooltip>
+                                        </div>
+                                        <div class="action-pos-relative"><i class="fas fa-trash-alt text--brand_accent_500 pos-relative fs-16 pointer ml-s" onclick="deleteRow(event, 'mm-listing#tableTercerosImplicadosAltaInforme')"></i>
+                                          <mm-tooltip class="w-fitContent">Eliminar fila</mm-tooltip>
+                                        </div>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </mm-listing>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-m">
+                    <div class="col-12 display-f flex--justify-end"><a class="underline" id="altaInformeTercerosImplicadosLightbox">
+                        <mm-button label="Añadir terceros implicados" type="secondary"></mm-button></a></div>
+                  </div>
+                  <div class="button-action-sticky row display-f flex--justify-between mt-m"> 
+                    <div class="action-1">
+                      <mm-button class="mr-xs" label="Cancelar" type="support"></mm-button>
+                    </div>
+                    <div class="action-2 display-f"><a id="buttonModoConsultivoPrev" href="causas_atributos.html">
+                        <mm-button class="mr-xs" label="anterior" type="secondary"></mm-button></a><a id="buttonModoConsultivoNext" href="tasacion_ajustes.html">
+                        <mm-button class="mr-xs" label="Siguiente" type="primary"></mm-button></a></div>
+                  </div>
+                </main>
+              </div>
+            </div>
+          </div>
+          <mm-responsive-layout-lateral-menu class="grey modo-consultivo"><i class="fas fa-times close-icon" onclick="expandPage(event)"></i>
+            <div class="b-block">
+              <h4 class="blue no-line">Detalle del siniestro</h4>
+              <div class="row"> 
+                <div class="col-6"> <small>Número del siniestro</small>
+                  <p>1103265 - 2021/1</p>
+                </div>
+                <div class="col-6"> <small>Número del siniestro</small>
+                  <p>1103265 - 2021/1</p>
+                </div>
+              </div>
+              <div class="row"> 
+                <div class="col-6"> <small>Dirección riesgo</small>
+                  <p>Juan de la Cierva, 1, 7º-13</p>
+                </div>
+                <div class="col-6"> <small>Fecha/hora Efecto</small>
+                  <p>20/05/2018 - 09:40h</p>
+                </div>
+              </div>
+              <div class="row"> 
+                <div class="col-6"> <small>Estado</small>
+                  <mm-indicator class="mr-xs">Finalizado</mm-indicator>
+                </div>
+                <div class="col-6"> <small>Fecha/hora Ocurrencia</small>
+                  <p>20/05/2018 - 09:40h</p>
+                </div>
+              </div>
+              <div class="row"> 
+                <div class="col-6"> <small>Proveedor</small><a id="proveedorLightbox"><i class="fas fa-user-tie mr-xxs"></i>IPAS</a></div>
+                <div class="col-6"> <small>Fecha/hora Declaración</small>
+                  <p>20/05/2018 - 09:40h</p>
+                </div>
+              </div>
+              <div class="row"> 
+                <div class="col-6"> <small>Tipo </small>
+                  <p>Indemnizable</p>
+                </div>
+                <div class="col-6"> <small>Fecha/hora Vencimiento</small>
+                  <p>20/05/2018 - 09:40h</p>
+                </div>
+              </div>
+            </div>
+            <div class="b-block">
+              <div class="sidebar-subheading--modo-consultivo"><i class="fas fa-file-alt"> </i>
+                <h3>Resumen</h3>
+              </div>
+              <div class="row"> 
+                <div class="col-12"> 
+                  <mm-accordion class="sidebar--modo-consultivo" header="datos generales" reduced="">
+                    <div class="row mb-xs"> 
+                      <div class="col-6"> <small>Producto </small>
+                        <p> <a href="#">A todo riesgo PLUS</a></p>
+                      </div>
+                      <div class="col-6"> <small>Tipo de siniestro</small>
+                        <p>1103265 - 2021/1</p>
+                      </div>
+                    </div>
+                    <div class="row mb-xs"> 
+                      <div class="col-6"> <small>Superficie construída</small>
+                        <p>112 m2</p>
+                      </div>
+                      <div class="col-6"> <small>Nº Trasteros/Garajes</small>
+                        <p>3</p>
+                      </div>
+                    </div>
+                    <div class="row mb-xs"> 
+                      <div class="col-6"> <small>Tipo/Subtipo vivienda</small>
+                        <p>Piso</p>
+                      </div>
+                      <div class="col-6"> <small>Superficie terraza</small>
+                        <p>100 m2</p>
+                      </div>
+                    </div>
+                    <div class="row mb-xs"> 
+                      <div class="col-6"> <small>Año construcción</small>
+                        <p>2004</p>
+                      </div>
+                      <div class="col-6"> <small>Año última reforma</small>
+                        <p>2004</p>
+                      </div>
+                    </div>
+                    <div class="row mb-xs"> 
+                      <div class="col-6"> <small>Superficie parcela s/c</small>
+                        <p>0</p>
+                      </div>
+                      <div class="col-6"> <small>Habitantes</small>
+                        <p>4</p>
+                      </div>
+                    </div>
+                    <div class="row mb-xs"> 
+                      <div class="col-12"> <small>Protecciones</small>
+                        <p>Protección 1, Protección 2, Protección 3,...</p>
+                      </div>
+                    </div>
+                    <div class="row mb-xs"> 
+                      <div class="col-12"> <small>Atributos</small>
+                        <p>VTS, Corrosión, Infraseguro, Judicial</p>
+                      </div>
+                    </div>
+                  </mm-accordion>
+                  <mm-accordion class="sidebar--modo-consultivo" header="descripción del riesgo" reduced="">
+                    <div class="row mb-xs"> 
+                      <div class="col-12"> <small>Capital continente adecudo a preexistencias</small>
+                        <p>Sí, (Existencias verificadas)</p>
+                      </div>
+                    </div>
+                    <div class="row mb-xs"> 
+                      <div class="col-12"> <small>Capital contenido adecudo a preexistencias</small>
+                        <p>No, (Razón Cdo)</p>
+                      </div>
+                    </div>
+                    <div class="row mb-xs"> 
+                      <div class="col-12"> <small>Estado de conservación</small>
+                        <p>Requiere mantenimiento</p>
+                      </div>
+                    </div>
+                    <div class="row mb-xs"> 
+                      <div class="col-12"> <small>Infraseguro</small>
+                        <p>No</p>
+                      </div>
+                    </div>
+                    <div class="row mb-xs">
+                      <div class="col-6"> <small>Tasación mobiliario</small>
+                        <p>Tasación mobiliario </p>
+                      </div>
+                      <div class="col-6"> <small class="number">Valor asegur. MOBiliario</small>
+                        <p class="number">47.568,13€</p>
+                      </div>
+                    </div>
+                    <div class="row mb-xs"> 
+                      <div class="col-6"> <small>Tasación vivienda</small>
+                        <p>Tasación vivienda</p>
+                      </div>
+                      <div class="col-6"> <small class="number">Valor asegur. VVAA</small>
+                        <p class="number">155.756,36€</p>
+                      </div>
+                    </div>
+                  </mm-accordion>
+                  <mm-accordion class="sidebar--modo-consultivo" header="Causas y atributos" reduced="" active>
+                    <div class="row mb-xs"> 
+                      <div class="col-12"> <small>Asegurado conforme</small>
+                        <p>Sí</p>
+                      </div>
+                    </div>
+                    <div class="row mb-xs"> 
+                      <div class="col-6"> <small>Tiene cobertura</small>
+                        <p>Sí</p>
+                      </div>
+                      <div class="col-6"> <small>Es recobrable</small>
+                        <p>No</p>
+                      </div>
+                    </div>
+                    <div class="row mb-xs"> 
+                      <div class="col-6"> <small>daños consorciables</small>
+                        <p>No</p>
+                      </div>
+                      <div class="col-6"> <small>Datos consorciables</small>
+                        <p>Parcial</p>
+                      </div>
+                    </div>
+                    <div class="row mb-xs"> 
+                      <div class="col-12"> <small>Estimación daños consorciables</small>
+                        <p>Estimación daños</p>
+                      </div>
+                    </div>
+                    <div class="row mb-xs"> 
+                      <div class="col-6"> <small>Posible fraude</small>
+                        <p>No</p>
+                      </div>
+                      <div class="col-6"> <small>Corrosión</small>
+                        <p>No</p>
+                      </div>
+                    </div>
+                    <div class="row mb-xs"> 
+                      <div class="col-12"> <small>Concurrencia</small>
+                        <p>No</p>
+                      </div>
+                    </div>
+                    <div class="row mb-xs"> 
+                      <div class="col-12"> <small>Visualizar informe reparador</small>
+                        <p>No</p>
+                      </div>
+                    </div>
+                  </mm-accordion>
+                </div>
+              </div>
+            </div>
+          </mm-responsive-layout-lateral-menu>
+        </div>
+        <mm-lightbox class="sizeS" label="Añadir terceros implicados" id-lightbox="altaInformeTercerosImplicadosLightbox">
+          <section slot="lightbox-content">
+            <div class="w-100 px-s py-xs">
+              <div class="row mb-s">
+                <div class="col-4">
+                  <mm-textfield label="Calidad">
+                    <input value="" name="altaInformeTercerosImplicadosLightbox_calidad" type="text" placeholder="Escribir motivo...">
+                  </mm-textfield>
+                </div>
+              </div>
+              <div class="row mb-s">
+                <div class="col-6">
+                  <mm-textfield label="Nombre">
+                    <input value="" name="altaInformeTercerosImplicadosLightbox_nombre" type="text" placeholder="Escribir Nombre...">
+                  </mm-textfield>
+                </div>
+                <div class="col-3">
+                  <mm-textfield label="DNI">
+                    <input value="" name="altaInformeTercerosImplicadosLightbox_dni" type="number" placeholder="Escribir DNI...">
+                  </mm-textfield>
+                </div>
+                <div class="col-3">
+                  <mm-textfield label="Teléfono">
+                    <input value="" name="altaInformeTercerosImplicadosLightbox_telefono" type="number" placeholder="Escribir Teléfono...">
+                  </mm-textfield>
+                </div>
+              </div>
+              <div class="row mb-s">
+                <div class="col-9">
+                  <mm-textfield label="Dirección completa">
+                    <input value="" name="altaInformeTercerosImplicadosLightbox_direccion" type="text" placeholder="Escribir Dirección...">
+                  </mm-textfield>
+                </div>
+                <div class="col-3">
+                  <mm-combobox id="mm-comboboxAltaInformeTercerosImplicadosProvincia" label="Provincia">
+                    <select name="altaInformeTercerosImplicadosLightbox_provincia" onchange="getAltaInformeTercerosImplicadosProvincia(event)">
+                      <option value="">Seleccione</option>
+                      <option value="Zaragoza">Zaragoza</option>
+                      <option value="Madrid">Madrid</option>
+                      <option value="Valencia">Valencia</option>
+                    </select>
+                  </mm-combobox>
+                </div>
+              </div>
+              <div class="row mb-s">
+                <div class="col-3">
+                  <mm-textfield label="Póliza">
+                    <input value="" name="altaInformeTercerosImplicadosLightbox_poliza" type="text" placeholder="Escribir motivo...">
+                  </mm-textfield>
+                </div>
+                <div class="col-3">
+                  <mm-textfield label="Siniestro">
+                    <input value="" name="altaInformeTercerosImplicadosLightbox_siniestro" type="text" placeholder="Escribir motivo...">
+                  </mm-textfield>
+                </div>
+                <div class="col-3">
+                  <mm-textfield label="Compañia">
+                    <input value="" name="altaInformeTercerosImplicadosLightbox_compania" type="text" placeholder="Escribir motivo...">
+                  </mm-textfield>
+                </div>
+                <div class="col-3">
+                  <mm-combobox id="mm-comboboxAltaInformeTercerosImplicadosDanos" label="Asume daños">
+                    <select name="altaInformeTercerosImplicadosLightbox_asumeDanos" onChange="getAltaInformeTercerosImplicadosDanos(event)">
+                      <option value="">Seleccione</option>
+                      <option value="Si">Si</option>
+                      <option value="No">No</option>
+                    </select>
+                  </mm-combobox>
+                </div>
+              </div>
+              <div class="row mb-s">
+                <div class="col-12">
+                  <mm-textarea label="Observación" helper-icon="Texto de ayuda">
+                    <textarea name="altaInformeTercerosImplicadosLightbox_observacion" rows="4" cols="80" maxlength="255" placeholder="Añade una descripción a tu nota"></textarea>
+                  </mm-textarea>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <section class="display-f flex--justify-between mt-m" slot="lightbox-content-button">
+                    <mm-button class="btn-cancel" label="Cancelar" type="support"></mm-button>
+                    <mm-button class="btn-add" label="Añadir" onclick="addDataToTable('altaInformeTercerosImplicadosLightbox', event)"></mm-button>
+                    <mm-button class="btn-update display-n" label="Actualizar" onclick="updateRow('altaInformeTercerosImplicadosLightbox', event)"></mm-button>
+                  </section>
+                </div>
+              </div>
+            </div>
+          </section>
+        </mm-lightbox>
+      </div>
+    </mm-responsive-layout>
+  </body>
+</html>

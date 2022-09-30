@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head><base href="./">
+    <meta charset="utf-8">
+    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="Aplicación demo 1.5">
+    <meta name="theme-color" content="#16161d">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="x-ua-compatible" content="IE=Edge">
+    <link rel="apple-touch-icon" href="../../../assets/icon/icon.png">
+    <!-- Libreria JS y estilos Guia MM-->
+    <link rel="icon" type="image/png" href="../../../assets/favicons/favicon.svg">
+    <link rel="preload stylesheet" as="style" href="../../../assets/build/demo-components-guide.css">
+    <link rel="preload stylesheet" as="style" href="../../../assets/fontawesome/fontawesome-all.css">
+    <link rel="preload stylesheet" as="style" href="../../../assets/css/main.css">
+    <link rel="preload stylesheet" as="style" href="https://unpkg.com/swiper/swiper.min.css">
+    <!--Guia-->
+    <script type="module" src="../../../assets/build/demo-components-guide.esm.js"></script>
+    <script nomodule src="../../../assets/build/demo-components-guide.js"></script>
+    <script src="../../../assets/plugins/jquery-3.6.0.min.js" async></script>
+    <script src="../../../assets/plugins/datatables/datatables.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../../../assets/js/pages/index.js" async></script>
+    <script src="../../../assets/js/pages/busqueda_busqueda.js" async></script>
+  </head>
+  <body>
+    <mm-responsive-layout><a href="../home/home.html" title="ejemplo" slot="header-logo"><img class="logo" src="logo.svg" alt="layout-logo" width="" height=""></a><a href="../home/home.html" title="ejemplo" slot="nav-logo"><img class="logo" src="logo.svg" alt="layout-nav-logo" width="" height=""></a>
+      <nav slot="nav">
+        <mm-responsive-layout-item type="dropdown">
+          <div>Dashboard</div>
+        </mm-responsive-layout-item>
+        <mm-responsive-layout-item type="dropdown">
+          <div>búsqueda manual</div>
+        </mm-responsive-layout-item>
+        <mm-responsive-layout-item type="dropdown">
+          <div>repositorio</div>
+        </mm-responsive-layout-item>
+        <mm-responsive-layout-item type="dropdown">
+          <div>Meteosim</div>
+        </mm-responsive-layout-item>
+      </nav>
+      <div slot="header-actions">
+        <mm-dark-mode class="display-n display-f-lg"></mm-dark-mode>
+        <mm-responsive-layout-user-nav slot="profile">
+          <div slot="sidenav">
+            <mm-responsive-layout-user-item icon="fas fa-bell" label="Notificaciones" bubble-counter="3">
+              <div>
+                <h4 class="m-n">3 alertas nuevas</h4>
+                <div class="mt-xs"><small class="mm-semibold">Nombre de la alerta</small><small class="mm-regular">Informaci&oacute;n adicional de la alerta. Texto adicional de la alerta.</small></div>
+                <div class="mt-s"><small class="mm-semibold">Nombre de la alerta</small><small class="mm-regular">Informaci&oacute;n adicional de la alerta. Texto adicional de la alerta.</small></div>
+                <div class="mt-s"><small class="mm-semibold">Nombre de la alerta</small><small class="mm-regular">Informaci&oacute;n adicional de la alerta. Texto adicional de la alerta.</small></div>
+              </div>
+            </mm-responsive-layout-user-item>
+            <mm-responsive-layout-user-item label="Área personal" box-style="false">
+              <section class="display-f flex--align-center" slot="custom-item-header"><i class="fas fa-user mr-n mr-s-lg"></i>
+                <div class="display-b-lg display-n">
+                  <h6 class="m-n p-n text--full_white">Francisco De la Torre</h6><small class="text--full_white">fdelatorre@demo.es</small>
+                </div>
+              </section>
+              <mm-user-profile id="userExample">
+                <mm-button class="adapt" label="Simular usuario" type="ghost" slot="mm-user-profile-simulation"></mm-button>
+                <mm-button class="adapt" label="Cambiar contraseña" type="ghost" slot="mm-user-profile-password"></mm-button>
+                <mm-button label="Cerrar sesión" type="secondary" slot="mm-user-profile-close"></mm-button>
+              </mm-user-profile>
+            </mm-responsive-layout-user-item>
+          </div>
+        </mm-responsive-layout-user-nav>
+      </div>
+      <div id="main" slot="content">
+        <mm-breadcrumb>
+          <ul>
+            <li><span>Dashboard</span>
+            </li>
+          </ul>
+        </mm-breadcrumb>
+        <main class="bg-gray">
+          <div class="container col-12">                 
+            <div class="container-flex main bg-white border-radius-2">
+              <div class="row">
+                <section class="col-12">
+                  <div class="row"> 
+                    <div class="col-12">
+                      <h1 class="pt-xs mb-n">Búsqueda manual </h1>
+                      <h2 class="subtitle">Buscando en: Comismar</h2>
+                    </div>
+                  </div>
+                  <div class="row mb-m"> 
+                    <div class="col-4">
+                      <mm-textfield class="mr-m date" label="Rango de fecha">
+                        <mm-datepicker placeholder="dd/mm/aaaa-dd/mm/aaaa" date-range="true"></mm-datepicker>
+                      </mm-textfield>
+                    </div>
+                  </div>
+                  <div class="row mb-m"> 
+                    <div class="col-12"> 
+                      <div class="row mb-s"> 
+                        <div class="col-12"> <span class="fs-normal display-ib text--primary_500 mm-bold uppercase"> <i class="fa fa-solid fa-filter text--primary_500 mr-xxs"></i>Filtrar por</span></div>
+                      </div>
+                      <div class="row mb-s">
+                        <div class="col-4">
+                          <mm-grouping-checkbox class="mm-box-check-group" label="Servicios asignados">
+                            <mm-checkbox>
+                              <div class="mm-box-check">
+                                <div class="mm-box-check-inner">
+                                  <input id="primerosservicios" type="checkbox" value="primerosservicios" name="serviciosasignados">
+                                  <label>Primeros servicios</label>
+                                </div><i class="fas fa-file"><span class="number">1</span></i>
+                              </div>
+                            </mm-checkbox>
+                            <mm-checkbox>
+                              <div class="mm-box-check">
+                                <div class="mm-box-check-inner">
+                                  <input id="clones" type="checkbox" value="clones" name="serviciosasignados">
+                                  <label>Clones</label>
+                                </div>
+                              </div>
+                            </mm-checkbox>
+                          </mm-grouping-checkbox>
+                        </div>
+                        <div class="col-8">
+                          <mm-grouping-checkbox class="mm-box-check-group" label="Acciones">
+                            <mm-checkbox>
+                              <div class="mm-box-check action danger active">
+                                <div class="mm-box-check-inner">
+                                  <input onchange="oneCheckboxActionFilter(event, 0)" id="fueraplazo" type="checkbox" value="Fuera de plazo" name="acciones">
+                                  <label>Fuera de plazo</label>
+                                </div><i class="fas fa-exclamation-triangle"></i>
+                              </div>
+                            </mm-checkbox>
+                            <mm-checkbox>
+                              <div class="mm-box-check action warning">
+                                <div class="mm-box-check-inner">
+                                  <input onchange="oneCheckboxActionFilter(event, 0)" id="acciones" type="checkbox" value="Acciones hoy" name="acciones">
+                                  <label>Acciones hoy</label>
+                                </div><i class="fas fa-clock"></i>
+                              </div>
+                            </mm-checkbox>
+                            <mm-checkbox>
+                              <div class="mm-box-check action info">
+                                <div class="mm-box-check-inner">
+                                  <input onchange="oneCheckboxActionFilter(event, 0)" id="servicios" type="checkbox" value="Servicios" name="acciones">
+                                  <label>Servicios</label>
+                                </div>
+                              </div>
+                            </mm-checkbox>
+                          </mm-grouping-checkbox>
+                        </div>
+                      </div>
+                      <div class="row mb-s">
+                        <div class="col-4">
+                          <mm-grouping-checkbox class="mm-box-check-group" label="Comunicaciones">
+                            <mm-checkbox>
+                              <div class="mm-box-check">
+                                <div class="mm-box-check-inner">
+                                  <input id="tareas" type="checkbox" value="tareas" name="comunicaciones">
+                                  <label>Tareas</label>
+                                </div>
+                              </div>
+                            </mm-checkbox>
+                            <mm-checkbox>
+                              <div class="mm-box-check">
+                                <div class="mm-box-check-inner">
+                                  <input id="notas" type="checkbox" value="notas" name="comunicaciones">
+                                  <label>Notas</label>
+                                </div>
+                              </div>
+                            </mm-checkbox>
+                          </mm-grouping-checkbox>
+                        </div>
+                        <div class="col-8">
+                          <mm-grouping-checkbox class="mm-box-check-group" label="Situación">
+                            <mm-checkbox>
+                              <div class="mm-box-check">
+                                <div class="mm-box-check-inner">
+                                  <input id="ptecontacto" type="checkbox" value="pte contacto" name="situacion">
+                                  <label>Pte contacto</label>
+                                </div>
+                              </div>
+                            </mm-checkbox>
+                            <mm-checkbox>
+                              <div class="mm-box-check">
+                                <div class="mm-box-check-inner">
+                                  <input id="pteavance" type="checkbox" value="pte avance" name="situacion">
+                                  <label>Pte avance</label>
+                                </div>
+                              </div>
+                            </mm-checkbox>
+                            <mm-checkbox>
+                              <div class="mm-box-check">
+                                <div class="mm-box-check-inner">
+                                  <input id="ptevisita" type="checkbox" value="pte visita" name="situacion">
+                                  <label>Pte visita</label>
+                                </div>
+                              </div>
+                            </mm-checkbox>
+                            <mm-checkbox>
+                              <div class="mm-box-check">
+                                <div class="mm-box-check-inner">
+                                  <input onchange="oneCheckboxSituationFilter(event, 2)" type="checkbox" value="pte informe" name="situacion">
+                                  <label>Pte informe</label>
+                                </div>
+                              </div>
+                            </mm-checkbox>
+                          </mm-grouping-checkbox>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-xs">
+                    <div class="col-12"> 
+                      <mm-accordion class="search" header="Búsqueda avanzada" reduced="">
+                        <div class="display-f">
+                          <mm-combobox class="mr-m" label="Tipo de servicio" placeholder="Selecciona una opción">
+                            <select onchange="oneOptionSignatureFilter(event, 0)">
+                              <option value="">Selecciona...</option>
+                              <option value="Comismar">Comismar</option>
+                            </select>
+                          </mm-combobox>
+                          <mm-textfield class="mr-m" label="Nº de siniestro">
+                            <input type="text" placeholder="Nº de siniestro">
+                          </mm-textfield>
+                          <mm-textfield class="mr-m date" label="Año del siniestro">
+                            <mm-datepicker placeholder="dd/mm/aaaa"></mm-datepicker>
+                          </mm-textfield>
+                          <mm-textfield class="mr-m" label="Nº de póliza">
+                            <input type="text" placeholder="Nº de póliza">
+                          </mm-textfield>
+                          <mm-textfield class="mr-m" label="Ref. Externa">
+                            <input type="text" placeholder="Ref. Externa">
+                          </mm-textfield>
+                          <mm-combobox class="mr-m" label="Estado" placeholder="Selecciona una opción">
+                            <select onchange="oneOptionSignatureFilter(event, 5)">
+                              <option value="">Selecciona...</option>
+                              <option value="En curso">En curso</option>
+                            </select>
+                          </mm-combobox>
+                        </div>
+                      </mm-accordion>
+                    </div>
+                  </div>
+                  <div class="row mb-m"> 
+                    <div class="col-12"> 
+                      <section class="bg--full_white border-top-box display-f flex--justify-end flex--align-center py-s">
+                        <button class="mm-button basic support mr-xs" type="button" onclick="clearTable()">LIMPIAR DATOS</button>
+                        <button class="mm-button basic main" type="button" onclick="searchTable()">BUSCAR</button>
+                      </section>
+                    </div>
+                  </div>
+                  <div class="row mb-m">
+                    <div class="col-12"> 
+                      <mm-listing class="filter-table-header" search>
+                        <header class="w100 display-f flex--align-end" slot="header-title">
+                          <div class="content-filters"> </div>
+                        </header>
+                        <table id="searchTable" slot="table">
+                          <thead>
+                            <tr>
+                              <th sortable searchable type="">Acciones</th>
+                              <th sortable searchable type="">Nº Siniestro</th>
+                              <th sortable searchable type="situacion">situación</th>
+                              <th sortable searchable type="">estado</th>
+                              <th sortable searchable type="">tipo servicio</th>
+                              <th sortable searchable type="">causa</th>
+                              <th sortable searchable type="">F. Alta</th>
+                              <th sortable searchable type="">F.contac</th>
+                              <th sortable searchable type="">F. visita</th>
+                              <th sortable searchable type="">F. Fin</th>
+                              <th sortable searchable type="">dirección</th>
+                              <th sortable searchable type="">VIP/S.Esp</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr class="info" id="searchRow_0">
+                              <td> <span class="display-n">servicios</span><i class="fa "></i></td>
+                              <td>1103265-2021/1</td>
+                              <td> 
+                                <mm-indicator>pte contacto</mm-indicator>
+                              </td>
+                              <td> 
+                                <mm-indicator class="status_info_secondary">en curso</mm-indicator>
+                              </td>
+                              <td>Peritación</td>
+                              <td class="pos-relative"><span>Rotura de...</span>
+                                <mm-tooltip>Rotura de causa de casa</mm-tooltip>
+                              </td>
+                              <td>12/02/2022</td>
+                              <td>12/02/2022</td>
+                              <td>12/02/2022</td>
+                              <td>-</td>
+                              <td> <span>C. de Ruiz de Alarcón...</span>
+                                <mm-tooltip>C. de Ruiz de Alarcón de la barca</mm-tooltip>
+                              </td>
+                              <td>-</td>
+                            </tr>
+                            <tr class="clock" id="searchRow_1">
+                              <td> <span class="display-n">Acciones hoy</span><i class="fa fa-clock"></i></td>
+                              <td>1103265-2021/1</td>
+                              <td> 
+                                <mm-indicator>pte contacto</mm-indicator>
+                              </td>
+                              <td> 
+                                <mm-indicator class="status_info_secondary">en curso</mm-indicator>
+                              </td>
+                              <td>Peritación</td>
+                              <td class="pos-relative"><span>Rotura de...</span>
+                                <mm-tooltip>Rotura de causa de casa</mm-tooltip>
+                              </td>
+                              <td>12/02/2022</td>
+                              <td>12/02/2022</td>
+                              <td>12/02/2022</td>
+                              <td>-</td>
+                              <td> <span>C. de Ruiz de Alarcón...</span>
+                                <mm-tooltip>C. de Ruiz de Alarcón de la barca</mm-tooltip>
+                              </td>
+                              <td>-</td>
+                            </tr>
+                            <tr class="exclamation" id="searchRow_2">
+                              <td> <span class="display-n">Fuera de plazo</span><i class="fa fa-exclamation-triangle"></i></td>
+                              <td>1103265-2021/1</td>
+                              <td> 
+                                <mm-indicator>pte contacto</mm-indicator>
+                              </td>
+                              <td> 
+                                <mm-indicator class="status_info_secondary">en curso</mm-indicator>
+                              </td>
+                              <td>Peritación</td>
+                              <td class="pos-relative"><span>Rotura de...</span>
+                                <mm-tooltip>Rotura de causa de casa</mm-tooltip>
+                              </td>
+                              <td>12/02/2022</td>
+                              <td>12/02/2022</td>
+                              <td>12/02/2022</td>
+                              <td>-</td>
+                              <td> <span>C. de Ruiz de Alarcón...</span>
+                                <mm-tooltip>C. de Ruiz de Alarcón de la barca</mm-tooltip>
+                              </td>
+                              <td>-</td>
+                            </tr>
+                            <tr class="clock" id="searchRow_3">
+                              <td> <span class="display-n">Acciones hoy</span><i class="fa fa-clock"></i></td>
+                              <td>1103265-2021/1</td>
+                              <td> 
+                                <mm-indicator>pte contacto</mm-indicator>
+                              </td>
+                              <td> 
+                                <mm-indicator class="status_info_secondary">en curso</mm-indicator>
+                              </td>
+                              <td>Peritación</td>
+                              <td class="pos-relative"><span>Rotura de...</span>
+                                <mm-tooltip>Rotura de causa de casa</mm-tooltip>
+                              </td>
+                              <td>12/02/2022</td>
+                              <td>12/02/2022</td>
+                              <td>12/02/2022</td>
+                              <td>-</td>
+                              <td> <span>C. de Ruiz de Alarcón...</span>
+                                <mm-tooltip>C. de Ruiz de Alarcón de la barca</mm-tooltip>
+                              </td>
+                              <td>-</td>
+                            </tr>
+                            <tr class="exclamation" id="searchRow_4">
+                              <td> <span class="display-n">Fuera de plazo</span><i class="fa fa-exclamation-triangle"></i></td>
+                              <td>1103265-2021/1</td>
+                              <td> 
+                                <mm-indicator>Pte avance</mm-indicator>
+                              </td>
+                              <td> 
+                                <mm-indicator class="status_info_secondary">en curso</mm-indicator>
+                              </td>
+                              <td>Peritación</td>
+                              <td class="pos-relative"><span>Rotura de...</span>
+                                <mm-tooltip>Rotura de causa de casa</mm-tooltip>
+                              </td>
+                              <td>12/02/2022</td>
+                              <td>12/02/2022</td>
+                              <td>12/02/2022</td>
+                              <td>-</td>
+                              <td> <span>C. de Ruiz de Alarcón...</span>
+                                <mm-tooltip>C. de Ruiz de Alarcón de la barca</mm-tooltip>
+                              </td>
+                              <td>-</td>
+                            </tr>
+                            <tr class="exclamation" id="searchRow_5">
+                              <td> <span class="display-n">Fuera de plazo</span><i class="fa fa-exclamation-triangle"></i></td>
+                              <td>1103265-2021/1</td>
+                              <td> 
+                                <mm-indicator>Pte avance</mm-indicator>
+                              </td>
+                              <td> 
+                                <mm-indicator class="status_info_secondary">en curso</mm-indicator>
+                              </td>
+                              <td>Peritación</td>
+                              <td class="pos-relative"><span>Rotura de...</span>
+                                <mm-tooltip>Rotura de causa de casa</mm-tooltip>
+                              </td>
+                              <td>12/02/2022</td>
+                              <td>12/02/2022</td>
+                              <td>12/02/2022</td>
+                              <td>-</td>
+                              <td> <span>C. de Ruiz de Alarcón...</span>
+                                <mm-tooltip>C. de Ruiz de Alarcón de la barca</mm-tooltip>
+                              </td>
+                              <td>-</td>
+                            </tr>
+                            <tr class="clock" id="searchRow_6">
+                              <td> <span class="display-n">Acciones hoy</span><i class="fa fa-clock"></i></td>
+                              <td>1103265-2021/1</td>
+                              <td> 
+                                <mm-indicator>pte contacto</mm-indicator>
+                              </td>
+                              <td> 
+                                <mm-indicator class="status_info_secondary">en curso</mm-indicator>
+                              </td>
+                              <td>Peritación</td>
+                              <td class="pos-relative"><span>Rotura de...</span>
+                                <mm-tooltip>Rotura de causa de casa</mm-tooltip>
+                              </td>
+                              <td>12/02/2022</td>
+                              <td>12/02/2022</td>
+                              <td>12/02/2022</td>
+                              <td>-</td>
+                              <td> <span>C. de Ruiz de Alarcón...</span>
+                                <mm-tooltip>C. de Ruiz de Alarcón de la barca</mm-tooltip>
+                              </td>
+                              <td>-</td>
+                            </tr>
+                            <tr class="exclamation" id="searchRow_7">
+                              <td> <span class="display-n">Fuera de plazo</span><i class="fa fa-exclamation-triangle"></i></td>
+                              <td>1103265-2021/1</td>
+                              <td> 
+                                <mm-indicator>Pte avance</mm-indicator>
+                              </td>
+                              <td> 
+                                <mm-indicator class="status_info_secondary">en curso</mm-indicator>
+                              </td>
+                              <td>Peritación</td>
+                              <td class="pos-relative"><span>Rotura de...</span>
+                                <mm-tooltip>Rotura de causa de casa</mm-tooltip>
+                              </td>
+                              <td>12/02/2022</td>
+                              <td>12/02/2022</td>
+                              <td>12/02/2022</td>
+                              <td>-</td>
+                              <td> <span>C. de Ruiz de Alarcón...</span>
+                                <mm-tooltip>C. de Ruiz de Alarcón de la barca</mm-tooltip>
+                              </td>
+                              <td>-</td>
+                            </tr>
+                            <tr class="info" id="searchRow_8">
+                              <td> <span class="display-n">servicios</span><i class="fa "></i></td>
+                              <td>1103265-2021/1</td>
+                              <td> 
+                                <mm-indicator>pte contacto</mm-indicator>
+                              </td>
+                              <td> 
+                                <mm-indicator class="status_info_secondary">en curso</mm-indicator>
+                              </td>
+                              <td>Peritación</td>
+                              <td class="pos-relative"><span>Rotura de...</span>
+                                <mm-tooltip>Rotura de causa de casa</mm-tooltip>
+                              </td>
+                              <td>12/02/2022</td>
+                              <td>12/02/2022</td>
+                              <td>12/02/2022</td>
+                              <td>-</td>
+                              <td> <span>C. de Ruiz de Alarcón...</span>
+                                <mm-tooltip>C. de Ruiz de Alarcón de la barca</mm-tooltip>
+                              </td>
+                              <td>-</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </mm-listing>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </mm-responsive-layout>
+  </body>
+</html>

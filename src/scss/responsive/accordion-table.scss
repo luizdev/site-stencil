@@ -1,0 +1,82 @@
+mm-accordion.global-accordion-table {
+  .accordion-content {
+    overflow-x: auto;
+  }
+}
+@media screen and (max-width: 1421px) {
+  .accordion-position-data > :nth-child(1) {
+    min-width: 8vw;
+  }
+
+  mm-accordion.global-accordion-table {
+    max-width: calc(100vw - 150px);
+
+    .accordion-title {
+      [slot="header"] > * {
+        &:nth-child(2) {
+          width: 40.5vw;
+        }
+
+        &:nth-child(3) {
+          width: 5%;
+        }
+
+        @media screen and (max-width: 1250px) {
+          &:nth-child(2) {
+            width: 36vw;
+          }
+          .indicador {
+            margin-left: 20px;
+          }
+        }
+      }
+    }
+
+    @media screen and (max-width: 1470px) {
+      .dataTables_wrapper {
+        border-top: none;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1550px) {
+  mm-accordion.global-accordion-table {
+    .accordion-title {
+      [slot="header"] > * {
+        &:nth-child(5) {
+          overflow: hidden;
+
+          .indicator {
+            margin-left: 20px;
+            margin-right: 20px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1421px) {
+  mm-accordion.global-accordion-table {
+    max-width: calc(100vw - 440px);
+  }
+}
+
+@media screen and (max-width: 1550px) and (min-width: 1421px) {
+  mm-accordion.global-accordion-table {
+    .lifeSaving-contractNumber {
+      min-width: 200px !important;
+    }
+
+    table.lifeSaving-table {
+      th:first-of-type {
+        min-width: auto;
+      }
+      th.pr-xl,
+      td.pr-xl {
+        padding-right: 10px;
+      }
+    }
+  }
+}

@@ -1,0 +1,1 @@
+import{G as r}from"./p-acc16ed7.js";function n(){return r.ASSETS_PATH()}function a(){return r.VERSION}function c(){return r.DEVELOP?"/GuiaAplicaciones/":"/recursos/gi/"}export{c as a,n as b,a as g}

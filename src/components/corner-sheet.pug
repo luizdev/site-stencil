@@ -1,0 +1,37 @@
+mixin corner-sheet()
+  mm-corner-sheet(close-button="false" expand-button="false")
+    .display-f.flex--align-center(slot="header")
+      h5.mb-n.text--full_white.pr-xs Documentos para firmar 
+      .badge 0
+    #corner-sheet-body.display-f.f-column(slot="body")
+      
+    .div(slot="empty")
+      p 
+        | No hay documentos para firmar. Selecciona algún documento haciendo click en el icono 
+        i.fas.fa-file-signature.text--action_500.mx-xxs
+        | correspondiente.
+
+    .display-f.flex--justify-end(slot='footer')
+      input#addAllButton.mm-button.basic.main.support(type='button', value='añadir todos' onclick="selectAllCornerItems()" disabled)
+      mm-button-dropdown.dropUp.ml-m(label='Enviar a cliente', type='secondary' disabled)
+        .dropdown
+          .dropdown-item
+            #biometric-lightbox(onclick="assignLightboxText('biometric-lightbox')") Envío biométrico
+          .dropdown-item
+            #digital-lightbox(onclick="assignLightboxText('digital-lightbox')") Firma digital
+  
+  mm-lightbox(id-lightbox="biometric-lightbox" label="Envío biométrico de 2 documentos")
+    div(slot="lightbox-content")
+      p.my-s Selecciona enviar para enviar los documentos seleccionados al cliente
+    div(slot="lightbox-content-button")
+      .display-f.flex--justify-between
+        input.mm-button.basic.secondary(type="button" value="Cancelar" onclick="closeLightbox('biometric-lightbox')")
+        input.mm-button.basic.main(type="button" value="Enviar" onClick="sendCornerSheetItems('biometric-lightbox')")
+
+  mm-lightbox(id-lightbox="digital-lightbox" label="Envío por firma digital de 2 documentos")
+    div(slot="lightbox-content")
+      p.my-s Selecciona enviar para enviar los documentos seleccionados al cliente
+    div(slot="lightbox-content-button")
+      .display-f.flex--justify-between
+        input.mm-button.basic.secondary(type="button" value="Cancelar" onclick="closeLightbox('digital-lightbox')")
+        input.mm-button.basic.main(type="button" value="Enviar" onClick="sendCornerSheetItems('digital-lightbox')")

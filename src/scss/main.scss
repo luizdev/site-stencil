@@ -1,0 +1,32 @@
+//--------------------- ESTILOS GENÉRICOS -----------------//
+@import "generic.scss";
+@import "variables.scss";
+@import "custom.scss";
+//--------------------- ESTILOS DE PÁGINAS -----------------//
+
+//--------------------- ESTILOS PARA NAVEGADORES -----------------//
+@import "browsers/edge.scss";
+
+//--------------------- COMPONENTES -----------------//
+
+@import "components/mm-responsive-layout.scss";
+@import "../pages/busqueda/busqueda/index.scss";
+@import "../pages/busqueda/busqueda-sin-datos/index.scss";
+@import "../pages/detalle_siniestro/detalle_siniestro/index.scss";
+@import "../pages/detalle_siniestro/detalle_siniestro_informe/index.scss";
+@import "../pages/modo_consultivo/causas_atributos/index.scss";
+@import "../pages/modo_consultivo/terceros_implicados/index.scss";
+@import "../pages/modo_consultivo/tasacion_ajustes/index.scss";
+@import "../pages/dashboard/dashboard/index.scss";
+@import "../pages/gestionar_tareas/gestionar_tarea_nueva/index.scss";
+@import "../pages/gestionar_tareas/gestionar_notas/index.scss";
+
+//--------------------- COMPONENT CUSTOM -----------------//
+@import "components/radiobutton-box.scss";
+@import "components/mm-lightbox.scss";
+
+//--------------------- RESPONSIVE GENERIC -----------------//
+@import "responsive/flexbox.scss";
+@import "responsive/spaces.scss";
+@import "responsive/generic.scss";
+@import "responsive/accordion-table.scss";

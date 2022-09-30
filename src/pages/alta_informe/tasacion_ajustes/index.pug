@@ -1,0 +1,710 @@
+extends ../../../layout/main
+include ../../../components/external-link.pug
+
+
+block variables
+  - var scripts = ["../../../assets/js/pages/alta_informe_tasacion_ajustes.js"]
+  - var HIDE_SIDEPANEL = true
+  - var breadcrumbsItems = [['Dashboard'], ['Filtro de servicios'], ['1103265-2021/1']]
+  - var title = 'Peritos Hogar'
+  -
+    const DIRECT_ACCESS = [
+      {
+        name: "Tower",
+        description: "Esto es una breve descripción del acceso directo",
+        href: "../wip/wip.html",
+        src: "tower_logo.png"
+      },
+      {
+        name: "Salesforce",
+        description: "Esto es una breve descripción del acceso directo",
+        href: "../wip/wip.html",
+        src: "salesforce_logo.svg"
+      },
+      {
+        name: "SAR",
+        description: "Esto es una breve descripción del acceso directo",
+        href: "../wip/wip.html",
+        src: "sar_logo.svg"
+      },
+      {
+        name: "SRV",
+        description: "Accede de una forma rápida al Sistema de Retribución Variable",
+        href: "../wip/wip.html",
+        src: "srv_logo.svg"
+      },
+      {
+        name: "Allfunds",
+        description: "Esto es una breve descripción del acceso directo",
+        href: "../wip/wip.html",
+        src: "allfunds_logo.svg"
+      }
+    ]
+
+    var comboBoxOptions = [
+      {
+        col: 0,
+        label:'Tipo de servicio',
+        filter: 'operation',
+        options: [
+          {name:'Comismar'}
+        ]
+      },
+      {
+        col: 1,
+        label :'Nº de siniestro',
+        filter: 'nro_siniestro',
+        text: true
+      },
+      {
+        col: 2,
+        label :'Año del siniestro',
+        filter: 'date_siniestro',
+        date: true
+      },
+      {
+        col: 3,
+        label :'Nº de póliza',
+        placeholder :'Escribir nº de póliza',
+        filter: 'nro_poliza',
+        text: true
+      },
+      {
+        col: 4,
+        label :'Ref. Externa',
+        placeholder :'Escribir referencia externa',
+        filter: 'nro_externa',
+        text: true
+      },
+      {
+        col: 5,
+        label:'Situación',
+        filter: 'situacion',
+        options: [
+          {name:'En curso'}
+        ]
+      },
+    ]
+
+    const THEADER_ROW_AJUSTES_DAÑOS = [
+      'tipo',
+      'Garantía',
+      'Gremio',
+      'Partida',
+      {name: 'precio', type: 'number'},
+      {name: 'DIR.', type: 'number'},
+      {name: 'EST', type: 'number'},
+      {name: 'V.NUEVO:', status: "none"},
+      {name: 'DEPREC:', status: "none"},
+      {name: 'V.REAL:', status: "none"},
+      {name: 'PROPUESTA:', status: "none"}
+    ]
+
+    const TBODY_ROWS_AJUSTES_DAÑOS = [
+      [
+        'Reparación',
+        'Vivienda',
+        'Fontanero',
+        'Localización sin cala',
+        {name: '25,62€', type: 'number'},
+        {name: '1,00', type: 'number'},
+        {name: '0,00', type: 'number'},
+        '25,62€',
+        '25,62€',
+        '25,62€',
+        '25,62€'
+      ],
+      [
+        'Reparación',
+        'Vivienda',
+        'Fontanero',
+        'Localización sin cala',
+        {name: '25,62€', type: 'number'},
+        {name: '1,00', type: 'number'},
+        {name: '0,00', type: 'number'},
+        '25,62€',
+        '25,62€',
+        '25,62€',
+        '25,62€'
+      ],
+      [
+        'Reparación',
+        'Vivienda',
+        'Fontanero',
+        'Localización sin cala',
+        {name: '25,62€', type: 'number'},
+        {name: '1,00', type: 'number'},
+        {name: '0,00', type: 'number'},
+        '25,62€',
+        '25,62€',
+        '25,62€',
+        '25,62€'
+      ],
+      [
+        'Reparación',
+        'Vivienda',
+        'Fontanero',
+        'Localización sin cala',
+        {name: '25,62€', type: 'number'},
+        {name: '1,00', type: 'number'},
+        {name: '0,00', type: 'number'},
+        '25,62€',
+        '25,62€',
+        '25,62€',
+        '25,62€'
+      ],
+      [
+        'Reparación',
+        'Vivienda',
+        'Fontanero',
+        'Localización sin cala',
+        {name: '25,62€', type: 'number'},
+        {name: '1,00', type: 'number'},
+        {name: '0,00', type: 'number'},
+        '25,62€',
+        '25,62€',
+        '25,62€',
+        '25,62€'
+      ]
+    ]
+
+    const THEADER_ROW_CONCURRENCIA = [
+      'Compañia',
+      {name: 'Capital', type: 'number'},
+      {name: 'Coef. participación', type: 'number'},
+      {name: 'Capital Participación', type: 'number'},
+      {name: 'PORCENTAJE', type: 'number'},
+      {name: 'RESULTADOS.', type: 'number'},
+    ]
+
+    const TBODY_ROWS_CONCURRENCIA = [
+      [
+        'Demo Madrileña',
+        {name: '150.000,00€', type: 'number'},
+        {name: '100%', type: 'number'},
+        {name: '150.000,00€', type: 'number'},
+        {name: '62,50%', type: 'number'},
+        {name: '825,56€', type: 'number'}
+      ],
+      [
+        'Demo Madrileña',
+        {name: '150.000,00€', type: 'number'},
+        {name: '100%', type: 'number'},
+        {name: '150.000,00€', type: 'number'},
+        {name: '62,50%', type: 'number'},
+        {name: '825,56€', type: 'number'}
+      ]
+    ]
+
+    const THEADER_ROW_ARTICLES = [
+      {name: 'Descripción artículo', type: "descr"},
+      'Dir.',
+      'EST.',
+      'Deprec.',
+      {name: '', type: "actions"}
+    ]
+
+    const TBODY_ROW_ARTICLES = [
+      [
+        'Descripción de una sola línea para el artículo 01',
+        '1,00',
+        '0,00',
+        '0,00%',
+        {name: '', actions: "actions"}
+      ],
+      [
+        'Descripción de dos línas para el artículo 02 con una descripción larga',
+        '1,00',
+        '0,00',
+        '0,00%',
+        {name: '', actions: "actions"}
+      ],
+      [
+        'Descripción de tres línas para el artículo 03 con una descripción mucho mas larga, en la que se necesitará una línea más.',
+        '1,00',
+        '0,00',
+        '0,00%',
+        {name: '', actions: "actions"}
+      ]
+    ]
+
+
+
+block content
+  #content-page-sidebar.display-f.flex--column.flex--row-lg
+    #content-page.w100.pos-relative
+      .content-icon-expanded
+        i.btn-expanded(href='#' onclick='expandPage(event)')
+          img(src='../../../assets/img/icon_expand.svg' alt='layout-nav-logo' width='15' height='10')
+        mm-tooltip.mm-tooltip-expanded.dark.w-fitContent(position="left") 
+          span.expanded Cerrar
+          span.not-expanded Abrir
+          |  columna de resumen
+      .row
+        .col-12
+          main.pl-m.pr-m.display-f.flex--column
+            .row.py-xs
+              .col-12
+                .display-f.flex--justify-between
+                  .display-f.flex--align-center
+                    h1.mb-n.mr-xs Generar informe
+            .row.mb-xl
+              .col-12 
+                mm-progress-indicator(current-step='4')
+                  .mmpi-content DESCRIPCIÓN RIESGO
+                  i.fas.fa-home.mmpi-icon( slot='step-1' style='font-size: 30px;')
+                  .mmpi-content CAUSAS Y ATRIBUTOS
+                  i.fas.fa-file-alt.mmpi-icon( slot='step-2' style='font-size: 30px;')
+                  .mmpi-content TERCEROS IMPLICADOS
+                  i.fas.fa-users.mmpi-icon(slot='step-3' style='font-size: 30px;')
+                  .mmpi-content TASACIÓN Y AJUSTE DE DAÑOS
+                  i.fas.fa-file-invoice-dollar.mmpi-icon(slot='step-4' style='font-size: 30px;')
+                  .mmpi-content DOCUMENTACIÓN
+                  i.fas.fa-folder-open.mmpi-icon(slot='step-5' style='font-size: 30px;')
+            .row.mb-xl 
+              .col-12
+                .subheading--modo-consultivo
+                  i.fas.fa-hand-holding-usd 
+                  h3 Tasación y ajustes de daños
+                .b-block 
+                  .row.mb-s 
+                    .col-3
+                      mm-combobox#mm-comboboxTipo(label='Tipo')
+                        select(name='tipo' onChange="getTipo(event)")
+                          option(value='') Seleccione
+                          option(value='Ajuste') Ajuste
+                          option(value='Excluído') Excluído
+                          option(value='Indemnización') Indemnización
+                          option(value='Pendiente indemnizable') Pendiente indemnizable
+                          option(value='Reparación') Reparación
+                    .col-3
+                      mm-combobox#mm-comboboxTipo(label='Garantías')
+                        select(name='garantias' onChange="getGarantías(event)")
+                          option(value='') Seleccione
+                          option(value='Código vivienda') Código vivienda
+                          option(value='Código Mobiliario') Código Mobiliario
+                          option(value='Código RC conjunta') Código RC conjunta
+                          option(value='Código Joyas caja fuerte') Código Joyas caja fuerte
+                          option(value='Código Joyas fuera caja') Código Joyas fuera caja
+                    .col-3
+                      mm-combobox#mm-comboboxTipo(label='Cobertura')
+                        select(name='cobertura' onChange="getCobertura(event)")
+                          option(value='') Seleccione
+                          option(value='Ajuste') Ajuste
+                          option(value='Excluído') Excluído
+                          option(value='Indemnización') Indemnización
+                          option(value='Pendiente indemnizable') Pendiente indemnizable
+                          option(value='Reparación') Reparación
+                    .col-3
+                      mm-combobox#mm-comboboxTipo(label='Gremios')
+                        select(name='gremios' onChange="getGremios(event)")
+                          option(value='') Seleccione
+                          option(value='Acuchillador') Acuchillador
+                          option(value='Albañil') Albañil
+                          option(value='Antenista') Antenista
+                          option(value='Barnizador/Esmaltador') Barnizador/Esmaltador
+                          option(value='Calderista') Calderista
+                  .row.mb-s
+                    .col-3
+                      mm-textfield(label='Profesional' mandatory)
+                        input(value='' name='textfield' type='text' placeholder='Texto')
+                  .row.mb-s
+                    .col-3 
+                      #tree-articles.wrap-tree-articles 
+                        mm-tree(filter='' filter-on-start='' auto-complete='' placeholder='Introduce tu texto...')
+                          label Carpeta
+                          mm-tree
+                            label Cristalería rope S.L
+                            mm-tree-item()
+                              label
+                                a(href='#' title='Fichero') Lunas color
+                            mm-tree-item()
+                              label Lunas espejo
+                            mm-tree-item()
+                              label Vidrios lacados
+                            mm-tree-item()
+                              label No baremado
+                          mm-tree
+                            label buscador artículo: Cristalería Rope S.L
+                            mm-tree-item(extension='xls')
+                              label
+                                a(href='#' title='Fichero') Modelo luna espejo
+                            mm-tree-item(extension='ppt')
+                              label Modelo luna color
+
+                    .col-9
+                      mm-listing#tableTasacionAjustesAltaInforme.filter-table-header(compact search)
+                        header(slot='header-title').w100.display-f.flex--align-end
+                          h5.fs-normal.display-ib.mm-bold.uppercase.mb-s Listado tasación y ajustes de daños
+                        table(slot='table')
+                          thead
+                            tr
+                              each th, index in THEADER_ROW_ARTICLES
+                                if th.status
+                                  th(class=`${th.status}`) 
+                                    | #{th.name} 
+                                else if th.type == "actions"
+                                  th.cell-actions
+                                    | #{th.name}
+                                else if th.type == "descr"
+                                  th.cell-descripcion
+                                    | #{th.name}
+                                else
+                                  th
+                                    | #{th}        
+                          tbody
+                            each rows, indexRow in TBODY_ROW_ARTICLES
+                              tr(id=`garntiaRow_${indexRow}` class=`${rows[0].status}`)
+                                each item, index in rows
+                                  if item.text
+                                    td
+                                      span #{item.name}
+                                      mm-tooltip #{item.text}
+                                  else if item.status
+                                    td
+                                      span #{item.name}
+                                  else if item.actions
+                                    td
+                                      .display-f.flex--justify-evenly.actionsButtons.text-align-r
+                                        .action-pos-relative
+                                          i.fas.fa-edit.text--brand_accent_500.pos-relative.fs-16.pointer.ml-s(onclick=`editRow(event, 'mm-listing#tableTercerosImplicadosAltaInforme', ${indexRow})` id=`editIcon_tercerosImplicados${indexRow}`)
+                                          mm-tooltip.w-fitContent Editar fila
+                                        .action-pos-relative
+                                          i.fas.fa-trash-alt.text--brand_accent_500.pos-relative.fs-16.pointer.ml-s(onclick=`deleteRow(event, 'mm-listing#tableTercerosImplicadosAltaInforme')`)
+                                          mm-tooltip.w-fitContent Eliminar fila
+                                  else
+                                    td #{item}
+                  
+                  .row.mb-s 
+                    .col-12 
+                      mm-listing.filter-table-header(compact search)
+                        header(slot='header-title').w100.display-f.flex--align-end
+                          h5.fs-normal.display-ib.mm-bold.uppercase.mb-s Listado tasación y ajustes de daños
+                        table#icTasacionAjustes(slot='table')
+                          thead
+                            tr
+                              each th, index in THEADER_ROW_AJUSTES_DAÑOS
+                                if th.status
+                                  th(class=`${th.status}`) 
+                                    | #{th.name} 
+                                else if th.type == 'number'
+                                  th.cell-number
+                                    | #{th.name}
+                                else
+                                  th
+                                    | #{th}        
+                          tbody
+                            each rows, indexRow in TBODY_ROWS_AJUSTES_DAÑOS
+                              tr(id=`garntiaRow_${indexRow}` class=`${rows[0].status}`)
+                                each item, index in rows
+                                  if item.text
+                                    td
+                                      span #{item.name}
+                                      mm-tooltip #{item.text}
+                                  else if item.type == 'number'
+                                    td.cell-number
+                                      span #{item.name}
+                                  else if item.status
+                                    td
+                                      span #{item.name}
+                                  else
+                                    td #{item}
+                  
+                  .row 
+                    .col-12.display-f.flex--justify-end
+                      a.underline( id="altaInformeTasacionAjustesLightbox")
+                        mm-button(label="exportar a excel" type="secondary")
+                      a.underline.ml-s( id="altaInformeTasacionAjustesLightbox")
+                        mm-button(label="Importar valoración reparador" type="secondary")
+            .row.mb-xl 
+              .col-12
+                .subheading--modo-consultivo
+                  i.fas.fa-hand-holding-usd 
+                  h3 Concurrencia
+                .b-block 
+                  .row.mb-s 
+                    .col-12 
+                      mm-listing.filter-table-header()
+                        table#icConcurrencia(slot='table')
+                          thead
+                            tr
+                              each th, index in THEADER_ROW_CONCURRENCIA
+                                if th.type == 'number'
+                                  th.cell-number
+                                    | #{th.name}
+                                else
+                                  th #{th}        
+                          tbody
+                            each rows, indexRow in TBODY_ROWS_CONCURRENCIA
+                              tr(id=`garntiaRow_${indexRow}` class=`${rows[0].status}`)
+                                each item, index in rows
+                                  if item.type == 'number'
+                                    td.cell-number
+                                      span #{item.name}
+                                  else
+                                    td #{item}
+                          tfoot
+                            tr
+                              td(colspan='3')
+                              td.total.cell-number 240.000,00€
+                              td(colspan='1')
+                              td.result.cell-number 1.320,90€
+                  .row 
+                    .col-12.display-f.flex--justify-end
+                      a.underline.ml-s( id="altaInformeAnadirCompaniaLightbox")
+                        mm-button(label="añadir compañia" type="secondary")
+            .row.mb-xl 
+              .col-12
+                .subheading--modo-consultivo
+                  i.fas.fa-coins 
+                  h3 Ahorros
+                .b-block 
+                  .row.mb-s 
+                    .col-4
+                      mm-textfield(label='Presupuesto asegurado en €')
+                        input(value='' name='textfield' type='text' placeholder='Texto')
+                    .col-4
+                      mm-textfield(label='Presupuesto reparador en €')
+                        input(value='' name='textfield' type='text' placeholder='Texto')
+                    .col-4
+                      mm-textfield(label='Ahorro en €')
+                        input(value='' name='textfield' type='text' placeholder='Texto')
+                .b-block
+                  .row.mb-s
+                    mm-uploader.uploaderTasacion.col-4(multiple id='uploaderButton'  uploader-title='Subir documentación')
+                    .col-8 
+                      .row.row-content-uploader.display-n 
+                        .col-4 
+                          label.mandatory.pos-relative
+                            span Tipo de documento
+                        .col-4 
+                          label.mandatory.pos-relative 
+                            span Categoría
+                        
+                      section#uploaderFields.row.f-grow-1.mb-s.mt-xs
+
+            .button-action-sticky
+              .row.row-bottom 
+                  .col-3.number
+                    mm-textfield(label='Valores totales')
+                        p.pt-xxs.uppercase
+                          strong tasación y ajuste de daños 
+                  .col-3.number
+                    mm-textfield(label='Valor total nuevo')
+                        p.pt-xxs.uppercase
+                          strong 102,48€
+                  .col-3.number
+                    mm-textfield(label='Valor total real')
+                        p.pt-xxs.uppercase
+                          strong 102,48€ 
+                  .col-3.number
+                    mm-textfield(label='Propuesta total')
+                        p.pt-xxs.uppercase
+                          strong 102,48€     
+              .row.display-f.flex--justify-between.mt-m 
+                .action-1
+                  mm-button.mr-xs( label="Cancelar" type="support")
+                .action-2.display-f
+                  a#buttonModoConsultivoPrev(href="terceros_implicados.html")
+                    mm-button.mr-xs( label="anterior" type="secondary")
+                  a#buttonModoConsultivoNext(href="documentacion.html")
+                    mm-button#nextButton.mr-xs( label="Siguiente" type="primary")
+    mm-responsive-layout-lateral-menu.grey.modo-consultivo
+      i.fas.fa-times.close-icon(onclick='expandPage(event)')
+      .b-block
+        h4.blue.no-line Detalle del siniestro
+        .row 
+          .col-6 
+            small Número del siniestro
+            p 1103265 - 2021/1
+        
+          .col-6 
+            small Número del siniestro
+            p 1103265 - 2021/1
+        .row 
+          .col-6 
+            small Dirección riesgo
+            p Juan de la Cierva, 1, 7º-13
+        
+          .col-6 
+            small Fecha/hora Efecto
+            p 20/05/2018 - 09:40h
+        .row 
+          .col-6 
+            small Estado
+            mm-indicator.mr-xs Finalizado
+        
+          .col-6 
+            small Fecha/hora Ocurrencia
+            p 20/05/2018 - 09:40h
+        .row 
+          .col-6 
+            small Proveedor
+            a(id="proveedorLightbox")
+              i.fas.fa-user-tie.mr-xxs
+              | IPAS
+        
+          .col-6 
+            small Fecha/hora Declaración
+            p 20/05/2018 - 09:40h
+        .row 
+          .col-6 
+            small Tipo 
+            p Indemnizable
+        
+          .col-6 
+            small Fecha/hora Vencimiento
+            p 20/05/2018 - 09:40h
+      .b-block
+        .sidebar-subheading--modo-consultivo
+          i.fas.fa-file-alt 
+          h3 Resumen
+        .row 
+          .col-12 
+            mm-accordion.sidebar--modo-consultivo(header='datos generales' reduced='')
+              .row.mb-xs 
+                .col-6 
+                  small Producto 
+                  p 
+                    a(href="#") A todo riesgo PLUS
+              
+                .col-6 
+                  small Tipo de siniestro
+                  p 1103265 - 2021/1
+              .row.mb-xs 
+                .col-6 
+                  small Superficie construída
+                  p 112 m2
+              
+                .col-6 
+                  small Nº Trasteros/Garajes
+                  p 3
+              .row.mb-xs 
+                .col-6 
+                  small Tipo/Subtipo vivienda
+                  p Piso
+              
+                .col-6 
+                  small Superficie terraza
+                  p 100 m2
+              .row.mb-xs 
+                .col-6 
+                  small Año construcción
+                  p 2004
+              
+                .col-6 
+                  small Año última reforma
+                  p 2004
+              .row.mb-xs 
+                .col-6 
+                  small Superficie parcela s/c
+                  p 0
+              
+                .col-6 
+                  small Habitantes
+                  p 4
+              .row.mb-xs 
+                .col-12 
+                  small Protecciones
+                  p Protección 1, Protección 2, Protección 3,...
+              .row.mb-xs 
+                .col-12  
+                  small Atributos
+                  p VTS, Corrosión, Infraseguro, Judicial
+            mm-accordion.sidebar--modo-consultivo(header='descripción del riesgo' reduced='')
+              .row.mb-xs 
+                .col-12 
+                  small Capital continente adecudo a preexistencias
+                  p Sí, (Existencias verificadas)
+              .row.mb-xs 
+                .col-12 
+                  small Capital contenido adecudo a preexistencias
+                  p No, (Razón Cdo)
+              .row.mb-xs 
+                .col-12 
+                  small Estado de conservación
+                  p Requiere mantenimiento
+              .row.mb-xs 
+                .col-12 
+                  small Infraseguro
+                  p No
+              .row.mb-xs
+                .col-6 
+                  small Tasación mobiliario
+                  p Tasación mobiliario 
+                .col-6 
+                  small.number Valor asegur. MOBiliario
+                  p.number 47.568,13€
+              .row.mb-xs 
+                .col-6 
+                  small Tasación vivienda
+                  p Tasación vivienda
+                .col-6 
+                  small.number Valor asegur. VVAA
+                  p.number 155.756,36€
+            mm-accordion.sidebar--modo-consultivo(header='Causas y atributos' reduced='')
+              .row.mb-xs 
+                .col-12 
+                  small Asegurado conforme
+                  p Sí
+              .row.mb-xs 
+                .col-6 
+                  small Tiene cobertura
+                  p Sí
+                .col-6 
+                  small Es recobrable
+                  p No
+              .row.mb-xs 
+                .col-6 
+                  small daños consorciables
+                  p No
+                .col-6 
+                  small Datos consorciables
+                  p Parcial
+              .row.mb-xs 
+                .col-12 
+                  small Estimación daños consorciables
+                  p Estimación daños
+              .row.mb-xs 
+                .col-6 
+                  small Posible fraude
+                  p No
+                .col-6 
+                  small Corrosión
+                  p No
+              .row.mb-xs 
+                .col-12 
+                  small Concurrencia
+                  p No
+              .row.mb-xs 
+                .col-12 
+                  small Visualizar informe reparador
+                  p No
+            mm-accordion.sidebar--modo-consultivo(header='terceros implicados' reduced='' active)
+              .row.mb-xs 
+                .col-12 
+                  small Últimos terceros implicados añadidos
+                  p.my-xxs Perjudicado - Mari Camen Martínez
+                  p.my-xxs Afectado - Ana Noemí Fernández Martínez
+                  p.my-xxs Causante - Jose María Fernández Iglesias
+
+  mm-lightbox.sizeS(label=`Añadir compañia` id-lightbox=`altaInformeAnadirCompaniaLightbox`)
+    section(slot='lightbox-content')
+      .w-100.px-s.py-xs
+        .row.mb-s
+          .col-6
+            mm-textfield(label='Compañia')
+              input(value='' name='textfield' type='text' placeholder='Escribir motivo...')
+        .row.mb-s
+          .col-6
+            mm-textfield(label='Capital')
+              input(value='' name='textfield' type='text' placeholder='Escribir motivo...')
+          .col-6
+            mm-textfield(label='Coeficiente participación')
+              input(value='' name='textfield' type='text' placeholder='Escribir motivo...')
+        .row
+          .col-12
+            section.display-f.flex--justify-between.mt-m(slot='lightbox-content-button')
+              mm-button.btn-cancel(label='Cancelar' type='support')
+              mm-button.btn-add(label='añadir compañia')
+  

@@ -1,0 +1,1 @@
+import{r as s,h as t}from"./p-44118c4f.js";const r=class{constructor(t){s(this,t)}render(){return t("article",{"data-scroller":this.dataScroller},t("h2",{id:this.idData,class:"go-to-link-block"},t("a",{href:this.linkData,class:"mm-bold",title:this.titleData},"#"),this.titleData),t("slot",null))}};export{r as mm_scroller_data}

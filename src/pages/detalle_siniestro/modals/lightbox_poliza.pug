@@ -1,0 +1,74 @@
+mixin modalPoliza()
+  mm-lightbox.sizeS(label=`Más detalles de la póliza` id-lightbox=`polizaLightbox`)
+    section(slot='lightbox-content')
+      .box-section
+        .box-section-header
+          h4 Perfil del cliente
+        .box-section-body
+          .row.mx-n
+            .col-3
+              .item 
+                h5 Perfil
+                mm-indicator.client_gold.mb-s Gold
+            .col-3
+              .item 
+                h5 Empleado
+                p No
+            .col-3
+              .item 
+                h5 Hipoteca
+                p Si
+      .box-section
+        .box-section-header
+          h4 Firmas de la póliza
+        .box-section-body
+          .row.mx-n
+            .col-3 
+              .item 
+                h5 Alta CP
+                p No Aplica
+            .col-3 
+              .item 
+                h5 Alta PA
+                p No Aplica
+            .col-3 
+              .item 
+                h5 Supl CP
+                p Firmada
+            .col-3 
+              .item 
+                h5 Supl PA
+                p No Aplica
+      .box-section
+        .box-section-header
+          h4 h4 Datos del tomador
+        .box-section-body
+          .row.mx-n.mb-m 
+            .col-4
+              .item 
+                h5 Nombre y apellidos
+                p Francisco Martínez Prieto
+            .col-3   
+              .item 
+                h5 NIF
+                p 12345678X
+            .col-5
+              .item 
+                h5 Domiclio
+                p Calle Castillo de arévalo 11
+          .row.mx-n  
+            .col-4
+              .item 
+                h5 Fecha de nacimiento
+                p 06/03/1966
+            .col-3
+              .item 
+                h5 Teléfono
+                p 634123456
+            .col-5
+              .item 
+                h5 Email
+                p franmarpi@gmail.com
+
+    section.display-f.flex--justify-between.mt-m(slot='lightbox-content-button')
+      button.mm-button.basic.support.button-close.mr-m(type='button') Cancelar

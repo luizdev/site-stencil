@@ -1,0 +1,149 @@
+.mm-table {
+  .pl-m {
+    padding-left: 30px !important;
+  }
+
+  tbody tr.selected {
+    border: 2px solid #3269b3;
+  }
+
+  tbody tr {
+    td .editCell[contentEditable="true"] {
+      position: relative;
+      border-bottom: 2px solid #00a4e3;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  &.mm-table--text-center {
+    th,
+    td {
+      text-align: center;
+    }
+  }
+
+  &.sidesheet-simple-table {
+    thead tr {
+      background-color: #e3f2fd;
+    }
+    tbody tr {
+      background-color: #fff;
+    }
+  }
+
+  &.sidesheet-table {
+    thead tr {
+      background-color: #e3f2fd;
+    }
+    tbody tr {
+      background-color: #fff;
+
+      &:last-child {
+        td:first-child {
+          background-color: #f2f2f2;
+        }
+
+        td {
+          background-color: #e9ecf0;
+        }
+      }
+    }
+  }
+
+  &.nc-customer-table,
+  &.currency-table {
+    .text-align-r {
+      text-align: right !important;
+    }
+  }
+
+  &.simulation-table {
+    border: 15px solid white;
+    // box-shadow: 0 0 2px 1px rgba(black, 0.1);
+
+    .w-400 {
+      width: 400px;
+    }
+
+    .p-n {
+      padding: 0 !important;
+    }
+
+    .text-align-r {
+      text-align: right !important;
+    }
+
+    .text-align-c {
+      text-align: center !important;
+    }
+
+    .pl-xl {
+      padding-left: 50px !important;
+    }
+
+    .pr-l {
+      padding-right: 40px !important;
+    }
+
+    .pr-xxl {
+      padding-right: 100px !important;
+    }
+
+    .pl-xxl {
+      padding-left: 100px !important;
+    }
+
+    .pl-150 {
+      padding-left: 150px !important;
+    }
+
+    .pr-200 {
+      padding-right: 200px !important;
+    }
+
+    tbody tr {
+      border-bottom: none;
+
+      &:not(.nohover):hover {
+        background-color: rgba(black, 0.08) !important;
+      }
+
+      &.even {
+        background-color: rgba(black, 0.05);
+      }
+
+      &.odd {
+        background-color: white;
+      }
+    }
+
+    tfoot tr {
+      background-color: #cccccc;
+    }
+
+    mm-accordion {
+      .accordion-title {
+        font-size: 14px;
+        line-height: 20px;
+        color: black;
+        border: none;
+        margin-left: 40px;
+        margin-right: 40px;
+      }
+
+      .accordion-body {
+        border: none;
+      }
+    }
+  }
+}
+
+.td-left-error-icon {
+  position: absolute;
+  left: -1rem;
+  color: #f03;
+  font-size: 1rem;
+}

@@ -1,0 +1,494 @@
+extends ../../../layout/main
+include ../../../components/external-link.pug
+
+
+block variables
+  - var scripts = ["../../../assets/js/pages/alta_informe_terceros_implicados.js"]
+  - var HIDE_SIDEPANEL = true
+  - var breadcrumbsItems = [['Dashboard'], ['Filtro de servicios'], ['1103265-2021/1']]
+  - var title = 'Peritos Hogar'
+  -
+    const DIRECT_ACCESS = [
+      {
+        name: "Tower",
+        description: "Esto es una breve descripción del acceso directo",
+        href: "../wip/wip.html",
+        src: "tower_logo.png"
+      },
+      {
+        name: "Salesforce",
+        description: "Esto es una breve descripción del acceso directo",
+        href: "../wip/wip.html",
+        src: "salesforce_logo.svg"
+      },
+      {
+        name: "SAR",
+        description: "Esto es una breve descripción del acceso directo",
+        href: "../wip/wip.html",
+        src: "sar_logo.svg"
+      },
+      {
+        name: "SRV",
+        description: "Accede de una forma rápida al Sistema de Retribución Variable",
+        href: "../wip/wip.html",
+        src: "srv_logo.svg"
+      },
+      {
+        name: "Allfunds",
+        description: "Esto es una breve descripción del acceso directo",
+        href: "../wip/wip.html",
+        src: "allfunds_logo.svg"
+      }
+    ]
+
+    var comboBoxOptions = [
+      {
+        col: 0,
+        label:'Tipo de servicio',
+        filter: 'operation',
+        options: [
+          {name:'Comismar'}
+        ]
+      },
+      {
+        col: 1,
+        label :'Nº de siniestro',
+        filter: 'nro_siniestro',
+        text: true
+      },
+      {
+        col: 2,
+        label :'Año del siniestro',
+        filter: 'date_siniestro',
+        date: true
+      },
+      {
+        col: 3,
+        label :'Nº de póliza',
+        placeholder :'Escribir nº de póliza',
+        filter: 'nro_poliza',
+        text: true
+      },
+      {
+        col: 4,
+        label :'Ref. Externa',
+        placeholder :'Escribir referencia externa',
+        filter: 'nro_externa',
+        text: true
+      },
+      {
+        col: 5,
+        label:'Situación',
+        filter: 'situacion',
+        options: [
+          {name:'En curso'}
+        ]
+      },
+    ]
+
+    const THEADER_ROW_TERCEROS_IMPLICADOS = [
+      'Calidad',
+      'Nombre',
+      {name: 'Dni:', status: "none"},
+      {name: 'Telefono:', status: "none"},
+      'Dirección',
+      {name: 'Provincia:', status: "none"},
+      'póliza',
+      'Nº Expediente',
+      'compañía',
+      {name: 'Daños:', status: "none"},
+      {name: 'Observaciones:', status: "none"},
+      {name: '', actions: "actions"}
+    ]
+
+    const TBODY_ROWS_TERCEROS_IMPLICADOS = [
+      [
+        'Perjudicado',
+        'Mari Carmen Martínez',
+        '45444223',
+        '635783910 ',
+        'Membezar 5, 1 Madrid',
+        'Madrid',
+        '1.260.285',
+        'Nº expediente',
+        'Demo Madrileña',
+        'Asume daños',
+        'Descripción observación',
+        {name: '', actions: "actions"}
+      ],
+      [
+        'Perjudicado',
+        'Mari Carmen Martínez',
+        '45444223',
+        '635783910 ',
+        'Membezar 5, 1 Madrid',
+        'Madrid',
+        '1.260.285',
+        'Nº expediente',
+        'Demo Madrileña',
+        'Asume daños',
+        'Descripción observación',
+        {name: '', actions: "actions"}
+      ],
+      [
+        'Perjudicado',
+        'Mari Carmen Martínez',
+        '45444223',
+        '635783910 ',
+        'Membezar 5, 1 Madrid',
+        'Madrid',
+        '1.260.285',
+        'Nº expediente',
+        'Demo Madrileña',
+        'Asume daños',
+        'Descripción observación',
+        {name: '', actions: "actions"}
+      ],
+      [
+        'Perjudicado',
+        'Mari Carmen Martínez',
+        '45444223',
+        '635783910 ',
+        'Membezar 5, 1 Madrid',
+        'Madrid',
+        '1.260.285',
+        'Nº expediente',
+        'Demo Madrileña',
+        'Asume daños',
+        'Descripción observación',
+        {name: '', actions: "actions"}
+      ],
+      [
+        'Perjudicado',
+        'Mari Carmen Martínez',
+        '45444223',
+        '635783910 ',
+        'Membezar 5, 1 Madrid',
+        'Madrid',
+        '1.260.285',
+        'Nº expediente',
+        'Demo Madrileña',
+        'Asume daños',
+        'Descripción observación',
+        {name: '', actions: "actions"}
+      ]
+    ]
+
+
+block content
+  #content-page-sidebar.display-f.flex--column.flex--row-lg
+    #content-page.w100.pos-relative
+      .content-icon-expanded
+        i.btn-expanded(href='#' onclick='expandPage(event)')
+          img(src='../../../assets/img/icon_expand.svg' alt='layout-nav-logo' width='15' height='10')
+        mm-tooltip.mm-tooltip-expanded.dark.w-fitContent(position="left") 
+          span.expanded Cerrar
+          span.not-expanded Abrir
+          |  columna de resumen
+      .row
+        .col-12
+          main.pl-m.pr-m.display-f.flex--column
+            .row.py-xs
+              .col-12
+                .display-f.flex--justify-between
+                  .display-f.flex--align-center
+                    h1.mb-n.mr-xs Generar informe
+            .row.mb-m
+              .col-12 
+                mm-progress-indicator(current-step='3')
+                  .mmpi-content DESCRIPCIÓN RIESGO
+                  i.fas.fa-home.mmpi-icon( slot='step-1' style='font-size: 30px;')
+                  .mmpi-content CAUSAS Y ATRIBUTOS
+                  i.fas.fa-file-alt.mmpi-icon( slot='step-2' style='font-size: 30px;')
+                  .mmpi-content TERCEROS IMPLICADOS
+                  i.fas.fa-users.mmpi-icon(slot='step-3' style='font-size: 30px;')
+                  .mmpi-content TASACIÓN Y AJUSTE DE DAÑOS
+                  i.fas.fa-file-invoice-dollar.mmpi-icon(slot='step-4' style='font-size: 30px;')
+                  .mmpi-content DOCUMENTACIÓN
+                  i.fas.fa-folder-open.mmpi-icon(slot='step-5' style='font-size: 30px;')
+            .row.mb-m 
+              .col-12
+                .subheading--modo-consultivo
+                  i.fas.fa-users 
+                  h3 Terceros implicados
+                .b-block 
+                  .row 
+                    .col-12 
+                      mm-listing#tableTercerosImplicadosAltaInforme.filter-table-header(search check-column show-table-actions actions-buttons)
+                        table(slot='table')
+                          thead
+                            tr
+                              each th, index in THEADER_ROW_TERCEROS_IMPLICADOS
+                                if th.status
+                                  th(class=`${th.status}`) 
+                                    | #{th.name} 
+                                else if th.actions
+                                  th
+                                    | #{th.name}
+                                else if th.type == 'direccion'
+                                  th.cell-direccion
+                                    | #{th.name}
+                                else
+                                  th
+                                    | #{th}      
+                          tbody
+                            each rows, indexRow in TBODY_ROWS_TERCEROS_IMPLICADOS
+                              tr(id=`row_tercerosImplicados${indexRow}` class=`${rows[0].status}`)
+                                each item, index in rows
+                                  if item.text
+                                    td
+                                      span #{item.name}
+                                      mm-tooltip #{item.text}
+                                  else if item.status
+                                    td
+                                      span #{item.name}
+                                  else if item.actions
+                                    td
+                                      .display-f.flex--justify-evenly.actionsButtons.text-align-r
+                                        .action-pos-relative
+                                          i.fas.fa-edit.text--brand_accent_500.pos-relative.fs-16.pointer.ml-s(onclick=`editRow(event, 'mm-listing#tableTercerosImplicadosAltaInforme', ${indexRow})` id=`editIcon_tercerosImplicados${indexRow}`)
+                                          mm-tooltip.w-fitContent Editar fila
+                                        .action-pos-relative
+                                          i.fas.fa-trash-alt.text--brand_accent_500.pos-relative.fs-16.pointer.ml-s(onclick=`deleteRow(event, 'mm-listing#tableTercerosImplicadosAltaInforme')`)
+                                          mm-tooltip.w-fitContent Eliminar fila
+                                  else
+                                    td #{item}
+            .row.mb-m
+              .col-12.display-f.flex--justify-end
+                a.underline( id="altaInformeTercerosImplicadosLightbox")
+                  mm-button(label="Añadir terceros implicados" type="secondary")
+            .button-action-sticky.row.display-f.flex--justify-between.mt-m 
+              .action-1
+                mm-button.mr-xs( label="Cancelar" type="support")
+              .action-2.display-f
+                a#buttonModoConsultivoPrev(href="causas_atributos.html")
+                  mm-button.mr-xs( label="anterior" type="secondary")
+                a#buttonModoConsultivoNext(href="tasacion_ajustes.html")
+                  mm-button.mr-xs( label="Siguiente" type="primary")
+    mm-responsive-layout-lateral-menu.grey.modo-consultivo
+      i.fas.fa-times.close-icon(onclick='expandPage(event)')
+      .b-block
+        h4.blue.no-line Detalle del siniestro
+        .row 
+          .col-6 
+            small Número del siniestro
+            p 1103265 - 2021/1
+        
+          .col-6 
+            small Número del siniestro
+            p 1103265 - 2021/1
+        .row 
+          .col-6 
+            small Dirección riesgo
+            p Juan de la Cierva, 1, 7º-13
+        
+          .col-6 
+            small Fecha/hora Efecto
+            p 20/05/2018 - 09:40h
+        .row 
+          .col-6 
+            small Estado
+            mm-indicator.mr-xs Finalizado
+        
+          .col-6 
+            small Fecha/hora Ocurrencia
+            p 20/05/2018 - 09:40h
+        .row 
+          .col-6 
+            small Proveedor
+            a(id="proveedorLightbox")
+              i.fas.fa-user-tie.mr-xxs
+              | IPAS
+        
+          .col-6 
+            small Fecha/hora Declaración
+            p 20/05/2018 - 09:40h
+        .row 
+          .col-6 
+            small Tipo 
+            p Indemnizable
+        
+          .col-6 
+            small Fecha/hora Vencimiento
+            p 20/05/2018 - 09:40h
+      .b-block
+        .sidebar-subheading--modo-consultivo
+          i.fas.fa-file-alt 
+          h3 Resumen
+        .row 
+          .col-12 
+            mm-accordion.sidebar--modo-consultivo(header='datos generales' reduced='')
+              .row.mb-xs 
+                .col-6 
+                  small Producto 
+                  p 
+                    a(href="#") A todo riesgo PLUS
+              
+                .col-6 
+                  small Tipo de siniestro
+                  p 1103265 - 2021/1
+              .row.mb-xs 
+                .col-6 
+                  small Superficie construída
+                  p 112 m2
+              
+                .col-6 
+                  small Nº Trasteros/Garajes
+                  p 3
+              .row.mb-xs 
+                .col-6 
+                  small Tipo/Subtipo vivienda
+                  p Piso
+              
+                .col-6 
+                  small Superficie terraza
+                  p 100 m2
+              .row.mb-xs 
+                .col-6 
+                  small Año construcción
+                  p 2004
+              
+                .col-6 
+                  small Año última reforma
+                  p 2004
+              .row.mb-xs 
+                .col-6 
+                  small Superficie parcela s/c
+                  p 0
+              
+                .col-6 
+                  small Habitantes
+                  p 4
+              .row.mb-xs 
+                .col-12 
+                  small Protecciones
+                  p Protección 1, Protección 2, Protección 3,...
+              .row.mb-xs 
+                .col-12  
+                  small Atributos
+                  p VTS, Corrosión, Infraseguro, Judicial
+            mm-accordion.sidebar--modo-consultivo(header='descripción del riesgo' reduced='')
+              .row.mb-xs 
+                .col-12 
+                  small Capital continente adecudo a preexistencias
+                  p Sí, (Existencias verificadas)
+              .row.mb-xs 
+                .col-12 
+                  small Capital contenido adecudo a preexistencias
+                  p No, (Razón Cdo)
+              .row.mb-xs 
+                .col-12 
+                  small Estado de conservación
+                  p Requiere mantenimiento
+              .row.mb-xs 
+                .col-12 
+                  small Infraseguro
+                  p No
+              .row.mb-xs
+                .col-6 
+                  small Tasación mobiliario
+                  p Tasación mobiliario 
+                .col-6 
+                  small.number Valor asegur. MOBiliario
+                  p.number 47.568,13€
+              .row.mb-xs 
+                .col-6 
+                  small Tasación vivienda
+                  p Tasación vivienda
+                .col-6 
+                  small.number Valor asegur. VVAA
+                  p.number 155.756,36€
+            mm-accordion.sidebar--modo-consultivo(header='Causas y atributos' reduced='' active)
+              .row.mb-xs 
+                .col-12 
+                  small Asegurado conforme
+                  p Sí
+              .row.mb-xs 
+                .col-6 
+                  small Tiene cobertura
+                  p Sí
+                .col-6 
+                  small Es recobrable
+                  p No
+              .row.mb-xs 
+                .col-6 
+                  small daños consorciables
+                  p No
+                .col-6 
+                  small Datos consorciables
+                  p Parcial
+              .row.mb-xs 
+                .col-12 
+                  small Estimación daños consorciables
+                  p Estimación daños
+              .row.mb-xs 
+                .col-6 
+                  small Posible fraude
+                  p No
+                .col-6 
+                  small Corrosión
+                  p No
+              .row.mb-xs 
+                .col-12 
+                  small Concurrencia
+                  p No
+              .row.mb-xs 
+                .col-12 
+                  small Visualizar informe reparador
+                  p No
+
+  mm-lightbox.sizeS(label=`Añadir terceros implicados` id-lightbox=`altaInformeTercerosImplicadosLightbox`)
+    section(slot='lightbox-content')
+      .w-100.px-s.py-xs
+        .row.mb-s
+          .col-4
+            mm-textfield(label='Calidad')
+              input(value='' name='altaInformeTercerosImplicadosLightbox_calidad' type='text' placeholder='Escribir motivo...')
+        .row.mb-s
+          .col-6
+            mm-textfield(label='Nombre')
+              input(value='' name='altaInformeTercerosImplicadosLightbox_nombre' type='text' placeholder='Escribir Nombre...')
+          .col-3
+            mm-textfield(label='DNI')
+              input(value='' name='altaInformeTercerosImplicadosLightbox_dni' type="number" placeholder='Escribir DNI...')
+          .col-3
+            mm-textfield(label='Teléfono')
+              input(value='' name='altaInformeTercerosImplicadosLightbox_telefono' type='number' placeholder='Escribir Teléfono...')
+        .row.mb-s
+          .col-9
+            mm-textfield(label='Dirección completa')
+              input(value='' name='altaInformeTercerosImplicadosLightbox_direccion' type='text' placeholder='Escribir Dirección...')
+          .col-3
+            mm-combobox#mm-comboboxAltaInformeTercerosImplicadosProvincia(label='Provincia')
+              select(name='altaInformeTercerosImplicadosLightbox_provincia' onchange=`getAltaInformeTercerosImplicadosProvincia(event)`)
+                option(value='') Seleccione
+                option(value='Zaragoza') Zaragoza
+                option(value='Madrid') Madrid
+                option(value='Valencia') Valencia
+        .row.mb-s
+          .col-3
+            mm-textfield(label='Póliza')
+              input(value='' name='altaInformeTercerosImplicadosLightbox_poliza' type='text' placeholder='Escribir motivo...')
+          .col-3
+            mm-textfield(label='Siniestro')
+              input(value='' name='altaInformeTercerosImplicadosLightbox_siniestro' type='text' placeholder='Escribir motivo...')
+          .col-3
+            mm-textfield(label='Compañia')
+              input(value='' name='altaInformeTercerosImplicadosLightbox_compania' type='text' placeholder='Escribir motivo...')
+          .col-3
+            mm-combobox#mm-comboboxAltaInformeTercerosImplicadosDanos(label='Asume daños')
+              select(name='altaInformeTercerosImplicadosLightbox_asumeDanos' onChange="getAltaInformeTercerosImplicadosDanos(event)")
+                option(value='') Seleccione
+                option(value='Si') Si
+                option(value='No') No
+        .row.mb-s
+          .col-12
+            mm-textarea(label='Observación' helper-icon='Texto de ayuda')
+              textarea(name='altaInformeTercerosImplicadosLightbox_observacion' rows='4' cols='80' maxlength="255" placeholder='Añade una descripción a tu nota')
+        .row
+          .col-12
+            section.display-f.flex--justify-between.mt-m(slot='lightbox-content-button')
+              mm-button.btn-cancel(label='Cancelar' type='support' )
+              mm-button.btn-add(label='Añadir' onclick="addDataToTable('altaInformeTercerosImplicadosLightbox', event)")
+              mm-button.btn-update.display-n(label='Actualizar' onclick="updateRow('altaInformeTercerosImplicadosLightbox', event)")
+  

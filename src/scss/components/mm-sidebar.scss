@@ -1,0 +1,47 @@
+mm-sidebar {
+  z-index: 11;
+  & > div:first-child {
+    padding-top: 20px;
+  }
+
+  h4 {
+    margin: 0;
+  }
+
+  a {
+    font-size: 12px;
+    font-family: "OpenSans-Semibold";
+  }
+
+  &.products {
+    .sidebar-item-active {
+      &,
+      &:hover {
+        background-color: #cccccc !important;
+      }
+    }
+
+    .sidebar-item:hover {
+      background-color: #dfe1e2;
+    }
+  }
+
+  &:not([collapsable]) {
+    & ~ mm-info-container {
+      width: calc(100% - 308px) !important;
+    }
+
+    [slot="collapsable-content"] {
+      display: none;
+
+      & + div {
+        padding-top: 20px;
+      }
+    }
+  }
+}
+
+.mm-sidebar--panel-info mm-card .card-container {
+  min-height: unset;
+  border-radius: 0;
+}

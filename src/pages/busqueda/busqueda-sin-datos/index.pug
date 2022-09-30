@@ -1,0 +1,215 @@
+extends ../../../layout/main
+include ../../../components/external-link.pug
+
+block variables
+  - var scripts = ["../../../assets/js/pages/home.js"]
+  - var HIDE_SIDEPANEL = true
+  - var breadcrumbsItems = [['Dashboard']]
+  - var title = 'Peritos Hogar'
+  -
+    const DIRECT_ACCESS = [
+      {
+        name: "Tower",
+        description: "Esto es una breve descripción del acceso directo",
+        href: "../wip/wip.html",
+        src: "tower_logo.png"
+      },
+      {
+        name: "Salesforce",
+        description: "Esto es una breve descripción del acceso directo",
+        href: "../wip/wip.html",
+        src: "salesforce_logo.svg"
+      },
+      {
+        name: "SAR",
+        description: "Esto es una breve descripción del acceso directo",
+        href: "../wip/wip.html",
+        src: "sar_logo.svg"
+      },
+      {
+        name: "SRV",
+        description: "Accede de una forma rápida al Sistema de Retribución Variable",
+        href: "../wip/wip.html",
+        src: "srv_logo.svg"
+      },
+      {
+        name: "Allfunds",
+        description: "Esto es una breve descripción del acceso directo",
+        href: "../wip/wip.html",
+        src: "allfunds_logo.svg"
+      }
+    ]
+
+    var comboBoxOptions = [
+      {
+        col: 0,
+        label:'Tipo de servicio',
+        filter: 'operation',
+        options: [
+          {name:'Comismar'},
+          {name:'Peritacion'},
+        ]
+      },
+      {
+        col: 1,
+        label :'Nº de siniestro',
+        filter: 'nro_siniestro',
+        text: true
+      },
+      {
+        col: 2,
+        label :'Año del siniestro',
+        filter: 'date_siniestro',
+        date: true
+      },
+      {
+        col: 3,
+        label :'Nº de póliza',
+        placeholder :'Escribir nº de póliza',
+        filter: 'nro_poliza',
+        text: true
+      },
+      {
+        col: 4,
+        label :'Ref. Externa',
+        placeholder :'Escribir referencia externa',
+        filter: 'nro_externa',
+        text: true
+      },
+      {
+        col: 5,
+        label:'Situación',
+        filter: 'situacion',
+        options: [
+          {name:'En curso'}
+        ]
+      },
+    ]
+
+block content
+  main.bg-gray
+    .container.col-12                
+      .container-flex.main.bg-white.border-radius-2
+        .row
+          section.col-12
+            .row 
+              .col-12
+                h1.pt-xs.mb-n Búsqueda manual 
+                h2.subtitle Buscando en: Comismar
+
+            .row.mb-m 
+              .col-4
+                mm-textfield.mr-m.date(label="Rango de fecha")
+                  mm-datepicker(placeholder="dd/mm/aaaa-dd/mm/aaaa" date-range="true")
+            
+            .row.mb-m  
+              .col-12 
+                .row.mb-s 
+                  .col-12 
+                    span.fs-normal.display-ib.text--primary_500.mm-bold.uppercase 
+                      i.fa.fa-solid.fa-filter.text--primary_500.mr-xxs
+                      | Filtrar por
+                .row.mb-s
+                  .col-4
+                    mm-grouping-checkbox(label='Servicios asignados').mm-box-check-group
+                      mm-checkbox
+                        .mm-box-check
+                          .mm-box-check-inner
+                            input(id="primerosservicios" type='checkbox' value='primerosservicios' name='serviciosasignados')
+                            label Primeros servicios
+                          i.fas.fa-file
+                            span.number 1
+                      mm-checkbox
+                        .mm-box-check
+                          .mm-box-check-inner
+                            input(id="clones" type='checkbox' value='clones' name='serviciosasignados')
+                            label Clones
+                  .col-8
+                    mm-grouping-checkbox(label='Acciones').mm-box-check-group
+                      mm-checkbox
+                        .mm-box-check.action.danger.active
+                          .mm-box-check-inner
+                            input(onchange="oneCheckboxActionFilter(event, 0)" id="fueraplazo" type='checkbox' value='Fuera de plazo' name='acciones')
+                            label Fuera de plazo
+                          i.fas.fa-exclamation-triangle
+                      
+                      mm-checkbox
+                        .mm-box-check.action.warning
+                          .mm-box-check-inner
+                            input(onchange="oneCheckboxActionFilter(event, 0)" id="acciones" type='checkbox' value='Acciones hoy' name='acciones')
+                            label Acciones hoy
+                          i.fas.fa-clock
+                      
+                      mm-checkbox
+                        .mm-box-check.action.info
+                          .mm-box-check-inner
+                            input(onchange="oneCheckboxActionFilter(event, 0)" id="servicios" type='checkbox' value='Servicios' name='acciones')
+                            label Servicios
+
+                .row.mb-s
+                  .col-4
+                    mm-grouping-checkbox(label='Comunicaciones').mm-box-check-group
+                      mm-checkbox
+                        .mm-box-check
+                          .mm-box-check-inner
+                            input(id="tareas" type='checkbox' value='tareas' name='comunicaciones')
+                            label Tareas
+                      mm-checkbox
+                        .mm-box-check
+                          .mm-box-check-inner
+                            input(id="notas" type='checkbox' value='notas' name='comunicaciones')
+                            label Notas
+
+                  .col-8
+                    mm-grouping-checkbox(label='Situación').mm-box-check-group
+                      mm-checkbox
+                        .mm-box-check
+                          .mm-box-check-inner
+                            input(id="ptecontacto" type='checkbox' value='pte contacto' name='situacion')
+                            label Pte contacto
+                      mm-checkbox
+                        .mm-box-check
+                          .mm-box-check-inner
+                            input(id="pteavance" type='checkbox' value='pte avance' name='situacion')
+                            label Pte avance
+                      mm-checkbox
+                        .mm-box-check
+                          .mm-box-check-inner
+                            input(id="ptevisita" type='checkbox' value='pte visita' name='situacion')
+                            label Pte visita
+                      mm-checkbox
+                        .mm-box-check
+                          .mm-box-check-inner
+                            input(onchange="oneCheckboxSituationFilter(event, 2)" type='checkbox' value='pte informe' name='situacion')
+                            label Pte informe
+            
+            .row.mb-xs
+              .col-12 
+                mm-accordion.search(header='Búsqueda avanzada' reduced='')
+                  .display-f
+                    each filter, index in comboBoxOptions
+                      if filter.date
+                        mm-textfield.mr-m.date(label=filter.label)
+                          mm-datepicker(placeholder="dd/mm/aaaa")
+                      else if filter.text
+                        mm-textfield.mr-m(label=filter.label)
+                          input(type="text" placeholder=filter.label) 
+                      else
+                        mm-combobox.mr-m(label=filter.label placeholder='Selecciona una opción')
+                          select(onchange=`oneOptionSignatureFilter(event, ${filter.col})`)
+                            option(value='') Selecciona...
+                            each option, index in filter.options
+                              option(value=option.name selected=option.selected) #{option.name}
+
+            .row.mb-m 
+              .col-12 
+                section.bg--full_white.border-top-box.display-f.flex--justify-end.flex--align-center.py-s
+                  button.mm-button.basic.support.mr-xs(type="button" onclick="clearTable()") LIMPIAR DATOS
+                  button.mm-button.basic.main(type="button"  onclick="searchTable()") BUSCAR
+            
+            .row.mb-m
+              .col-12 
+                .search-blank 
+                  img.py-m(src="../../../assets/img/Ilustracion-buscador.svg")
+                  h4 Todavía no hay información que mostrar
+                  p Rellene los campos de filtros y/o búsqueda avanzada para obtener resultados

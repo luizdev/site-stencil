@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head><base href="./">
+    <meta charset="utf-8">
+    <title>Peritos Hogar</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="Aplicación demo 1.5">
+    <meta name="theme-color" content="#16161d">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="x-ua-compatible" content="IE=Edge">
+    <link rel="apple-touch-icon" href="../../../assets/icon/icon.png">
+    <!-- Libreria JS y estilos Guia MM-->
+    <link rel="icon" type="image/png" href="../../../assets/favicons/favicon.svg">
+    <link rel="preload stylesheet" as="style" href="../../../assets/build/demo-components-guide.css">
+    <link rel="preload stylesheet" as="style" href="../../../assets/fontawesome/fontawesome-all.css">
+    <link rel="preload stylesheet" as="style" href="../../../assets/css/main.css">
+    <link rel="preload stylesheet" as="style" href="https://unpkg.com/swiper/swiper.min.css">
+    <!--Guia-->
+    <script type="module" src="../../../assets/build/demo-components-guide.esm.js"></script>
+    <script nomodule src="../../../assets/build/demo-components-guide.js"></script>
+    <script src="../../../assets/plugins/jquery-3.6.0.min.js" async></script>
+    <script src="../../../assets/plugins/datatables/datatables.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../../../assets/js/pages/index.js" async></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js" async></script>
+    <script src="../../../assets/js/pages/modo_consultivo_documentacion.js" async></script>
+  </head>
+  <body>
+    <mm-responsive-layout><a href="../home/home.html" title="ejemplo" slot="header-logo"><img class="logo" src="logo.svg" alt="layout-logo" width="" height=""></a><a href="../home/home.html" title="ejemplo" slot="nav-logo"><img class="logo" src="logo.svg" alt="layout-nav-logo" width="" height=""></a>
+      <nav slot="nav">
+        <mm-responsive-layout-item type="dropdown">
+          <div>Dashboard</div>
+        </mm-responsive-layout-item>
+        <mm-responsive-layout-item type="dropdown">
+          <div>búsqueda manual</div>
+        </mm-responsive-layout-item>
+        <mm-responsive-layout-item type="dropdown">
+          <div>repositorio</div>
+        </mm-responsive-layout-item>
+        <mm-responsive-layout-item type="dropdown">
+          <div>Meteosim</div>
+        </mm-responsive-layout-item>
+      </nav>
+      <div slot="header-actions">
+        <mm-dark-mode class="display-n display-f-lg"></mm-dark-mode>
+        <mm-responsive-layout-user-nav slot="profile">
+          <div slot="sidenav">
+            <mm-responsive-layout-user-item icon="fas fa-bell" label="Notificaciones" bubble-counter="3">
+              <div>
+                <h4 class="m-n">3 alertas nuevas</h4>
+                <div class="mt-xs"><small class="mm-semibold">Nombre de la alerta</small><small class="mm-regular">Informaci&oacute;n adicional de la alerta. Texto adicional de la alerta.</small></div>
+                <div class="mt-s"><small class="mm-semibold">Nombre de la alerta</small><small class="mm-regular">Informaci&oacute;n adicional de la alerta. Texto adicional de la alerta.</small></div>
+                <div class="mt-s"><small class="mm-semibold">Nombre de la alerta</small><small class="mm-regular">Informaci&oacute;n adicional de la alerta. Texto adicional de la alerta.</small></div>
+              </div>
+            </mm-responsive-layout-user-item>
+            <mm-responsive-layout-user-item label="Área personal" box-style="false">
+              <section class="display-f flex--align-center" slot="custom-item-header"><i class="fas fa-user mr-n mr-s-lg"></i>
+                <div class="display-b-lg display-n">
+                  <h6 class="m-n p-n text--full_white">Francisco De la Torre</h6><small class="text--full_white">fdelatorre@demo.es</small>
+                </div>
+              </section>
+              <mm-user-profile id="userExample">
+                <mm-button class="adapt" label="Simular usuario" type="ghost" slot="mm-user-profile-simulation"></mm-button>
+                <mm-button class="adapt" label="Cambiar contraseña" type="ghost" slot="mm-user-profile-password"></mm-button>
+                <mm-button label="Cerrar sesión" type="secondary" slot="mm-user-profile-close"></mm-button>
+              </mm-user-profile>
+            </mm-responsive-layout-user-item>
+          </div>
+        </mm-responsive-layout-user-nav>
+      </div>
+      <div id="main" slot="content">
+        <mm-breadcrumb>
+          <ul>
+            <li><a href="../wip/wip.html">Dashboard</a>
+            </li>
+            <li><a href="../wip/wip.html">Filtro de servicios</a>
+            </li>
+            <li><span>1103265-2021/1</span>
+            </li>
+          </ul>
+        </mm-breadcrumb>
+        <div class="display-f flex--column flex--row-lg" id="content-page-sidebar">
+          <div class="w100 pos-relative" id="content-page">
+            <div class="content-icon-expanded"><i class="btn-expanded" href="#" onclick="expandPage(event)"><img src="../../../assets/img/icon_expand.svg" alt="layout-nav-logo" width="15" height="10"></i>
+              <mm-tooltip class="mm-tooltip-expanded dark w-fitContent" position="left"> <span class="expanded">Cerrar</span><span class="not-expanded">Abrir</span> columna de resumen</mm-tooltip>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <main class="pl-m pr-m display-f flex--column">
+                  <div class="row py-xs">
+                    <div class="col-12">
+                      <div class="display-f flex--justify-between">
+                        <div class="display-f flex--align-center">
+                          <h1 class="mb-n mr-xs">COMISMAR 1103265 - 2021/1</h1>
+                          <mm-indicator class="mr-xs">Finalizado</mm-indicator>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-m">
+                    <div class="col-12"> 
+                      <mm-progress-indicator current-step="5">
+                        <div class="mmpi-content">DESCRIPCIÓN RIESGO</div><a class="mmpi-icon" href="descripcion_riesgos.html" slot="step-1" title="Seccion"><i class="fas fa-home" style="font-size: 30px;"></i></a>
+                        <div class="mmpi-content">CAUSAS Y ATRIBUTOS</div><a class="mmpi-icon" href="causas_atributos.html" slot="step-2" title="Seccion"><i class="fas fa-file-alt" style="font-size: 30px;"></i></a>
+                        <div class="mmpi-content">TERCEROS IMPLICADOS</div><a class="mmpi-icon" href="terceros_implicados.html" slot="step-3" title="Seccion"><i class="fas fa-users" style="font-size: 30px;"></i></a>
+                        <div class="mmpi-content">TASACIÓN Y AJUSTE DE DAÑOS</div><a class="mmpi-icon" href="tasacion_ajustes.html" slot="step-4" title="Seccion"><i class="fas fa-file-invoice-dollar" style="font-size: 30px;"></i></a>
+                        <div class="mmpi-content">DOCUMENTACIÓN</div><a class="mmpi-icon" href="documentacion.html" slot="step-5" title="Seccion"><i class="fas fa-folder-open" style="font-size: 30px;">   </i></a>
+                      </mm-progress-indicator>
+                    </div>
+                  </div>
+                  <div class="row mb-m"> 
+                    <div class="col-12">
+                      <div class="subheading--modo-consultivo"><i class="fas fa-folder-open"> </i>
+                        <h3>Documentación</h3>
+                      </div>
+                      <div class="b-block">
+                        <div class="row"> 
+                          <div class="col-12 display-f flex--justify-end button-action-gallery">
+                            <mm-buttons-selector>
+                              <button class="grouping-button-item mr-xxs" type="button" name="botones" value="1" onclick="handleActionGallery(event)"><i class="fa fa-th-large" aria-hidden="true"></i></button>
+                              <button class="grouping-button-item" type="button" name="botones" value="0" onclick="handleActionGallery(event)"> <i class="fa fa-th-list" aria-hidden="true"></i></button>
+                            </mm-buttons-selector>
+                          </div>
+                        </div>
+                        <div class="row row-galery mb-m"> 
+                          <div class="col-12"> 
+                            <div class="heading-documents display-f flex--align-center mb-xxs">
+                              <p class="mb-n"><strong class="uppercase mr-xxs">documentos servicio actual</strong>(1103265 - 2021/3)</p>
+                            </div>
+                            <div class="row">
+                              <div class="content-galery content-galery--grid content-galery--old content-galery--not-select"> 
+                                <div class="col-item-documents"> 
+                                  <div class="item-documents--image"><a class="pos-relative" href="#" onclick="openLightbox(event, 'gallery1Lightbox', 0)">
+                                      <div class="video-shadow"> <i class="fas fa-play-circle"></i></div><img src="../../../assets/img/img_galeria.jpg"></a><a class="delete-img" href="#"><i class="fas fa-trash"> </i></a></div>
+                                  <div class="item-documents--detail">
+                                    <div class="icon-type"> <i class="fas fa-file-video"></i></div>
+                                    <div class="actions"> <a class="delete mr-xs" href="#"><i class="fas fa-trash"></i></a><a class="edit" href="#"><i class="fas fa-edit"></i></a></div>
+                                    <div class="detail">
+                                      <p class="title"><a href="#" onclick="openLightbox(event, 'gallery1Lightbox', 0)"> 1. Título del video</a></p>
+                                      <div class="descripcion">
+                                        <p class="mr-xs">Video - terceros</p>
+                                        <p class="mb-n">05/01/2022, 09:35 </p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-item-documents"> 
+                                  <div class="item-documents--image"> <img src="../../../assets/img/img_galeria.jpg"><a class="delete-img" href="#"><i class="fas fa-trash"></i></a></div>
+                                  <div class="item-documents--detail">
+                                    <div class="icon-type"> <i class="fas fa-file-image"></i></div>
+                                    <div class="actions"> <a class="delete mr-xs" href="#"><i class="fas fa-trash"></i></a><a class="edit" href="#"><i class="fas fa-edit"></i></a></div>
+                                    <div class="detail">
+                                      <div class="select"> 
+                                        <mm-checkbox>
+                                          <input type="checkbox" value="1" name="check1">
+                                          <label></label>
+                                        </mm-checkbox>
+                                      </div>
+                                      <p class="title"> <a href="#" onclick="openLightbox(event, 'gallery1Lightbox', 1)">2. Título de la imagen</a></p>
+                                      <div class="descripcion"> 
+                                        <p class="mr-xs">Imagen - terceros</p>
+                                        <p class="mb-n">05/01/2022, 09:35                             </p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-item-documents"> 
+                                  <div class="item-documents--image"> <i class="fas fa-file-pdf"></i><a class="delete-img" href="#"><i class="fas fa-trash"> </i></a></div>
+                                  <div class="item-documents--detail">
+                                    <div class="icon-type"> <i class="fas fa-file-pdf"></i></div>
+                                    <div class="actions"> <a class="delete mr-xs" href="#"><i class="fas fa-trash"></i></a><a class="edit" href="#"><i class="fas fa-edit"></i></a></div>
+                                    <div class="detail">
+                                      <p class="title"> <a href="#" onclick="openLightbox(event, 'gallery1Lightbox', 2)"> 3. Título del pdf</a></p>
+                                      <div class="descripcion">
+                                        <p class="mr-xs">Pdf - terceros</p>
+                                        <p class="mb-n">05/01/2022, 09:35</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <mm-lightbox class="sizeS gallery" label="" id-lightbox="gallery1Lightbox">
+                                <section slot="lightbox-content">
+                                  <div class="w-100 px-s">
+                                    <div class="row">
+                                      <div class="col-12">
+                                        <div class="swiper swiper-container slider-swiper">
+                                          <div class="swiper-wrapper">
+                                            <div class="swiper-slide"> 
+                                              <div class="row mb-xs">
+                                                <div class="col-12 display-f flex--justify-between">
+                                                  <div class="header-slider"> 
+                                                    <h2>1- Título del Video</h2>
+                                                    <p>Imagen VVAA. Perjudicada 05/01/2022, 13:35</p>
+                                                  </div>
+                                                  <div class="actions display-f flex--justify-end flex--align-end">
+                                                    <mm-button type="support" onclick="rotateImage(&quot;#gallery1LightboxObject1&quot;)"><i class="fa fa-sync-alt" aria-hidden="true"></i><span class="ml-xs">Rotar </span></mm-button>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="row">
+                                                <div class="col-12">
+                                                  <div class="body-slider object">
+                                                    <div class="north" id="gallery1LightboxObject1">
+                                                      <iframe width="560" height="315" src="https://www.youtube.com/embed/cgmrjKTdhG0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="swiper-slide">
+                                              <div class="row mb-xs">
+                                                <div class="col-12 display-f flex--justify-between">
+                                                  <div class="header-slider"> 
+                                                    <h2>2- Título de la imagen</h2>
+                                                    <p>Imagen VVAA. Perjudicada 05/01/2022, 13:35</p>
+                                                  </div>
+                                                  <div class="actions display-f flex--justify-end flex--align-end">
+                                                    <mm-button type="support" onclick="rotateImage(&quot;#gallery1LightboxObject2&quot;)"><i class="fa fa-sync-alt" aria-hidden="true"></i><span class="ml-xs">Rotar</span></mm-button>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="row">
+                                                <div class="col-12">
+                                                  <div class="body-slider"><img class="north" id="gallery1LightboxObject2" src="../../../assets/img/img_slider.png"></div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="swiper-slide"> 
+                                              <div class="row mb-xs">
+                                                <div class="col-12">
+                                                  <div class="header-slider"> 
+                                                    <h2>3- Título del PDF</h2>
+                                                    <p>Imagen VVAA. Perjudicada 05/01/2022, 13:35</p>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="row mb-xs">
+                                                <div class="col-12">
+                                                  <div class="actions"></div>
+                                                </div>
+                                              </div>
+                                              <div class="row">
+                                                <div class="col-12">
+                                                  <div class="body-slider pdf">
+                                                    <mm-file-preview url="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"></mm-file-preview>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <!-- Add Pagination-->
+                                          <div class="swiper-pagination"></div>
+                                          <!-- Add Navigation-->
+                                          <div class="swiper-button-prev"><i class="fas fa-angle-left"></i></div>
+                                          <div class="swiper-button-next"> <i class="fas fa-angle-right"></i></div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-12">
+                                        <section class="display-f flex--justify-end mt-m" slot="lightbox-content-button">
+                                          <mm-button class="btn-save display-n mr-s" label="guardar cambios" type="support"></mm-button>
+                                          <mm-button class="btn-close" label="Cerrar"></mm-button>
+                                        </section>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </section>
+                              </mm-lightbox>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row row-galery"> 
+                          <div class="col-12"> 
+                            <div class="heading-documents display-f flex--align-center mb-xxs">
+                              <p class="mb-n"><strong class="uppercase mr-xxs">documentos servicios anteriores</strong><span> <i class="fa fa-info-circle"></i>
+                                  <mm-tooltip class="dark">lorem ipsum</mm-tooltip></span></p>
+                            </div>
+                            <div class="row">
+                              <div class="content-galery content-galery--grid content-galery--old content-galery--not-select"> 
+                                <div class="col-item-documents"> 
+                                  <div class="item-documents--image"> <img src="../../../assets/img/img_galeria.jpg"><a class="delete-img" href="#"><i class="fas fa-trash"></i></a></div>
+                                  <div class="item-documents--detail">
+                                    <div class="icon-type"> <i class="fas fa-file-image"></i></div>
+                                    <div class="detail"> 
+                                      <p class="title"> <a href="#" onclick="openLightbox(event, 'gallery2Lightbox', 0)">1. Título de la imagen</a></p>
+                                      <div class="descripcion"> 
+                                        <p class="mr-xs">Imagen - terceros</p>
+                                        <p class="mb-n">05/01/2022, 09:35</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-item-documents"> 
+                                  <div class="item-documents--image"><a class="pos-relative" href="#" onclick="openLightbox(event, 'gallery2Lightbox', 1)">
+                                      <div class="video-shadow"> <i class="fas fa-play-circle"></i></div><img src="../../../assets/img/img_galeria.jpg"></a><a class="delete-img" href="#"><i class="fas fa-trash"></i></a></div>
+                                  <div class="item-documents--detail">
+                                    <div class="icon-type"> <i class="fas fa-file-image"></i></div>
+                                    <div class="actions"> <a class="edit" href="#"><i class="fas fa-edit"></i></a><a class="delete ml-xs" href="#"><i class="fas fa-trash"></i></a></div>
+                                    <div class="detail"> 
+                                      <div class="select"> 
+                                        <mm-checkbox>
+                                          <input type="checkbox" value="1" name="check1">
+                                          <label></label>
+                                        </mm-checkbox>
+                                      </div>
+                                      <p class="title"><a href="#" onclick="openLightbox(event, 'gallery2Lightbox', 1)">2. Título de la imagen</a></p>
+                                      <div class="descripcion">
+                                        <p>Imagen - terceros</p>
+                                        <p class="mb-n">05/01/2022, 09:35                             </p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-item-documents"> 
+                                  <div class="item-documents--image"> <img src="../../../assets/img/img_galeria_2.jpg"><a class="delete-img" href="#"><i class="fas fa-trash"> </i></a></div>
+                                  <div class="item-documents--detail"> 
+                                    <div class="icon-type"> <i class="fas fa-file-pdf"></i></div>
+                                    <div class="detail">
+                                      <p class="title"> <a href="#" onclick="openLightbox(event, 'gallery2Lightbox', 2)">3. Título de la imagen</a></p>
+                                      <div class="descripcion"> 
+                                        <p class="mr-xs">Imagen - terceros</p>
+                                        <p class="mb-n">05/01/2022, 09:35</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <mm-lightbox class="sizeS gallery" label="" id-lightbox="gallery2Lightbox">
+                                <section slot="lightbox-content">
+                                  <div class="w-100 px-s">
+                                    <div class="row">
+                                      <div class="col-12">
+                                        <div class="swiper swiper-container slider-swiper">
+                                          <div class="swiper-wrapper">
+                                            <div class="swiper-slide"> 
+                                              <div class="row mb-xs">
+                                                <div class="col-12 display-f flex--justify-between">
+                                                  <div class="header-slider"> 
+                                                    <h2>1- Título de la imagen</h2>
+                                                    <p>Imagen VVAA. Perjudicada 05/01/2022, 13:35</p>
+                                                  </div>
+                                                  <div class="actions display-f flex--justify-end flex--align-end">
+                                                    <mm-button type="support" onclick="rotateImage(&quot;#gallery2LightboxObject0&quot;)"><i class="fa fa-sync-alt" aria-hidden="true"></i><span class="ml-xs">Rotar </span></mm-button>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="row">
+                                                <div class="col-12">
+                                                  <div class="body-slider"><img class="north" id="gallery2LightboxObject2" src="../../../assets/img/img_slider.png"></div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="swiper-slide">
+                                              <div class="row mb-xs">
+                                                <div class="col-12 display-f flex--justify-between">
+                                                  <div class="header-slider"> 
+                                                    <h2>2- Título del Video</h2>
+                                                    <p>Imagen VVAA. Perjudicada 05/01/2022, 13:35</p>
+                                                  </div>
+                                                  <div class="actions display-f flex--justify-end flex--align-end">
+                                                    <mm-button type="support" onclick="rotateImage(&quot;#galler2LightboxObject1&quot;)"><i class="fa fa-sync-alt" aria-hidden="true"></i><span class="ml-xs">Rotar</span></mm-button>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="row">
+                                                <div class="col-12">
+                                                  <div class="body-slider object">
+                                                    <div class="north" id="gallery1LightboxObject1">
+                                                      <iframe width="560" height="315" src="https://www.youtube.com/embed/cgmrjKTdhG0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="swiper-slide"> 
+                                              <div class="row mb-xs">
+                                                <div class="col-12 display-f flex--justify-between">
+                                                  <div class="header-slider"> 
+                                                    <h2>3- Título de la imagen</h2>
+                                                    <p>Imagen VVAA. Perjudicada 05/01/2022, 13:35</p>
+                                                  </div>
+                                                  <div class="actions display-f flex--justify-end flex--align-end">
+                                                    <mm-button type="support" onclick="rotateImage(&quot;#galler2LightboxObject2&quot;)"><i class="fa fa-sync-alt" aria-hidden="true"></i><span class="ml-xs">Rotar</span></mm-button>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="row mb-xs">
+                                                <div class="col-12">
+                                                  <div class="actions"></div>
+                                                </div>
+                                              </div>
+                                              <div class="row">
+                                                <div class="col-12">
+                                                  <div class="body-slider"><img class="north" id="gallery2LightboxObject3" src="../../../assets/img/img_slider.png"></div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <!-- Add Pagination-->
+                                          <div class="swiper-pagination"></div>
+                                          <!-- Add Navigation-->
+                                          <div class="swiper-button-prev"><i class="fas fa-angle-left"></i></div>
+                                          <div class="swiper-button-next"> <i class="fas fa-angle-right"></i></div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-12">
+                                        <section class="display-f flex--justify-end mt-m" slot="lightbox-content-button">
+                                          <mm-button class="btn-save display-n mr-s" label="guardar cambios" type="support"></mm-button>
+                                          <mm-button class="btn-close" label="Cerrar"></mm-button>
+                                        </section>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </section>
+                              </mm-lightbox>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="button-action-sticky row display-f flex--justify-between mt-m"> 
+                    <div class="action-1">
+                      <mm-button class="mr-xs" label="Cancelar" type="support"></mm-button>
+                    </div>
+                    <div class="action-2 display-f"><a id="buttonModoConsultivoPrev" href="tasacion_ajustes.html">
+                        <mm-button class="mr-xs" label="anterior" type="secondary"></mm-button></a>
+                      <mm-button class="mr-xs" label="Descargar informe PDF" type="secondary"></mm-button>
+                      <mm-button label="Cerrar" type="primary"></mm-button>
+                    </div>
+                  </div>
+                </main>
+              </div>
+            </div>
+          </div>
+          <mm-responsive-layout-lateral-menu class="grey modo-consultivo"><i class="fas fa-times close-icon" onclick="expandPage(event)"></i>
+            <div class="b-block">
+              <h4 class="blue no-line">Detalle del siniestro</h4>
+              <div class="row"> 
+                <div class="col-6"> <small>Número del siniestro</small>
+                  <p>1103265 - 2021/1</p>
+                </div>
+                <div class="col-6"> <small>Número del siniestro</small>
+                  <p>1103265 - 2021/1</p>
+                </div>
+              </div>
+              <div class="row"> 
+                <div class="col-6"> <small>Dirección riesgo</small>
+                  <p>Juan de la Cierva, 1, 7º-13</p>
+                </div>
+                <div class="col-6"> <small>Fecha/hora Efecto</small>
+                  <p>20/05/2018 - 09:40h</p>
+                </div>
+              </div>
+              <div class="row"> 
+                <div class="col-6"> <small>Estado</small>
+                  <mm-indicator class="mr-xs">Finalizado</mm-indicator>
+                </div>
+                <div class="col-6"> <small>Fecha/hora Ocurrencia</small>
+                  <p>20/05/2018 - 09:40h</p>
+                </div>
+              </div>
+              <div class="row"> 
+                <div class="col-6"> <small>Proveedor</small><a id="proveedorLightbox"><i class="fas fa-user-tie mr-xxs"></i>IPAS</a></div>
+                <div class="col-6"> <small>Fecha/hora Declaración</small>
+                  <p>20/05/2018 - 09:40h</p>
+                </div>
+              </div>
+              <div class="row"> 
+                <div class="col-6"> <small>Tipo </small>
+                  <p>Indemnizable</p>
+                </div>
+                <div class="col-6"> <small>Fecha/hora Vencimiento</small>
+                  <p>20/05/2018 - 09:40h</p>
+                </div>
+              </div>
+            </div>
+            <div class="b-block">
+              <div class="sidebar-subheading--modo-consultivo"><i class="fas fa-file-alt"> </i>
+                <h3>Resumen</h3>
+              </div>
+              <div class="row"> 
+                <div class="col-12"> 
+                  <mm-accordion class="sidebar--modo-consultivo" header="datos generales" reduced="">
+                    <div class="row mb-xs"> 
+                      <div class="col-6"> <small>Producto </small>
+                        <p> <a href="#">A todo riesgo PLUS</a></p>
+                      </div>
+                      <div class="col-6"> <small>Tipo de siniestro</small>
+                        <p>1103265 - 2021/1</p>
+                      </div>
+                    </div>
+                    <div class="row mb-xs"> 
+                      <div class="col-6"> <small>Superficie construída</small>
+                        <p>112 m2</p>
+                      </div>
+                      <div class="col-6"> <small>Nº Trasteros/Garajes</small>
+                        <p>3</p>
+                      </div>
+                    </div>
+                    <div class="row mb-xs"> 
+                      <div class="col-6"> <small>Tipo/Subtipo vivienda</small>
+                        <p>Piso</p>
+                      </div>
+                      <div class="col-6"> <small>Superficie terraza</small>
+                        <p>100 m2</p>
+                      </div>
+                    </div>
+                    <div class="row mb-xs"> 
+                      <div class="col-6"> <small>Año construcción</small>
+                        <p>2004</p>
+                      </div>
+                      <div class="col-6"> <small>Año última reforma</small>
+                        <p>2004</p>
+                      </div>
+                    </div>
+                    <div class="row mb-xs"> 
+                      <div class="col-6"> <small>Superficie parcela s/c</small>
+                        <p>0</p>
+                      </div>
+                      <div class="col-6"> <small>Habitantes</small>
+                        <p>4</p>
+                      </div>
+                    </div>
+                    <div class="row mb-xs"> 
+                      <div class="col-12"> <small>Protecciones</small>
+                        <p>Protección 1, Protección 2, Protección 3,...</p>
+                      </div>
+                    </div>
+                    <div class="row mb-xs"> 
+                      <div class="col-12"> <small>Atributos</small>
+                        <p>VTS, Corrosión, Infraseguro, Judicial</p>
+                      </div>
+                    </div>
+                  </mm-accordion>
+                  <mm-accordion class="sidebar--modo-consultivo" header="descripción del riesgo" reduced="">
+                    <div class="row mb-xs"> 
+                      <div class="col-12"> <small>Capital continente adecudo a preexistencias</small>
+                        <p>Sí, (Existencias verificadas)</p>
+                      </div>
+                    </div>
+                    <div class="row mb-xs"> 
+                      <div class="col-12"> <small>Capital contenido adecudo a preexistencias</small>
+                        <p>No, (Razón Cdo)</p>
+                      </div>
+                    </div>
+                    <div class="row mb-xs"> 
+                      <div class="col-12"> <small>Estado de conservación</small>
+                        <p>Requiere mantenimiento</p>
+                      </div>
+                    </div>
+                    <div class="row mb-xs"> 
+                      <div class="col-12"> <small>Infraseguro</small>
+                        <p>No</p>
+                      </div>
+                    </div>
+                    <div class="row mb-xs">
+                      <div class="col-6"> <small>Tasación vivienda</small>
+                        <p>Tasación vivienda</p>
+                      </div>
+                      <div class="col-6"> <small class="number">Valor asegur. VVAA</small>
+                        <p class="number">155.756,36€</p>
+                      </div>
+                    </div>
+                    <div class="row mb-xs"> 
+                      <div class="col-6"> <small>Tasación mobiliario</small>
+                        <p>Tasación mobiliario</p>
+                      </div>
+                      <div class="col-6"> <small class="number">Valor asegur. Mobiliario</small>
+                        <p class="number">47.568,13€</p>
+                      </div>
+                    </div>
+                  </mm-accordion>
+                  <mm-accordion class="sidebar--modo-consultivo" header="Causas y atributos" reduced="">
+                    <div class="row mb-xs"> 
+                      <div class="col-12"> <small>Asegurado conforme</small>
+                        <p>Sí</p>
+                      </div>
+                    </div>
+                    <div class="row mb-xs"> 
+                      <div class="col-6"> <small>Tiene cobertura</small>
+                        <p>Sí</p>
+                      </div>
+                      <div class="col-6"> <small>Es recobrable</small>
+                        <p>No</p>
+                      </div>
+                    </div>
+                    <div class="row mb-xs"> 
+                      <div class="col-6"> <small>daños consorciables</small>
+                        <p>No</p>
+                      </div>
+                      <div class="col-6"> <small>Datos consorciables</small>
+                        <p>Parcial</p>
+                      </div>
+                    </div>
+                    <div class="row mb-xs"> 
+                      <div class="col-12"> <small>Estimación daños consorciables</small>
+                        <p>Estimación daños</p>
+                      </div>
+                    </div>
+                    <div class="row mb-xs"> 
+                      <div class="col-6"> <small>Posible fraude</small>
+                        <p>No</p>
+                      </div>
+                      <div class="col-6"> <small>Corrosión</small>
+                        <p>No</p>
+                      </div>
+                    </div>
+                    <div class="row mb-xs"> 
+                      <div class="col-12"> <small>Concurrencia</small>
+                        <p>No</p>
+                      </div>
+                    </div>
+                    <div class="row mb-xs"> 
+                      <div class="col-12"> <small>Visualizar informe reparador</small>
+                        <p>No</p>
+                      </div>
+                    </div>
+                  </mm-accordion>
+                  <mm-accordion class="sidebar--modo-consultivo" header="terceros implicados" reduced="">
+                    <div class="row mb-xs"> 
+                      <div class="col-12"> <small>Últimos terceros implicados añadidos</small>
+                        <p class="my-xxs">Perjudicado - Mari Camen Martínez</p>
+                        <p class="my-xxs">Afectado - Ana Noemí Fernández Martínez</p>
+                        <p class="my-xxs">Causante - Jose María Fernández Iglesias</p>
+                      </div>
+                    </div>
+                  </mm-accordion>
+                  <mm-accordion class="sidebar--modo-consultivo" header="Tasación y ajustes de daño" reduced="" active>
+                    <div class="row mb-xs"> 
+                      <div class="col-6"> <small class="number">Valor total nuevo</small>
+                        <p class="number">102,48€</p>
+                      </div>
+                      <div class="col-6"> <small class="number">Valor total real</small>
+                        <p class="number">102,48€</p>
+                      </div>
+                    </div>
+                    <div class="row mb-xs"> 
+                      <div class="col-6"> <small class="number">Propuesta total</small>
+                        <p class="number">102,48€</p>
+                      </div>
+                    </div>
+                  </mm-accordion>
+                </div>
+              </div>
+            </div>
+          </mm-responsive-layout-lateral-menu>
+        </div>
+      </div>
+    </mm-responsive-layout>
+  </body>
+</html>

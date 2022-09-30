@@ -1,0 +1,56 @@
+
+mixin header()
+  a(href='../home/home.html' title='ejemplo' slot='header-logo')
+    img.logo(src='logo.svg' alt='layout-logo' width='' height='')
+
+  a(href='../home/home.html' title='ejemplo' slot='nav-logo')
+    img.logo(src='logo.svg' alt='layout-nav-logo' width='' height='')
+    
+  nav(slot='nav')
+    -
+      var nav = [
+        { 
+          title: 'Dashboard'
+        },
+        {
+          title: 'búsqueda manual'
+        },
+        { 
+          title: 'repositorio'
+        },
+        { 
+          title: 'Meteosim'
+        }
+      ]
+
+    each itemNav in nav
+      mm-responsive-layout-item(type='dropdown')
+        div #{itemNav.title}
+  div(slot="header-actions")
+    mm-dark-mode.display-n.display-f-lg()
+    mm-responsive-layout-user-nav(slot='profile')
+      div(slot='sidenav')
+        mm-responsive-layout-user-item(icon='fas fa-bell' label='Notificaciones' bubble-counter='3')
+          div
+            h4.m-n 3 alertas nuevas
+            .mt-xs
+              small.mm-semibold Nombre de la alerta
+              small.mm-regular Informaci&oacute;n adicional de la alerta. Texto adicional de la alerta.
+            .mt-s
+              small.mm-semibold Nombre de la alerta
+              small.mm-regular Informaci&oacute;n adicional de la alerta. Texto adicional de la alerta.
+            .mt-s
+              small.mm-semibold Nombre de la alerta
+              small.mm-regular Informaci&oacute;n adicional de la alerta. Texto adicional de la alerta.
+        mm-responsive-layout-user-item(label='Área personal' box-style='false')
+          section.display-f.flex--align-center(slot='custom-item-header')
+            i.fas.fa-user.mr-n.mr-s-lg
+            .display-b-lg.display-n
+              h6.m-n.p-n.text--full_white Francisco De la Torre
+              small.text--full_white fdelatorre@demo.es
+          mm-user-profile#userExample
+            mm-button.adapt(label='Simular usuario' type='ghost' slot='mm-user-profile-simulation')
+            mm-button.adapt(label='Cambiar contraseña' type='ghost' slot='mm-user-profile-password')
+            mm-button(label='Cerrar sesión' type='secondary' slot='mm-user-profile-close')
+
+  

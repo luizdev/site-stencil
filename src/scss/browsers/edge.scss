@@ -1,0 +1,13 @@
+@supports (-ms-ime-align: auto) {
+  mm-accordion.type-card .accordion-content {
+    height: auto;
+  }
+
+  mm-card.mm-card--document .card-container {
+    height: auto;
+  }
+
+  mm-listing table th {
+    width: auto !important;
+  }
+}

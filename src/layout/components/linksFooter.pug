@@ -1,0 +1,9 @@
+mixin linksFooter(scripts, mode="development")
+  if mode === "development"
+    - var link1  = 'http://localhost:3333/GuiaAplicaciones/3.1.8-beta1'
+  else
+    - var link1 = 'http://localhost:3333/GuiaAplicaciones/3.1.8-beta1'
+
+  if (scripts !== undefined)
+    each item in scripts
+      script(src=item)

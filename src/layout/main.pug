@@ -1,0 +1,23 @@
+include components/links.pug
+include components/header.pug
+include components/breadcrumbs.pug
+include ../components/corner-sheet.pug
+
+- var HIDE_SIDEPANEL = false
+- var breadcrumbsItems = []
+- var title = ''
+
+block variables
+
+doctype html
+html(lang='es')
+  head
+    +links(scripts, title)
+
+  body()
+    mm-responsive-layout
+      +header()
+
+      #main(slot='content')
+        +breadcrumbs(breadcrumbsItems)
+        block content

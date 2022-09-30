@@ -1,0 +1,13 @@
+@media screen and (min-width: 1421px) {
+  &.column-lg {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: $breakpoint-m) {
+  &.column-md {
+    display: flex;
+    flex-direction: column;
+  }
+}

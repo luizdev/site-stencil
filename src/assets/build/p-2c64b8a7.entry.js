@@ -1,0 +1,1 @@
+import{r,h as s}from"./p-44118c4f.js";const t=class{constructor(s){r(this,s)}render(){return this.menuRender()}menuRender(){return s("small",{"target-scroller":this.targetScroller},s("a",{href:this.linkData,class:"no-decoration",title:this.nameMenu},this.nameMenu))}};export{t as mm_scroller_submenu}

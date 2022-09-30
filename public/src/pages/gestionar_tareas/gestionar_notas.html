@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head><base href="./">
+    <meta charset="utf-8">
+    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="Aplicación demo 1.5">
+    <meta name="theme-color" content="#16161d">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="x-ua-compatible" content="IE=Edge">
+    <link rel="apple-touch-icon" href="../../../assets/icon/icon.png">
+    <!-- Libreria JS y estilos Guia MM-->
+    <link rel="icon" type="image/png" href="../../../assets/favicons/favicon.svg">
+    <link rel="preload stylesheet" as="style" href="../../../assets/build/demo-components-guide.css">
+    <link rel="preload stylesheet" as="style" href="../../../assets/fontawesome/fontawesome-all.css">
+    <link rel="preload stylesheet" as="style" href="../../../assets/css/main.css">
+    <link rel="preload stylesheet" as="style" href="https://unpkg.com/swiper/swiper.min.css">
+    <!--Guia-->
+    <script type="module" src="../../../assets/build/demo-components-guide.esm.js"></script>
+    <script nomodule src="../../../assets/build/demo-components-guide.js"></script>
+    <script src="../../../assets/plugins/jquery-3.6.0.min.js" async></script>
+    <script src="../../../assets/plugins/datatables/datatables.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../../../assets/js/pages/index.js" async></script>
+    <script src="../../../assets/js/pages/gestionar_tareas_gestionar_notas.js" async></script>
+  </head>
+  <body>
+    <mm-responsive-layout><a href="../home/home.html" title="ejemplo" slot="header-logo"><img class="logo" src="logo.svg" alt="layout-logo" width="" height=""></a><a href="../home/home.html" title="ejemplo" slot="nav-logo"><img class="logo" src="logo.svg" alt="layout-nav-logo" width="" height=""></a>
+      <nav slot="nav">
+        <mm-responsive-layout-item type="dropdown">
+          <div>Dashboard</div>
+        </mm-responsive-layout-item>
+        <mm-responsive-layout-item type="dropdown">
+          <div>búsqueda manual</div>
+        </mm-responsive-layout-item>
+        <mm-responsive-layout-item type="dropdown">
+          <div>repositorio</div>
+        </mm-responsive-layout-item>
+        <mm-responsive-layout-item type="dropdown">
+          <div>Meteosim</div>
+        </mm-responsive-layout-item>
+      </nav>
+      <div slot="header-actions">
+        <mm-dark-mode class="display-n display-f-lg"></mm-dark-mode>
+        <mm-responsive-layout-user-nav slot="profile">
+          <div slot="sidenav">
+            <mm-responsive-layout-user-item icon="fas fa-bell" label="Notificaciones" bubble-counter="3">
+              <div>
+                <h4 class="m-n">3 alertas nuevas</h4>
+                <div class="mt-xs"><small class="mm-semibold">Nombre de la alerta</small><small class="mm-regular">Informaci&oacute;n adicional de la alerta. Texto adicional de la alerta.</small></div>
+                <div class="mt-s"><small class="mm-semibold">Nombre de la alerta</small><small class="mm-regular">Informaci&oacute;n adicional de la alerta. Texto adicional de la alerta.</small></div>
+                <div class="mt-s"><small class="mm-semibold">Nombre de la alerta</small><small class="mm-regular">Informaci&oacute;n adicional de la alerta. Texto adicional de la alerta.</small></div>
+              </div>
+            </mm-responsive-layout-user-item>
+            <mm-responsive-layout-user-item label="Área personal" box-style="false">
+              <section class="display-f flex--align-center" slot="custom-item-header"><i class="fas fa-user mr-n mr-s-lg"></i>
+                <div class="display-b-lg display-n">
+                  <h6 class="m-n p-n text--full_white">Francisco De la Torre</h6><small class="text--full_white">fdelatorre@demo.es</small>
+                </div>
+              </section>
+              <mm-user-profile id="userExample">
+                <mm-button class="adapt" label="Simular usuario" type="ghost" slot="mm-user-profile-simulation"></mm-button>
+                <mm-button class="adapt" label="Cambiar contraseña" type="ghost" slot="mm-user-profile-password"></mm-button>
+                <mm-button label="Cerrar sesión" type="secondary" slot="mm-user-profile-close"></mm-button>
+              </mm-user-profile>
+            </mm-responsive-layout-user-item>
+          </div>
+        </mm-responsive-layout-user-nav>
+      </div>
+      <div id="main" slot="content">
+        <mm-breadcrumb>
+          <ul>
+            <li><a href="../wip/wip.html">Dashboard</a>
+            </li>
+            <li><a href="../wip/wip.html">Filtro de servicios</a>
+            </li>
+            <li><span>1103265-2021/1</span>
+            </li>
+          </ul>
+        </mm-breadcrumb>
+        <div class="row py-xs pos-sticky-heading"> 
+          <div class="col-12">
+            <div class="display-f flex--justify-between">
+              <div class="display-f flex--align-center">
+                <h1 class="mb-n mr-xs">COMISMAR 1103265 - 2021/1</h1>
+                <mm-indicator class="mr-xs">pte avance</mm-indicator>
+                <mm-indicator class="status_info_secondary">tipo siniestro</mm-indicator>
+              </div>
+              <div class="display-f flex--align-center">
+                <div class="bg--full_white display-f flex--justify-end flex--align-center">
+                  <mm-button class="mr-xs" id="gestionarNota" label="GESTIONAR NOTAS" type="secondary"></mm-button>
+                  <mm-button class="mr-xs" id="gestionarTareas" label="GESTIONAR TAREAS" type="secondary"></mm-button>
+                  <mm-button id="gestionarCita" label="GESTIONAR CITA" type="primary"></mm-button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <main class="row">
+          <div class="col-12">              
+            <div class="container-flex main bg-white border-radius-2">
+              <div class="row">
+                <section class="col-12">
+                  <div class="row mb-m mt-m"> 
+                    <div class="col-6">
+                      <div class="card px-xs py-xs mb-s"> 
+                        <div class="card-header display-f flex--justify-between flex--align-center"> 
+                          <h3>Descripción del siniestro</h3><a class="underline" id="siniestroLightbox">Ver datos del siniestro</a>
+                        </div>
+                        <div class="card-body"> 
+                          <div class="row">
+                            <div class="col-6 display-flex">
+                              <div class="item">
+                                <h5>Póliza</h5>
+                                <p>1.170.277</p>
+                              </div>
+                              <div class="item">
+                                <h5>DNI</h5>
+                                <p>12345678V</p>
+                              </div>
+                            </div>
+                            <div class="col-6 display-flex">
+                              <div class="item">
+                                <h5>Asegurado</h5>
+                                <p>Paco López Martínez</p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-6 display-flex">
+                              <div class="item">
+                                <h5>Domicilio asegurado</h5>
+                                <p>Calle Rafael Bergamin 5 B:K P:3 28043 Madrid</p>
+                              </div>
+                            </div>
+                            <div class="col-6 display-flex">
+                              <div class="item">
+                                <h5>Referencia catastral</h5>
+                                <p> <a href="#">0899382658794650</a></p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-12 display-flex">
+                              <div class="item">
+                                <h5>Descripción del siniestro</h5>
+                                <p>Causa humedades al piso inferior en el baño</p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-6 display-flex">
+                              <div class="item">
+                                <h5>Perito alta servicio</h5>
+                                <p>Motivo: No está claro origen/dificultad ténica </p>
+                              </div>
+                            </div>
+                            <div class="col-6 display-flex">
+                              <div class="item">
+                                <h5>Causa</h5>
+                                <p>Causa humedades al piso inferior en el baño </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card px-xs py-xs mb-s"> 
+                        <div class="card-header display-f flex--justify-between flex--align-center"> 
+                          <h3>Datos del contacto</h3><a class="underline" id="contactoLightbox">Ver más contactos</a>
+                        </div>
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col-6 display-flex">
+                              <div class="item">
+                                <h5>Declarante</h5>
+                                <p>Asegurado</p>
+                              </div>
+                              <div class="item">
+                                <h5>Nombre y apellidos</h5>
+                                <p>Paco López Martínez</p>
+                              </div>
+                            </div>
+                            <div class="col-6 display-flex">
+                              <div class="item">
+                                <h5>Teléfono</h5>
+                                <p>634123456</p>
+                              </div>
+                              <div class="item">
+                                <h5>Horario de contacto</h5>
+                                <p>10:00 - 20:00h</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card px-xs py-xs mb-s"> 
+                        <div class="card-header display-f flex--justify-between flex--align-center"> 
+                          <h3>Perjudicados</h3><a class="underline" id="perjudicadosLightbox">Ver más perjudicados</a>
+                        </div>
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col-6 display-flex">
+                              <div class="item">
+                                <h5>Nombre y apellidos</h5>
+                                <p>Elena López Fernández</p>
+                              </div>
+                            </div>
+                            <div class="col-6 display-flex">
+                              <div class="item">
+                                <h5>Domicilio</h5>
+                                <p>Castillo de arévalo 11 28232 Las Rozas de Madrid</p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-6 display-flex">
+                              <div class="item">
+                                <h5>Nombre y apellidos</h5>
+                                <p>Elena López Fernández</p>
+                              </div>
+                            </div>
+                            <div class="col-6 display-flex">
+                              <div class="item">
+                                <h5>Domicilio</h5>
+                                <p>Castillo de arévalo 11 28232 Las Rozas de Madrid</p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-6 display-flex">
+                              <div class="item">
+                                <h5>Nombre y apellidos</h5>
+                                <p>Elena López Fernández</p>
+                              </div>
+                            </div>
+                            <div class="col-6 display-flex">
+                              <div class="item">
+                                <h5>Domicilio</h5>
+                                <p>Castillo de arévalo 11 28232 Las Rozas de Madrid</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="card px-xs py-xs mb-s"> 
+                        <div class="card-header display-f flex--justify-between flex--align-center"> 
+                          <h3>Detalle de la póliza</h3>
+                          <div class="actions"> <a class="underline mr-m" id="riesgoLightbox">Ver info riesgo</a><a class="underline" id="polizaLightbox">Ver detalles de la póliza</a></div>
+                        </div>
+                        <div class="card-body"> 
+                          <div class="row">
+                            <div class="col-6 display-flex">
+                              <div class="item">
+                                <h5>Producto</h5>
+                                <p> <a href="#">A todo riesgo PLUS</a></p>
+                              </div>
+                              <div class="item">
+                                <h5>Nº Condicionado</h5>
+                                <p>HG2001</p>
+                              </div>
+                            </div>
+                            <div class="col-6 display-flex">
+                              <div class="item">
+                                <h5>VIP</h5>
+                                <p>No</p>
+                              </div>
+                              <div class="item">
+                                <h5>CAV</h5>
+                                <p>Sí</p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-6 display-flex">
+                              <div class="item">
+                                <h5>Fecha contratación</h5>
+                                <p>12/05/2020 - 13:30h</p>
+                              </div>
+                              <div class="item">
+                                <h5>Fecha efecto</h5>
+                                <p>12/06/2020 - 13:30h</p>
+                              </div>
+                            </div>
+                            <div class="col-6 display-flex">
+                              <div class="item">
+                                <h5>Fecha ocurrencia</h5>
+                                <p>12/05/2020 - 13:30h</p>
+                              </div>
+                              <div class="item">
+                                <h5>Fecha declaración</h5>
+                                <p>12/06/2020 - 13:30h</p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-6 display-flex">
+                              <div class="item">
+                                <h5>Fecha vencimiento</h5>
+                                <p>12/05/2020 - 13:30h</p>
+                              </div>
+                              <div class="item">
+                                <h5>Proveedor</h5>
+                                <p> <a id="proveedorLightbox"><i class="fas fa-user-tie mr-xxs"></i>IPAS</a></p>
+                              </div>
+                            </div>
+                            <div class="col-6 display-flex">
+                              <div class="item">
+                                <h5>Estado de la póliza</h5>
+                                <mm-indicator class="status_success">En vigor</mm-indicator>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row"> 
+                            <div class="col-12"> 
+                              <mm-listing class="filter-table-header">
+                                <header class="w100 display-f flex--align-end" slot="header-title">
+                                  <h5 class="fs-normal display-ib mm-bold uppercase mb-s">Garantías y capitales asegurados</h5>
+                                </header>
+                                <table id="garantiaTable" slot="table">
+                                  <thead>
+                                    <tr>
+                                      <th type="">Garantias      </th>
+                                      <th type="">Capitales      </th>
+                                      <th type="">RP      </th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr class="undefined" id="garntiaRow_0">
+                                      <td>Vivienda</td>
+                                      <td class="text-nowrap"><span>155.756,36 €</span>
+                                      </td>
+                                      <td>No</td>
+                                    </tr>
+                                    <tr class="undefined" id="garntiaRow_1">
+                                      <td>Vivienda</td>
+                                      <td class="text-nowrap"><span>155.756,36 €</span>
+                                      </td>
+                                      <td>No</td>
+                                    </tr>
+                                    <tr class="undefined" id="garntiaRow_2">
+                                      <td>Mobiliario</td>
+                                      <td class="text-nowrap"><span>47.568,13 €</span>
+                                      </td>
+                                      <td>No</td>
+                                    </tr>
+                                    <tr class="undefined" id="garntiaRow_3">
+                                      <td>RC Conjunta</td>
+                                      <td class="text-nowrap"><span>300.000,00 €</span><a class="ml-xs" href="#"> <i class="fas fa-paperclip mr-xxs"></i>Ver detalle</a>
+                                      </td>
+                                      <td>-</td>
+                                    </tr>
+                                    <tr class="undefined" id="garntiaRow_4">
+                                      <td>RC Conjunta</td>
+                                      <td class="text-nowrap"><span>300.000,00 €</span><a class="ml-xs" href="#"> <i class="fas fa-paperclip mr-xxs"></i>Ver detalle</a>
+                                      </td>
+                                      <td>-</td>
+                                    </tr>
+                                    <tr class="undefined" id="garntiaRow_5">
+                                      <td>RC Conjunta</td>
+                                      <td class="text-nowrap"><span>300.000,00 €</span><a class="ml-xs" href="#"> <i class="fas fa-paperclip mr-xxs"></i>Ver detalle</a>
+                                      </td>
+                                      <td>-</td>
+                                    </tr>
+                                    <tr class="undefined" id="garntiaRow_6">
+                                      <td>Vivienda</td>
+                                      <td class="text-nowrap"><span>155.756,36 €</span>
+                                      </td>
+                                      <td>No</td>
+                                    </tr>
+                                    <tr class="undefined" id="garntiaRow_7">
+                                      <td>Vivienda</td>
+                                      <td class="text-nowrap"><span>155.756,36 €</span>
+                                      </td>
+                                      <td>No</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </mm-listing>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row"> 
+                    <div class="col-12">
+                      <div class="card px-xs py-xs mb-s"> 
+                        <div class="card-header display-f flex--justify-between flex--align-center"> 
+                          <h3>Siniestros previos</h3>
+                        </div>
+                        <div class="card-body"> 
+                          <div class="row"> 
+                            <div class="col-12"> 
+                              <mm-listing class="filter-table-header" compact>
+                                <table id="siniestroTable" slot="table">
+                                  <thead>
+                                    <tr>
+                                      <th type="">Siniestro      </th>
+                                      <th type="">tipo      </th>
+                                      <th type="">causa      </th>
+                                      <th type="">ocurrencia      </th>
+                                      <th type="">Declaración      </th>
+                                      <th type="date">terminación      </th>
+                                      <th type="">Descripción del siniestro      </th>
+                                      <th type="">coberturas      </th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr class="undefined" id="garntiaRow_0">
+                                      <td>1254808 / 2021</td>
+                                      <td>IN</td>
+                                      <td>Daños eléctricos por sobretensión</td>
+                                      <td>25/03/2021</td>
+                                      <td>26/03/2021</td>
+                                      <td>15/03/2021</td>
+                                      <td><span>Descripción del siniestro...</span>
+                                        <mm-tooltip>Descripción del siniestro...</mm-tooltip>
+                                      </td>
+                                      <td><span>CRISTALERO - CONFIRMA </span>
+                                        <mm-tooltip>CRISTALERO - CONFIRMA SINIESTRO - MEDIDO UNA LUNA DE 10 MM DE 160 X 90 CM CON CANTOS PULIDOS Y ESQUINAS REDONDAS, PERO EL CLIENTE EXIGE TAMBIEN LA SUSTITUCION DE LAS VENTOSAS DE SUJECION DEL CRISTAL, AUNQUE LAS MISMAS ESTAN EN ESTADO ACEPTABLE DE REUTILIZACION.</mm-tooltip>
+                                      </td>
+                                    </tr>
+                                    <tr class="undefined" id="garntiaRow_1">
+                                      <td>1254808 / 2021</td>
+                                      <td>IN</td>
+                                      <td>Daños eléctricos por sobretensión</td>
+                                      <td>25/03/2021</td>
+                                      <td>26/03/2021</td>
+                                      <td>15/03/2021</td>
+                                      <td><span>Descripción del siniestro...</span>
+                                        <mm-tooltip>Descripción del siniestro...</mm-tooltip>
+                                      </td>
+                                      <td><span>CRISTALERO - CONFIRMA </span>
+                                        <mm-tooltip>CRISTALERO - CONFIRMA SINIESTRO - MEDIDO UNA LUNA DE 10 MM DE 160 X 90 CM CON CANTOS PULIDOS Y ESQUINAS REDONDAS, PERO EL CLIENTE EXIGE TAMBIEN LA SUSTITUCION DE LAS VENTOSAS DE SUJECION DEL CRISTAL, AUNQUE LAS MISMAS ESTAN EN ESTADO ACEPTABLE DE REUTILIZACION.</mm-tooltip>
+                                      </td>
+                                    </tr>
+                                    <tr class="undefined" id="garntiaRow_2">
+                                      <td>1254808 / 2021</td>
+                                      <td>IN</td>
+                                      <td>Daños eléctricos por sobretensión</td>
+                                      <td>25/03/2021</td>
+                                      <td>26/03/2021</td>
+                                      <td>15/03/2021</td>
+                                      <td><span>Descripción del siniestro...</span>
+                                        <mm-tooltip>Descripción del siniestro...</mm-tooltip>
+                                      </td>
+                                      <td><span>CRISTALERO - CONFIRMA </span>
+                                        <mm-tooltip>CRISTALERO - CONFIRMA SINIESTRO - MEDIDO UNA LUNA DE 10 MM DE 160 X 90 CM CON CANTOS PULIDOS Y ESQUINAS REDONDAS, PERO EL CLIENTE EXIGE TAMBIEN LA SUSTITUCION DE LAS VENTOSAS DE SUJECION DEL CRISTAL, AUNQUE LAS MISMAS ESTAN EN ESTADO ACEPTABLE DE REUTILIZACION.</mm-tooltip>
+                                      </td>
+                                    </tr>
+                                    <tr class="undefined" id="garntiaRow_3">
+                                      <td>1254808 / 2021</td>
+                                      <td>IN</td>
+                                      <td>Daños eléctricos por sobretensión</td>
+                                      <td>25/03/2021</td>
+                                      <td>26/03/2021</td>
+                                      <td>15/03/2021</td>
+                                      <td><span>Descripción del siniestro...</span>
+                                        <mm-tooltip>Descripción del siniestro...</mm-tooltip>
+                                      </td>
+                                      <td><span>CRISTALERO - CONFIRMA </span>
+                                        <mm-tooltip>CRISTALERO - CONFIRMA SINIESTRO - MEDIDO UNA LUNA DE 10 MM DE 160 X 90 CM CON CANTOS PULIDOS Y ESQUINAS REDONDAS, PERO EL CLIENTE EXIGE TAMBIEN LA SUSTITUCION DE LAS VENTOSAS DE SUJECION DEL CRISTAL, AUNQUE LAS MISMAS ESTAN EN ESTADO ACEPTABLE DE REUTILIZACION.</mm-tooltip>
+                                      </td>
+                                    </tr>
+                                    <tr class="undefined" id="garntiaRow_4">
+                                      <td>1254808 / 2021</td>
+                                      <td>IN</td>
+                                      <td>Daños eléctricos por sobretensión</td>
+                                      <td>25/03/2021</td>
+                                      <td>26/03/2021</td>
+                                      <td>15/03/2021</td>
+                                      <td><span>Descripción del siniestro...</span>
+                                        <mm-tooltip>Descripción del siniestro...</mm-tooltip>
+                                      </td>
+                                      <td><span>CRISTALERO - CONFIRMA </span>
+                                        <mm-tooltip>CRISTALERO - CONFIRMA SINIESTRO - MEDIDO UNA LUNA DE 10 MM DE 160 X 90 CM CON CANTOS PULIDOS Y ESQUINAS REDONDAS, PERO EL CLIENTE EXIGE TAMBIEN LA SUSTITUCION DE LAS VENTOSAS DE SUJECION DEL CRISTAL, AUNQUE LAS MISMAS ESTAN EN ESTADO ACEPTABLE DE REUTILIZACION.</mm-tooltip>
+                                      </td>
+                                    </tr>
+                                    <tr class="undefined" id="garntiaRow_5">
+                                      <td>1254808 / 2021</td>
+                                      <td>IN</td>
+                                      <td>Daños eléctricos por sobretensión</td>
+                                      <td>25/03/2021</td>
+                                      <td>26/03/2021</td>
+                                      <td>15/03/2021</td>
+                                      <td><span>Descripción del siniestro...</span>
+                                        <mm-tooltip>Descripción del siniestro...</mm-tooltip>
+                                      </td>
+                                      <td><span>CRISTALERO - CONFIRMA </span>
+                                        <mm-tooltip>CRISTALERO - CONFIRMA SINIESTRO - MEDIDO UNA LUNA DE 10 MM DE 160 X 90 CM CON CANTOS PULIDOS Y ESQUINAS REDONDAS, PERO EL CLIENTE EXIGE TAMBIEN LA SUSTITUCION DE LAS VENTOSAS DE SUJECION DEL CRISTAL, AUNQUE LAS MISMAS ESTAN EN ESTADO ACEPTABLE DE REUTILIZACION.</mm-tooltip>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </mm-listing>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </main>
+        <mm-lightbox class="sizeS" label="Más detalles de la póliza" id-lightbox="polizaLightbox">
+          <section slot="lightbox-content">
+            <div class="box-section">
+              <div class="box-section-header">
+                <h4>Perfil del cliente</h4>
+              </div>
+              <div class="box-section-body">
+                <div class="row mx-n">
+                  <div class="col-3">
+                    <div class="item"> 
+                      <h5>Perfil</h5>
+                      <mm-indicator class="client_gold mb-s">Gold</mm-indicator>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="item"> 
+                      <h5>Empleado</h5>
+                      <p>No</p>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="item"> 
+                      <h5>Hipoteca</h5>
+                      <p>Si</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="box-section">
+              <div class="box-section-header">
+                <h4>Firmas de la póliza</h4>
+              </div>
+              <div class="box-section-body">
+                <div class="row mx-n">
+                  <div class="col-3"> 
+                    <div class="item"> 
+                      <h5>Alta CP</h5>
+                      <p>No Aplica</p>
+                    </div>
+                  </div>
+                  <div class="col-3"> 
+                    <div class="item"> 
+                      <h5>Alta PA</h5>
+                      <p>No Aplica</p>
+                    </div>
+                  </div>
+                  <div class="col-3"> 
+                    <div class="item"> 
+                      <h5>Supl CP</h5>
+                      <p>Firmada</p>
+                    </div>
+                  </div>
+                  <div class="col-3"> 
+                    <div class="item"> 
+                      <h5>Supl PA</h5>
+                      <p>No Aplica</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="box-section">
+              <div class="box-section-header">
+                <h4>h4 Datos del tomador</h4>
+              </div>
+              <div class="box-section-body">
+                <div class="row mx-n mb-m"> 
+                  <div class="col-4">
+                    <div class="item"> 
+                      <h5>Nombre y apellidos</h5>
+                      <p>Francisco Martínez Prieto</p>
+                    </div>
+                  </div>
+                  <div class="col-3">  
+                    <div class="item"> 
+                      <h5>NIF</h5>
+                      <p>12345678X</p>
+                    </div>
+                  </div>
+                  <div class="col-5">
+                    <div class="item"> 
+                      <h5>Domiclio</h5>
+                      <p>Calle Castillo de arévalo 11</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mx-n"> 
+                  <div class="col-4">
+                    <div class="item"> 
+                      <h5>Fecha de nacimiento</h5>
+                      <p>06/03/1966</p>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="item"> 
+                      <h5>Teléfono</h5>
+                      <p>634123456</p>
+                    </div>
+                  </div>
+                  <div class="col-5">
+                    <div class="item"> 
+                      <h5>Email</h5>
+                      <p>franmarpi@gmail.com</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section class="display-f flex--justify-between mt-m" slot="lightbox-content-button">
+            <button class="mm-button basic support button-close mr-m" type="button">Cancelar</button>
+          </section>
+        </mm-lightbox>
+        <mm-lightbox class="sizeS" label="Más datos del siniestro" id-lightbox="siniestroLightbox">
+          <section slot="lightbox-content">
+            <div class="box-section">
+              <div class="box-section-header">
+                <h4>Detalle del siniestro</h4>
+              </div>
+              <div class="box-section-body">
+                <div class="row mx-n mb-xs">
+                  <div class="col-3">
+                    <div class="item"> 
+                      <h5>Estado</h5>
+                      <mm-indicator>en curso</mm-indicator>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="item"> 
+                      <h5>Situación</h5>
+                      <mm-indicator class="status_info_secondary">PTE avance</mm-indicator>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="item"> 
+                      <h5>Causa</h5>
+                      <p>Rotura de tubería empotrada</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mx-n">
+                  <div class="col-3">
+                    <div class="item"> 
+                      <h5>Ubicación daño</h5>
+                      <p>trasteros</p>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="item"> 
+                      <h5>Bienes dañados</h5>
+                      <p>Paramento</p>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="item"> 
+                      <h5>Causante</h5>
+                      <p>Asegurado</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="box-section">
+              <div class="box-section-header">
+                <h4>Atributos</h4>
+              </div>
+              <div class="box-section-body">
+                <div class="row mx-n mb-xs">
+                  <div class="col-3"> 
+                    <div class="item"> 
+                      <p>VTS</p>
+                    </div>
+                  </div>
+                  <div class="col-3"> 
+                    <div class="item"> 
+                      <h5>Corrosión</h5>
+                    </div>
+                  </div>
+                  <div class="col-3"> 
+                    <div class="item"> 
+                      <h5>Infraseguro</h5>
+                    </div>
+                  </div>
+                  <div class="col-3"> 
+                    <div class="item"> 
+                      <h5>Causante no repara</h5>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mx-n">
+                  <div class="col-3"> 
+                    <div class="item"> 
+                      <p>Judicial</p>
+                    </div>
+                  </div>
+                  <div class="col-3"> 
+                    <div class="item"> 
+                      <h5>Consorciable</h5>
+                    </div>
+                  </div>
+                  <div class="col-3"> 
+                    <div class="item"> 
+                      <h5>Seguimiento especial</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section class="display-f flex--justify-between mt-m" slot="lightbox-content-button">
+            <button class="mm-button basic support button-close mr-m" type="button">Cancelar</button>
+          </section>
+        </mm-lightbox>
+        <mm-lightbox class="sizeS" label="Mas contactos" id-lightbox="contactoLightbox">
+          <section slot="lightbox-content">
+            <div class="row mx-n">
+              <div class="col-12">
+                <mm-listing class="filter-table-header" search compact>
+                  <header class="w100 display-f flex--align-end" slot="header-title">
+                    <h5 class="fs-normal display-ib mm-bold uppercase mb-s">Listado de contactos</h5>
+                  </header>
+                  <table id="contactoModalTable" slot="table">
+                    <thead>
+                      <tr>
+                        <th sortable searchable type="">nombre y apellidos      </th>
+                        <th sortable searchable type="">teléfono      </th>
+                        <th sortable searchable type="">horario contacto      </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="undefined" id="contactoModalRow_0">
+                        <td>Juan Pablo Labaña</td>
+                        <td>634123456</td>
+                        <td>10:00 - 20:00h</td>
+                      </tr>
+                      <tr class="undefined" id="contactoModalRow_1">
+                        <td>Juan Pablo Labaña</td>
+                        <td>634123456</td>
+                        <td>10:00 - 20:00h</td>
+                      </tr>
+                      <tr class="undefined" id="contactoModalRow_2">
+                        <td>Noemí Fernández</td>
+                        <td>634123456</td>
+                        <td>10:00 - 20:00h</td>
+                      </tr>
+                      <tr class="undefined" id="contactoModalRow_3">
+                        <td>Jose María Iglesias</td>
+                        <td>634123456</td>
+                        <td>10:00 - 20:00h</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </mm-listing>
+              </div>
+              <section class="display-f flex--justify-between mt-m" slot="lightbox-content-button">
+                <button class="mm-button basic support button-close mr-m" type="button">Cancelar</button>
+              </section>
+            </div>
+          </section>
+        </mm-lightbox>
+        <mm-lightbox class="sizeS" label="Más perjudicados" id-lightbox="perjudicadosLightbox">
+          <section slot="lightbox-content">
+            <div class="row mx-n">
+              <div class="col-12">
+                <mm-listing class="filter-table-header" search compact>
+                  <header class="w100 display-f flex--align-end" slot="header-title">
+                    <h5 class="fs-normal display-ib mm-bold uppercase mb-s">Listado de perjudicados</h5>
+                  </header>
+                  <table id="perjudicadosModalTable" slot="table">
+                    <thead>
+                      <tr>
+                        <th sortable searchable type="">nombre y apellidos      </th>
+                        <th sortable searchable type="">domicilio      </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="undefined" id="perjudicadosModalRow_0">
+                        <td>Juan Pablo Labaña</td>
+                        <td>Castillo de arévalo 11 28232 Las Rozas de Madrid</td>
+                      </tr>
+                      <tr class="undefined" id="perjudicadosModalRow_1">
+                        <td>Juan Pablo Labaña</td>
+                        <td>José Noriega 15, 1 1 28017 Madrid</td>
+                      </tr>
+                      <tr class="undefined" id="perjudicadosModalRow_2">
+                        <td>Noemí Fernández</td>
+                        <td>Castillo de arévalo 11 28232 Las Rozas de Madrid</td>
+                      </tr>
+                      <tr class="undefined" id="perjudicadosModalRow_3">
+                        <td>Jose María Iglesias</td>
+                        <td>José Noriega 15, 1 1 28017 Madrid</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </mm-listing>
+              </div>
+              <section class="display-f flex--justify-between mt-m" slot="lightbox-content-button">
+                <button class="mm-button basic support button-close mr-m" type="button">Cancelar</button>
+              </section>
+            </div>
+          </section>
+        </mm-lightbox>
+        <mm-lightbox class="sizeM" label="Información del riesgo" id-lightbox="riesgoLightbox">
+          <section slot="lightbox-content">
+            <div class="box-section">
+              <div class="box-section-header">
+                <h4>Información del riesgo</h4>
+              </div>
+              <div class="box-section-body">
+                <div class="row mx-n mb-s">
+                  <div class="col-3">
+                    <div class="item"> 
+                      <h5>Tipo</h5>
+                      <p>Piso</p>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="item"> 
+                      <h5>Planta</h5>
+                      <p>Planta baja</p>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="item"> 
+                      <h5>Régimen</h5>
+                      <p>Propiedad (Ocupante)</p>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="item"> 
+                      <h5>Uso</h5>
+                      <p>Vivienda habitual</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mx-n mb-s">
+                  <div class="col-3">
+                    <div class="item"> 
+                      <h5>Ubicación</h5>
+                      <p>Núcleo urbano</p>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="item"> 
+                      <h5>Año construcción</h5>
+                      <p>2004</p>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="item"> 
+                      <h5>Año última reforma</h5>
+                      <p>2004</p>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="item"> 
+                      <h5>Tipo de construcción</h5>
+                      <p>Estándar</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mx-n mb-s">
+                  <div class="col-3">
+                    <div class="item"> 
+                      <h5>Actividad profesional</h5>
+                      <p>No</p>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="item"> 
+                      <h5>Porcentaje uso</h5>
+                      <p>0.00%</p>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="item"> 
+                      <h5>Superficie construida</h5>
+                      <p>112 m2</p>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="item"> 
+                      <h5>Superficie terraza</h5>
+                      <p>100 m2</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mx-n">
+                  <div class="col-3">
+                    <div class="item"> 
+                      <h5>Parcela si construir</h5>
+                      <p>0 m2</p>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="item"> 
+                      <h5>Nº trasteros y garajes</h5>
+                      <p>1</p>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="item"> 
+                      <h5>Nº habitantes</h5>
+                      <p>2</p>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="item"> 
+                      <h5>Nº puertas acceso</h5>
+                      <p>3</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="box-section">
+              <div class="box-section-header">
+                <h4>medidas de robo</h4>
+              </div>
+              <div class="box-section-body">
+                <div class="row mx-n mb-s">
+                  <div class="col-3"> 
+                    <div class="item"> 
+                      <h5>Puertas blindadas</h5>
+                      <p>Sí</p>
+                    </div>
+                  </div>
+                  <div class="col-3"> 
+                    <div class="item"> 
+                      <h5>Rejas fijas en ventana</h5>
+                      <p>Sí</p>
+                    </div>
+                  </div>
+                  <div class="col-3"> 
+                    <div class="item"> 
+                      <h5>Caja fuerte</h5>
+                      <p>Sí</p>
+                    </div>
+                  </div>
+                  <div class="col-3"> 
+                    <div class="item"> 
+                      <h5>Vivienda conectada a alarma</h5>
+                      <p>Sí</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mx-n">
+                  <div class="col-3"> 
+                    <div class="item"> 
+                      <h5>Sistema vigilancia 24 horas</h5>
+                      <p>No</p>
+                    </div>
+                  </div>
+                  <div class="col-3"> 
+                    <div class="item"> 
+                      <h5>Sistema electrónico de seguridad</h5>
+                      <p>Sí</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="box-section">
+              <div class="box-section-header">
+                <h4>observaciones</h4>
+              </div>
+              <div class="box-section-body">
+                <div class="row mx-n">
+                  <div class="col-12">
+                    <div class="item"> 
+                      <p>Nunc mollis feugiat pulvinar. Nunc sit amet laoreet justo. Morbi sem erat, interdum quis lectus a, tincidunt bibendum urna. Vestibulum purus elit, sagittis vel tortor ut.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section class="display-f flex--justify-between mt-m" slot="lightbox-content-button">
+            <button class="mm-button basic support button-close mr-m" type="button">Cancelar</button>
+          </section>
+        </mm-lightbox>
+        <mm-lightbox class="sizeS" label="Datos del proveedor" id-lightbox="proveedorLightbox">
+          <section slot="lightbox-content">
+            <div class="box-section no-border">
+              <div class="box-section-body">
+                <div class="row mx-n mb-xs">
+                  <div class="col-12">
+                    <div class="item"> 
+                      <h5>Nombre</h5>
+                      <p>IPAS</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mx-n mb-xs">
+                  <div class="col-4">
+                    <div class="item"> 
+                      <h5>Teléfono 1</h5>
+                      <p>665788900</p>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="item"> 
+                      <h5>Email 1</h5>
+                      <p>nombre@mail.com</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mx-n">
+                  <div class="col-4">
+                    <div class="item"> 
+                      <h5>Teléfono 2</h5>
+                      <p>665788900</p>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="item"> 
+                      <h5>Email 2</h5>
+                      <p>nombre_dos@mail.com</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section class="display-f flex--justify-between mt-m" slot="lightbox-content-button">
+            <button class="mm-button basic support button-close mr-m" type="button">Cancelar</button>
+          </section>
+        </mm-lightbox>
+        <mm-sidesheet class="size_50 show" id="sidesheetNuevaNota" position="right" size="50">
+          <div class="pb-xs">
+            <h3>Gestionar notas</h3>
+          </div>
+          <div class="heading display-f flex--align-center mb-xs"> 
+            <h4 class="border-n p-n m-n fs-normal">Crear nueva nota</h4>
+          </div>
+          <div class="content">
+            <section class="mb-m">
+              <div class="row mb-s">
+                <div class="col-12 create-note display-f"> 
+                  <mm-textfield class="mod-date" label="Fecha estimada de realización" mandatory>
+                    <mm-datepicker id="generic-datepicker" placeholder="dd/mm/aaaa" path="foo">             </mm-datepicker>
+                  </mm-textfield>
+                  <mm-textfield class="mod-time" label="Hora estimada de realización" mandatory>
+                    <mm-datepicker id="generic-datepicker" placeholder="hh:mm" type="time"></mm-datepicker>
+                  </mm-textfield>
+                </div>
+                <div class="col-12 mt-s">
+                  <mm-textarea class="observaciones" label="Observaciones" helper-icon="Añade una descripción a la tarea para aportar más información sobre la misma" scrollable mandatory>
+                    <textarea name="name" height="54" placeholder="Añade una descripción a tu nota" maxlength="581"></textarea>
+                  </mm-textarea>
+                  <div class="display-f flex--justify-end mt-s">
+                    <mm-button label="Añadir nueva nota" type="secondary"></mm-button>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <h3 class="subtitle mb-xs">Mis notas</h3>
+              <div class="note mb-l is-open">
+                <div class="note__header exclamation-red display-f flex--justify-between flex--align-center mb-s pb-xs">
+                  <mm-radiobutton class="note__header--radio">
+                    <input type="radio" value="ch1" name="radio1" id="radio1">
+                    <label></label>
+                    <mm-tooltip class="dark">Marcar como realizada</mm-tooltip>
+                  </mm-radiobutton>
+                  <div class="note__header--left display-f flex--align-center"><i class="fas fa-exclamation-triangle text--status_critical_500 mr-xs"></i>
+                    <p class="note__header--date mr-xs">11/04/2022 - 10:30h</p>
+                    <p class="note__header--text">“Recordar llamar al asegurado por la tarde”</p>
+                  </div><i class="fas fa-minus note__header--open-icon ml-s"></i>
+                </div>
+                <div class="note__body pl-m">
+                  <div class="mb-xs">
+                    <p class="note__body--title">Fecha y hora estimada de realización</p>
+                    <p>18/04/2022 - 17:00 h</p>
+                  </div>
+                  <div class="mb-xs">
+                    <p class="note__body--title">Observaciones</p>
+                    <p>Recordar llamar al asegurado por la tarde lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean molestie, odio sit amet sollicitudin porta, ex arcu dignissim sapien, in tincidunt sem tortor sed nisl.</p>
+                  </div>
+                  <div class="display-f flex--justify-between flex--align-end">
+                    <div class="mb-xs">
+                      <p class="note__body--title mb-xs">Estado</p>
+                      <mm-indicator class="status_info">Pendiente</mm-indicator>
+                    </div>
+                    <div class="display-f">
+                      <mm-button class="btn-grey mr-m" id="lightbox2" type="ghost"><i class="fas fa-trash mr-xs" aria-hidden="true"></i><span>Eliminar nota</span></mm-button>
+                      <mm-button class="btn-pink" type="ghost"><i class="fas fa-edit mr-xs" aria-hidden="true"></i><span>Modificar nota</span></mm-button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="note mb-l">
+                <div class="note__header display-f flex--justify-between flex--align-center mb-s pb-xs">
+                  <mm-radiobutton class="note__header--radio">
+                    <input type="radio" value="ch1" name="radio1" id="radio2" checked>
+                    <label></label>
+                    <mm-tooltip class="dark">Marcar como realizada</mm-tooltip>
+                  </mm-radiobutton>
+                  <div class="note__header--left display-f flex--align-center">
+                    <mm-indicator class="status_success mr-xs">Realizada</mm-indicator>
+                    <p class="note__header--date mr-xs">11/04/2022 - 10:30h</p>
+                    <p class="note__header--text">“Recordar llamar al asegurado por la tarde”</p>
+                  </div><i class="fas fa-plus note__header--open-icon ml-s"></i>
+                </div>
+                <div class="note__body pl-m">
+                  <div class="mb-xs">
+                    <p class="note__body--title">Fecha y hora estimada de realización</p>
+                    <p>18/04/2022 - 17:00 h</p>
+                  </div>
+                  <div class="mb-xs">
+                    <p class="note__body--title">Observaciones</p>
+                    <p>Recordar llamar al asegurado por la tarde lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean molestie, odio sit amet sollicitudin porta, ex arcu dignissim sapien, in tincidunt sem tortor sed nisl.</p>
+                  </div>
+                  <div class="display-f flex--justify-between flex--align-end">
+                    <div class="mb-xs">
+                      <p class="note__body--title mb-xs">Estado</p>
+                      <mm-indicator class="status_info">Pendiente</mm-indicator>
+                    </div>
+                    <div class="display-f">
+                      <mm-button class="mr-m" id="lightbox2" type="ghost"><i class="fas fa-trash mr-xs" aria-hidden="true"></i><span>Eliminar nota</span></mm-button>
+                      <mm-button class="btn-pink" type="ghost"><i class="fas fa-edit mr-xs" aria-hidden="true"></i><span>Modificar nota</span></mm-button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="note mb-l is-open">
+                <div class="note__header exclamation-red display-f flex--justify-between flex--align-center mb-s pb-xs">
+                  <mm-radiobutton class="note__header--radio">
+                    <input type="radio" value="ch1" name="radio1" id="radio1">
+                    <label></label>
+                    <mm-tooltip class="dark">Marcar como realizada</mm-tooltip>
+                  </mm-radiobutton>
+                  <div class="note__header--left display-f flex--align-center"><i class="fas fa-exclamation-triangle text--status_critical_500 mr-xs"></i>
+                    <p class="note__header--date mr-xs">11/04/2022 - 10:30h</p>
+                    <p class="note__header--text">“Recordar llamar al asegurado por la tarde”</p>
+                  </div><i class="fas fa-minus note__header--open-icon ml-s"></i>
+                </div>
+                <div class="note__body pl-m">
+                  <div class="heading mb-xs"> 
+                    <h4 class="border-n p-n m-n fs-normal">Modificar nota</h4>
+                  </div>
+                  <div class="content">
+                    <section class="mb-m">
+                      <div class="row mb-s">
+                        <div class="col-12 mod-note display-f">                 
+                          <mm-textfield class="mod-date" label="Fecha estimada de realización" mandatory>
+                            <mm-datepicker id="generic-datepicker" placeholder="dd/mm/aaaa" path="foo"></mm-datepicker>
+                          </mm-textfield>
+                          <mm-textfield class="mod-time" label="Hora estimada de realización" mandatory>
+                            <mm-datepicker id="generic-datepicker" placeholder="hh:mm" type="time"></mm-datepicker>
+                          </mm-textfield>
+                        </div>
+                        <div class="col-12 mt-s">
+                          <mm-textarea label="Observaciones" helper-icon="Añade una descripción a la tarea para aportar más información sobre la misma" scrollable mandatory>
+                            <textarea name="name" height="54" placeholder="Texto dentro del textarea..." maxlength="581"></textarea>
+                          </mm-textarea>
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                  <div class="display-f flex--justify-between flex--align-end">
+                    <div class="mb-m">
+                      <label class="pos-relative"><span>Estado</span></label>
+                      <mm-buttons-selector class="mt-xxs">
+                        <button class="grouping-button-item mr-xxs" type="button" name="estado" value="1">Pendiente</button>
+                        <button class="grouping-button-item" type="button" name="estado" value="0">Realizada</button>
+                      </mm-buttons-selector>
+                    </div>
+                    <div class="display-f">
+                      <mm-button class="btn-grey mr-m" id="lightbox2" type="ghost"><i class="fas fa-times mr-xs" aria-hidden="true"></i><span>Cancelar</span></mm-button>
+                      <mm-button class="btn-pink" type="ghost"><i class="fas fa-check mr-xs" aria-hidden="true"></i><span>Guardar nota</span></mm-button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </mm-sidesheet>
+        <mm-lightbox label="¿Desea eliminar esta nota?" id-lightbox="lightbox2">
+          <div class="lightbox-fixed-button" slot="lightbox-content">
+            <section>
+              <div class="row">
+                <div class="col-12">
+                  <p>Una vez eliminada, no podrá recuperarla y visualizarla en tu panel de gestión de notas.</p>
+                </div>
+              </div>
+              <div class="display-f flex--justify-between flex--align-end">
+                <mm-button class="button-close mt-s" label="Cancelar" type="support"></mm-button>
+                <div class="display-f flex--justify-end flex--wrap">
+                  <mm-button class="ml-s mt-s" label="Eliminar nota"></mm-button>
+                </div>
+              </div>
+            </section>
+          </div>
+        </mm-lightbox>
+        <script type="text/javascript">
+          const modalManageNotes = document.querySelector('mm-sidesheet.size_50');
+          if (modalManageNotes) {
+            const observer = new MutationObserver((mutations, observer) => {        
+              const textAreaTooltipHelp = document.querySelector('.observaciones mm-tooltip');
+              if (textAreaTooltipHelp) {
+                textAreaTooltipHelp.style.width = `230px`;
+              }
+          
+              const radioTooltipHelp = document.querySelectorAll('mm-radiobutton mm-tooltip');
+              if (radioTooltipHelp) {
+                radioTooltipHelp.forEach((element, index) => {
+                  element.style.width = `50px`;
+                  element.style.left = `-15px`;
+                });
+              }
+          
+            });
+          
+              observer.observe(modalManageNotes, {
+                subtree: true,
+                attributes: true
+              });
+          }
+          const openModal = document.querySelectorAll('.note');
+          openModal.forEach((element, index) => {
+            const iconModal = element.querySelector('.note__header');
+            iconModal.addEventListener('click', clickHeader);
+            function clickHeader() {
+              const noteBody = element.querySelector('.note__body');
+              const noteStatus = window.getComputedStyle(noteBody, null);
+              const iconTurn = element.querySelector('i.note__header--open-icon');
+              if (noteBody && noteStatus && iconTurn) {
+                if (noteStatus.display == 'block') {
+                  noteBody.style.display = 'none';
+                } else if (noteStatus.display == 'none'){
+                  noteBody.style.display = 'block';
+                }
+                if (iconTurn.classList.contains('fa-minus')) {
+                    iconTurn.classList.remove('fa-minus');
+                    iconTurn.classList.add('fa-plus');
+          
+                } else if (iconTurn.classList.contains('fa-plus')) {
+                    iconTurn.classList.remove('fa-plus');
+                    iconTurn.classList.add('fa-minus');
+                }
+              }
+            }
+          });
+        </script>
+      </div>
+    </mm-responsive-layout>
+  </body>
+</html>

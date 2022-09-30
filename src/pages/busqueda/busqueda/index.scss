@@ -1,0 +1,111 @@
+.home-header {
+  background-color: #00a4e3;
+  background-image: url("../img/ilustration-home.png");
+  background-repeat: no-repeat;
+  background-position: 90%;
+  min-height: 365px;
+
+  .tab-header.line mm-tab-header {
+    .tab-header-item {
+      color: #fff;
+      font-size: 16px;
+      font-family: "OpenSans-Semibold";
+      text-transform: unset;
+
+      &:after {
+        background-color: #fff;
+        height: 5px;
+      }
+
+      &:not(.active):after {
+        content: unset;
+      }
+    }
+  }
+}
+
+.mm-box-check-group {
+  display: flex;
+  flex-direction: column;
+  .checks {
+    display: flex;
+    mm-checkbox {
+      flex: 1 1 0px;
+    }
+  }
+}
+
+mm-accordion {
+  &.search {
+    .accordion-title {
+      border-bottom: none;
+      border-top: none;
+    }
+    .accordion-content {
+      border-bottom: none !important;
+    }
+
+    mm-combobox {
+      width: 180px;
+    }
+  }
+}
+
+mm-listing {
+  .dataTables_wrapper {
+    border-bottom: none;
+  }
+  table {
+    thead {
+      th[type="situacion"] {
+        width: 100px;
+      }
+    }
+    tbody {
+      tr {
+        &.info {
+          background: #fff !important;
+          td {
+            border-bottom: 1px solid #3269b3;
+            &:first-child {
+              border-left: 8px solid #3269b3;
+            }
+            i {
+              color: #3269b3;
+            }
+          }
+        }
+        &.clock {
+          background: #fff !important;
+          td {
+            border-bottom: 1px solid #ffae33;
+            &:first-child {
+              border-left: 8px solid #ffae33;
+            }
+            i {
+              color: #ffae33;
+            }
+          }
+        }
+        &.exclamation {
+          background: #fff !important;
+          td {
+            border-bottom: 1px solid #d62c42;
+            &:first-child {
+              border-left: 8px solid #d62c42;
+            }
+            i {
+              color: #d62c42;
+            }
+          }
+        }
+      }
+    }
+  }
+  mm-indicator {
+    .indicator {
+      font-size: 0.688rem;
+      padding: 0 7px;
+    }
+  }
+}

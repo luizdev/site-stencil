@@ -1,0 +1,18 @@
+mm-tooltip.top80 {
+  transform: translateY(-80px);
+
+  &::after {
+    top: calc(70% - 5px);
+  }
+}
+mm-tooltip.min-tooltip-fitContent {
+  min-width: calc(100% - 616px); // El tamaño del sidebar + padding
+
+  @media screen and (max-width: $breakpoint-m) {
+    min-width: calc(100% - 316px);
+  }
+}
+
+mm-helper mm-tooltip {
+  width: fit-content;
+}

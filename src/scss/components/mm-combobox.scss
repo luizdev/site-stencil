@@ -1,0 +1,33 @@
+mm-combobox {
+  &.form-index {
+    .options {
+      z-index: 5;
+    }
+  }
+
+  &.remarkedGrey {
+    .remarked {
+      pointer-events: none;
+    }
+    .option:not(.disabled):not(.active) .remarked {
+      color: grey !important;
+      text-transform: uppercase;
+      font-size: 10px;
+    }
+  }
+
+  mm-textfield .input-content {
+    input {
+      color: #a0aab5;
+    }
+  }
+
+  &.is-selected {
+    mm-textfield .input-content {
+      input {
+        color: #2a2425;
+        font-family: OpenSans;
+      }
+    }
+  }
+}

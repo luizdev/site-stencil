@@ -1,0 +1,12 @@
+mixin breadcrumbs(breadcrumbsItems)
+  mm-breadcrumb
+    ul
+      each item, index in breadcrumbsItems
+        li
+          if (index == breadcrumbsItems.length - 1) 
+            span #{item[0]}
+          else
+            if item[1]
+              a(href=`${item[1]}`) #{item[0]}
+            else
+              a(href="../wip/wip.html") #{item[0]}

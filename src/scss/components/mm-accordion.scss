@@ -1,0 +1,94 @@
+mm-accordion {
+  &.no-border {
+    .active {
+      border-bottom: none;
+    }
+  }
+
+  &.active {
+    height: inherit;
+  }
+
+  &.extraSmall-title {
+    .accordion-title {
+      font-size: 12px;
+    }
+  }
+
+  &.small-title {
+    .active {
+      border-bottom: none;
+    }
+
+    .accordion-title {
+      padding: 6px 0 6px 35px;
+      text-transform: none;
+    }
+  }
+
+  &.details .accordion-content p {
+    padding: 10px 0 0 0;
+    margin: 0 0 8px;
+    line-height: 22px;
+  }
+
+  &.newCustomer .accordion-content .accordion-body {
+    // padding: 10px;
+    // border-left: 1px solid #ccc;
+    // border-right: 1px solid #ccc;
+
+    .mb-15 {
+      margin-bottom: 15px !important;
+    }
+    .p-n {
+      padding: 0 !important;
+    }
+    .pl-n {
+      padding-left: 0 !important;
+    }
+  }
+
+  &.no-padding p {
+    padding: 0;
+  }
+
+  &.type-card {
+    .accordion-content {
+      height: calc(100% - 65px);
+      min-height: 195px;
+      position: relative;
+    }
+  }
+}
+
+.container-accordion {
+  mm-accordion.small-accordion {
+    .active {
+      border-bottom: 0;
+      .accordion-title {
+        padding: 6px 0 6px 35px;
+      }
+    }
+
+    &.type-card {
+      & > div:not(.active) {
+        padding-bottom: 3px;
+        .accordion-title {
+          border-bottom: 0;
+        }
+      }
+
+      .active {
+        height: auto;
+
+        .accordion-title {
+          border: none;
+        }
+
+        .accordion-body {
+          min-height: 283px;
+        }
+      }
+    }
+  }
+}

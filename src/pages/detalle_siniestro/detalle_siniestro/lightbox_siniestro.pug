@@ -1,0 +1,16 @@
+mm-lightbox.sizeS(label=`Guardar ${project}` id-lightbox=`polizaLightbox` mandatory-click)
+  section(slot='lightbox-content')
+    p Te recomendamos que revises antes todos los datos antes de guardar
+
+    h4.m-n Asegurado
+    each row in INSURANCE_DETAILS
+      article.row
+        each detail, index in row
+          +detail-box(detail, 'col-4 pl-n')
+    
+    h4.m-n Configuración del proyecto
+
+  section.display-f.flex--justify-between.mt-m(slot='lightbox-content-button')
+    button.mm-button.basic.support.button-close.mr-m(type='button') Cancelar
+    a.display-ib(href=saveHref)
+      input.mm-button.basic.main(type='button' value='Aceptar')

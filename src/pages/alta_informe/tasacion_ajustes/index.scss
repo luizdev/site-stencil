@@ -1,0 +1,17 @@
+mm-listing table#icTasacionAjustes.dataTable.dtr-inline.collapsed > tbody tr.child ul li {
+  padding: 0.5em 0;
+}
+
+mm-listing table#icConcurrencia.dataTable tfoot tr {
+  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.4);
+  td {
+    height: 48px;
+    box-sizing: border-box;
+    padding: 7px 10px;
+    color: var(--grey_900, #55494c);
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: 22px;
+    vertical-align: middle;
+  }
+}

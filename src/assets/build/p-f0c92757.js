@@ -1,0 +1,1 @@
+function e(e){e?(document.body.style.setProperty("overflow","hidden"),document.body.style.setProperty("height","100vh")):(document.body.style.removeProperty("overflow","hidden"),document.body.style.removeProperty("height","100vh"))}export{e as b}

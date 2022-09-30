@@ -1,0 +1,62 @@
+mm-progress-indicator.readOnly {
+  margin-top: 5px;
+
+  .mm-progress-indicator-content {
+    padding: 0 10px;
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 17px;
+      background: linear-gradient(90deg, #f2fafd 0%, #c1e3fc 51%, #00a4e3 100%);
+    }
+  }
+
+  .step {
+    &::before {
+      content: none;
+    }
+
+    .mmpi-content {
+      font-family: inherit;
+
+      &.mm-bold {
+        font-family: "OpenSans-Bold";
+      }
+    }
+
+    &.current {
+      .circle {
+        position: relative;
+        border-color: transparent !important;
+        &:before {
+          content: "\f00c";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          color: white;
+          font-family: "Font Awesome 5 Free";
+          font-weight: 900;
+          -webkit-font-smoothing: antialiased;
+          display: inline-block;
+          font-style: normal;
+          font-variant: normal;
+          text-rendering: auto;
+          line-height: 1;
+          font-size: 0.6em;
+        }
+      }
+    }
+
+    .circle {
+      height: 15px;
+      width: 15px;
+      border-color: #ccc !important;
+    }
+  }
+}

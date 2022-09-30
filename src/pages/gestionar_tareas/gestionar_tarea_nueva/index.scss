@@ -1,0 +1,116 @@
+.card {
+  background: #f9f9f9;
+  border-radius: 2px;
+  box-shadow: none;
+  .card-body {
+    .item {
+      margin-right: 1em;
+      flex: 1 1 0px;
+      h5 {
+        margin-bottom: 4px;
+      }
+      h5 + p {
+        margin-top: 5px;
+      }
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+mm-listing {
+  .dataTables_wrapper {
+    border-bottom: none;
+  }
+  table {
+    border-collapse: collapse;
+    &.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:after {
+      display: none;
+    }
+
+    &.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before {
+      top: calc(30%);
+    }
+    &.dataTable.dtr-inline.collapsed > {
+      tbody.modificar-tarea {
+        tr.child ul {
+          width: fit-content;
+        }
+        tr.selected + .child td {
+          border: 2px solid var(--primary_500);
+          border-top: 0;
+        }
+        tr.selected {
+          border: 2px solid var(--primary_500);
+          border-bottom: 0;
+        }
+      }
+    }
+    thead th.sorting span {
+      padding-left: 0;
+    }
+
+    tbody {
+      tr {
+        &.info {
+          background: #fff !important;
+          td {
+            border-bottom: 1px solid #3269b3;
+            &:first-child {
+              border-left: 8px solid #3269b3;
+            }
+            i {
+              color: #3269b3;
+            }
+          }
+        }
+        &.clock {
+          background: #fff !important;
+          td {
+            border-bottom: 1px solid #ffae33;
+            &:first-child {
+              border-left: 8px solid #ffae33;
+            }
+            i {
+              color: #ffae33;
+            }
+          }
+        }
+        &.exclamation {
+          background: #fff !important;
+          td {
+            border-bottom: 1px solid #d62c42;
+            &:first-child {
+              border-left: 8px solid #d62c42;
+            }
+            i {
+              color: #d62c42;
+            }
+          }
+        }
+      }
+    }
+  }
+  &.buttons-wrap {
+    .buttons > button {
+      display: none;
+    }
+
+    .edit-task button {
+      box-shadow: none;
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
+}
+
+#siniestroTable {
+  background: #fff;
+}
+
+mm-lightbox {
+  z-index: 1001;
+}
